@@ -9,7 +9,7 @@ const rootDir = path.resolve(__dirname, '..');
 process.chdir(rootDir);
 
 if (!fs.existsSync('data/Insurgence-Showdown')) {
-	child_process.execSync('git clone https://github.com/Poilerwags/Insurgence-Showdown.git', {
+	child_process.execSync('git clone https://github.com/TheTrueVoidWalker/Insurgence-Showdown.git', {
 		cwd: 'data',
 	});
 }
