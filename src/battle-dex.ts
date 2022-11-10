@@ -182,12 +182,12 @@ const Dex = new class implements ModdedDex {
 	resourcePrefix = (() => {
 		let prefix = '';
 		if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
-		return `${prefix}//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/`;
+		return `${prefix}//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/`;
 	})();
 
 	fxPrefix = (() => {
 		const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
-		return `${protocol}//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/fx/`;
+		return `${protocol}//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/fx/`;
 	})();
 
 	loadedSpriteData = {xy: 1, bw: 0};

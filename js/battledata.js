@@ -182,12 +182,12 @@ pokeballs=null;this.
 resourcePrefix=function(){var _window$document,_window$document$loca;
 var prefix='';
 if(((_window$document=window.document)==null?void 0:(_window$document$loca=_window$document.location)==null?void 0:_window$document$loca.protocol)!=='http:')prefix='https:';
-return prefix+"//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/";
+return prefix+"//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/";
 }();this.
 
 fxPrefix=function(){var _window$document2,_window$document2$loc;
 var protocol=((_window$document2=window.document)==null?void 0:(_window$document2$loc=_window$document2.location)==null?void 0:_window$document2$loc.protocol)!=='http:'?'https:':'';
-return protocol+"//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/fx/";
+return protocol+"//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/fx/";
 }();this.
 
 loadedSpriteData={xy:1,bw:0};this.
