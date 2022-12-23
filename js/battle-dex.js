@@ -685,7 +685,7 @@ num=BattlePokemonSprites[id].num;
 num=BattlePokedex[id].num;
 }
 if(num<0)num=0;
-if(num>898)num=0;
+if(num>1008)num=0;
 
 if((_window$BattlePokemon3=window.BattlePokemonIconIndexes)!=null&&_window$BattlePokemon3[id]){
 num=BattlePokemonIconIndexes[id];
