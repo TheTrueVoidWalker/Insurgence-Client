@@ -626,7 +626,7 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	cyndaquildelta: 1524 + 62,
 	quilavadelta: 1524 + 63,
 	typhlosiondelta: 1524 + 64,
-	typhlosiondeltamega: 1644 + 13,
+	typhlosiondeltamega: 1801,
 	typhlosiondeltamegaactive: 1524 + 65,
 	treeckodelta: 1524 + 66,
 	grovyledelta: 1524 + 67,
@@ -863,6 +863,8 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	deinodeltaf: 1788 + 21,
 	zweilousdeltaf: 1788 + 22,
 	hydreigondeltaf: 1788 + 23,
+
+	druddigondelta: 1812 + 0,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
