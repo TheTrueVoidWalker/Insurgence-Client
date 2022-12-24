@@ -1656,7 +1656,7 @@ mismagiusdelta:1524+61,
 cyndaquildelta:1524+62,
 quilavadelta:1524+63,
 typhlosiondelta:1524+64,
-typhlosiondeltamega:1644+13,
+typhlosiondeltamega:1801,
 typhlosiondeltamegaactive:1524+65,
 treeckodelta:1524+66,
 grovyledelta:1524+67,
@@ -1892,7 +1892,9 @@ ivysaurdeltaf:1788+19,
 venusaurdeltaf:1788+20,
 deinodeltaf:1788+21,
 zweilousdeltaf:1788+22,
-hydreigondeltaf:1788+23};
+hydreigondeltaf:1788+23,
+
+druddigondelta:1812+0};
 
 
 var BattlePokemonIconIndexesLeft={
