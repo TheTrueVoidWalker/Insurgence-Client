@@ -102,6 +102,7 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 	/** [[moveName, ppUsed]] */
 	moveTrack: [string, number][] = [];
 	statusData = {sleepTurns: 0, toxicTurns: 0};
+	timesAttacked = 0;
 
 	sprite: PokemonSprite;
 
@@ -615,6 +616,7 @@ export class Side {
 
 	/** [effectName, levels, minDuration, maxDuration] */
 	sideConditions: {[id: string]: [string, number, number, number]} = {};
+	faintCounter = 0;
 
 	constructor(battle: Battle, n: number) {
 		this.battle = battle;
@@ -650,6 +652,7 @@ export class Side {
 	reset() {
 		this.clearPokemon();
 		this.sideConditions = {};
+		this.faintCounter = 0;
 	}
 	setAvatar(avatar: string) {
 		this.avatar = avatar;
@@ -942,6 +945,7 @@ export class Side {
 
 		pokemon.fainted = true;
 		pokemon.hp = 0;
+		if (pokemon.side.faintCounter < 100) pokemon.side.faintCounter++;
 
 		this.battle.scene.animFaint(pokemon);
 	}
@@ -1666,6 +1670,9 @@ export class Battle {
 					break;
 				}
 			} else {
+				if (this.dex.moves.get(this.lastMove).category !== 'Status') {
+					poke.timesAttacked++;
+				}
 				let damageinfo = '' + Pokemon.getFormattedRange(range, damage[1] === 100 ? 0 : 1, '\u2013');
 				if (damage[1] !== 100) {
 					let hover = '' + ((damage[0] < 0) ? '\u2212' : '') +
@@ -2381,6 +2388,7 @@ export class Battle {
 			poke.boosts = {...tpoke.boosts};
 			poke.copyTypesFrom(tpoke);
 			poke.ability = tpoke.ability;
+			poke.timesAttacked = tpoke.timesAttacked;
 			const targetForme = tpoke.volatiles.formechange;
 			const speciesForme = (targetForme && !targetForme[1].endsWith('-Gmax')) ? targetForme[1] : tpoke.speciesForme;
 			const pokemon = tpoke;
