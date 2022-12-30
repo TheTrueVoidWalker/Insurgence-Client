@@ -1096,6 +1096,9 @@ if(weather){
 if(this.battle.gen>=4&&this.pokemonHasType(pokemon,'Rock')&&weather==='sandstorm'){
 stats.spd=Math.floor(stats.spd*1.5);
 }
+if(this.pokemonHasType(pokemon,'Ice')&&weather==='hail'){
+stats.def=Math.floor(stats.def*1.5);
+}
 if(ability==='sandrush'&&weather==='sandstorm'){
 speedModifiers.push(2);
 }
@@ -1759,6 +1762,13 @@ value.set(_basePower3);
 value.setRange(isGKLK?20:40,120);
 }
 }
+
+if(move.id==='ragefist'){
+value.set(Math.min(350,50+50*pokemon.timesAttacked),
+pokemon.timesAttacked>0?"Hit "+
+pokemon.timesAttacked+" time"+(pokemon.timesAttacked>1?'s':''):
+undefined);
+}
 if(!value.value)return value;
 
 
@@ -1776,6 +1786,7 @@ value.abilityModify(1.5,"Technician");
 }
 if(['psn','tox'].includes(pokemon.status)&&move.category==='Physical'){
 value.abilityModify(1.5,"Toxic Boost");
+value.abilityModify(1.5,"Black Mamba");
 }
 if(this.battle.gen>2&&serverPokemon.status==='brn'&&move.id!=='facade'&&move.category==='Physical'){
 if(!value.tryAbility("Guts"))value.modify(0.5,'Burn');
@@ -1794,6 +1805,14 @@ value.abilityModify(1.5,"Steely Spirit");
 }
 if(move.flags['sound']){
 value.abilityModify(1.3,"Punk Rock");
+}
+if(move.flags['slicing']){
+value.abilityModify(1.5,"Sharpness");
+}
+for(var i=1;i<=5&&i<=pokemon.side.faintCounter;i++){
+if(pokemon.volatiles["fallen"+i]){
+value.abilityModify(1+0.1*i,"Supreme Overlord");
+}
 }
 if(target){
 if(["MF","FM"].includes(pokemon.gender+target.gender)){

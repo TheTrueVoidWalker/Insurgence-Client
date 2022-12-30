@@ -105,7 +105,8 @@ Pokemon=function(){
 
 
 
-function Pokemon(data,side){this.name='';this.speciesForme='';this.ident='';this.details='';this.searchid='';this.side=void 0;this.slot=0;this.fainted=false;this.hp=0;this.maxhp=1000;this.level=100;this.gender='N';this.shiny=false;this.hpcolor='g';this.moves=[];this.ability='';this.baseAbility='';this.item='';this.itemEffect='';this.prevItem='';this.prevItemEffect='';this.boosts={};this.status='';this.statusStage=0;this.volatiles={};this.turnstatuses={};this.movestatuses={};this.lastMove='';this.moveTrack=[];this.statusData={sleepTurns:0,toxicTurns:0};this.sprite=void 0;
+
+function Pokemon(data,side){this.name='';this.speciesForme='';this.ident='';this.details='';this.searchid='';this.side=void 0;this.slot=0;this.fainted=false;this.hp=0;this.maxhp=1000;this.level=100;this.gender='N';this.shiny=false;this.hpcolor='g';this.moves=[];this.ability='';this.baseAbility='';this.item='';this.itemEffect='';this.prevItem='';this.prevItemEffect='';this.boosts={};this.status='';this.statusStage=0;this.volatiles={};this.turnstatuses={};this.movestatuses={};this.lastMove='';this.moveTrack=[];this.statusData={sleepTurns:0,toxicTurns:0};this.timesAttacked=0;this.sprite=void 0;
 this.side=side;
 this.speciesForme=data.speciesForme;
 
@@ -616,7 +617,8 @@ Side=function(){
 
 
 
-function Side(battle,n){this.battle=void 0;this.name='';this.id='';this.sideid=void 0;this.n=void 0;this.isFar=void 0;this.foe=null;this.ally=null;this.avatar='unknown';this.rating='';this.totalPokemon=6;this.x=0;this.y=0;this.z=0;this.missedPokemon=null;this.wisher=null;this.active=[null];this.lastPokemon=null;this.pokemon=[];this.sideConditions={};
+
+function Side(battle,n){this.battle=void 0;this.name='';this.id='';this.sideid=void 0;this.n=void 0;this.isFar=void 0;this.foe=null;this.ally=null;this.avatar='unknown';this.rating='';this.totalPokemon=6;this.x=0;this.y=0;this.z=0;this.missedPokemon=null;this.wisher=null;this.active=[null];this.lastPokemon=null;this.pokemon=[];this.sideConditions={};this.faintCounter=0;
 this.battle=battle;
 this.n=n;
 this.sideid=['p1','p2','p3','p4'][n];
@@ -650,6 +652,7 @@ this.lastPokemon=null;
 reset=function reset(){
 this.clearPokemon();
 this.sideConditions={};
+this.faintCounter=0;
 };_proto2.
 setAvatar=function setAvatar(avatar){
 this.avatar=avatar;
@@ -942,6 +945,7 @@ this.active[slot]=null;
 
 pokemon.fainted=true;
 pokemon.hp=0;
+if(pokemon.side.faintCounter<100)pokemon.side.faintCounter++;
 
 this.battle.scene.animFaint(pokemon);
 };_proto2.
@@ -1666,6 +1670,9 @@ this.scene.runOtherAnim('bound',[poke]);
 break;}
 
 }else{
+if(this.dex.moves.get(this.lastMove).category!=='Status'){
+poke.timesAttacked++;
+}
 var damageinfo=''+Pokemon.getFormattedRange(range,damage[1]===100?0:1,"\u2013");
 if(damage[1]!==100){
 var hover=''+(damage[0]<0?"\u2212":'')+
@@ -2381,6 +2388,7 @@ this.activateAbility(_poke28,_effect13);
 _poke28.boosts=Object.assign({},tpoke.boosts);
 _poke28.copyTypesFrom(tpoke);
 _poke28.ability=tpoke.ability;
+_poke28.timesAttacked=tpoke.timesAttacked;
 var targetForme=tpoke.volatiles.formechange;
 var speciesForme=targetForme&&!targetForme[1].endsWith('-Gmax')?targetForme[1]:tpoke.speciesForme;
 var _pokemon2=tpoke;
