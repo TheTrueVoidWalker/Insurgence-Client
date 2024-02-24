@@ -887,7 +887,7 @@
 			if (format) {
 				var formatParts = format.split('@@@', 2);
 				formatParts[0] = toID(formatParts[0]);
-				if (!formatParts[0].startsWith('gen')) formatParts[0] = 'gen9' + formatParts[0];
+				if (!formatParts[0].startsWith('gen')) formatParts[0] = 'gen8' + formatParts[0];
 				format = formatParts.length > 1 ? formatParts[0] + '@@@' + formatParts[1] : formatParts[0];
 			}
 
@@ -997,8 +997,8 @@
 			if (!noChoice) {
 				this.curFormat = formatid;
 				if (!this.curFormat) {
-					if (BattleFormats['gen9randombattle']) {
-						this.curFormat = 'gen9randombattle';
+					if (BattleFormats['gen8randombattle']) {
+						this.curFormat = 'gen8randombattle';
 					} else for (var i in BattleFormats) {
 						if (!BattleFormats[i].searchShow || !BattleFormats[i].challengeShow) continue;
 						this.curFormat = i;
