@@ -35,7 +35,7 @@ class PSRouter {
 				url = url.slice(24);
 			} else if (PS.server.id === 'showdown' && url.startsWith('psim.us')) {
 				url = url.slice(7);
-			} else if (url.startsWith('battling.p-insurgence.com/replays')) {
+			} else if (url.startsWith('replay.pokemonshowdown.com')) {
 				url = url.slice(26).replace('/', '/battle-');
 			}
 		}

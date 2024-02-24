@@ -28,7 +28,7 @@ class ModifiableValue {
 		this.itemName = Dex.items.get(serverPokemon.item).name;
 		const ability = serverPokemon.ability || pokemon?.ability || serverPokemon.baseAbility;
 		this.abilityName = Dex.abilities.get(ability).name;
-		this.weatherName = battle.weather === 'snow' ? 'Snow' : Dex.moves.get(battle.weather).exists ?
+		this.weatherName = Dex.moves.get(battle.weather).exists ?
 			Dex.moves.get(battle.weather).name : Dex.abilities.get(battle.weather).name;
 	}
 	reset(value = 0, isAccuracy?: boolean) {
@@ -542,7 +542,6 @@ class BattleTooltips {
 
 		let value = new ModifiableValue(this.battle, pokemon, serverPokemon);
 		let [moveType, category] = this.getMoveType(move, value, gmaxMove || isZOrMax === 'maxmove');
-		let categoryDiff = move.category !== category;
 
 		if (isZOrMax === 'zmove') {
 			if (item.zMoveFrom === move.name) {
@@ -575,7 +574,6 @@ class BattleTooltips {
 						zMove = this.battle.dex.moves.get(BattleTooltips.zMoveTable['Rock']);
 						break;
 					case 'hail':
-					case 'snow':
 						zMove = this.battle.dex.moves.get(BattleTooltips.zMoveTable['Ice']);
 						break;
 					case 'newmoon':
@@ -588,7 +586,6 @@ class BattleTooltips {
 					category: move.category,
 					basePower: movePower,
 				});
-				categoryDiff = false;
 			}
 		} else if (isZOrMax === 'maxmove') {
 			if (move.category === 'Status') {
@@ -602,15 +599,7 @@ class BattleTooltips {
 					category: move.category,
 					basePower,
 				});
-				categoryDiff = false;
 			}
-		}
-
-		if (categoryDiff) {
-			move = new Move(move.id, move.name, {
-				...move,
-				category,
-			});
 		}
 
 		text += '<h2>' + move.name + '<br />';
@@ -762,12 +751,6 @@ class BattleTooltips {
 			if (move.flags.bullet) {
 				text += `<p class="movetag">&#x2713; Bullet-like <small>(doesn't affect Bulletproof pokemon)</small></p>`;
 			}
-			if (move.flags.slicing) {
-				text += `<p class="movetag">&#x2713; Slicing <small>(boosted by Sharpness)</small></p>`;
-			}
-			if (move.flags.wind) {
-				text += `<p class="movetag">&#x2713; Wind <small>(activates Wind Power and Wind Rider)</small></p>`;
-			}
 		}
 		return text;
 	}
@@ -802,7 +785,7 @@ class BattleTooltips {
 			name += ' <small>(' + BattleLog.escapeHTML(pokemon.speciesForme) + ')</small>';
 		}
 
-		let levelBuf = (pokemon.level !== 120 ? ` <small>L${pokemon.level}</small>` : ``);
+		let levelBuf = (pokemon.level !== 100 ? ` <small>L${pokemon.level}</small>` : ``);
 		if (!illusionIndex || illusionIndex === 1) {
 			text += `<h2>${name}${genderBuf}${illusionIndex ? '' : levelBuf}<br />`;
 
@@ -814,19 +797,12 @@ class BattleTooltips {
 				}
 			}
 
-			let types = serverPokemon?.terastallized ? [serverPokemon.teraType] : this.getPokemonTypes(pokemon);
+			let types = this.getPokemonTypes(pokemon);
 
-			if (pokemon.terastallized) {
-				text += `<small>(Terastallized)</small><br />`;
-			} else if (clientPokemon?.volatiles.typechange || clientPokemon?.volatiles.typeadd) {
+			if (clientPokemon && (clientPokemon.volatiles.typechange || clientPokemon.volatiles.typeadd)) {
 				text += `<small>(Type changed)</small><br />`;
 			}
-			text += `<span class="textaligned-typeicons">${types.map(type => Dex.getTypeIcon(type)).join(' ')}</span>`;
-			if (pokemon.terastallized) {
-				text += `&nbsp; &nbsp; <small>(base: <span class="textaligned-typeicons">${this.getPokemonTypes(pokemon, true).map(type => Dex.getTypeIcon(type)).join(' ')}</span>)</small>`;
-			} else if (serverPokemon?.teraType && !this.battle.rules['Terastal Clause']) {
-				text += `&nbsp; &nbsp; <small>(Tera Type: <span class="textaligned-typeicons">${Dex.getTypeIcon(serverPokemon.teraType)}</span>)</small>`;
-			}
+			text += types.map(type => Dex.getTypeIcon(type)).join(' ');
 			text += `</h2>`;
 		}
 
@@ -989,7 +965,7 @@ class BattleTooltips {
 		return false;
 	}
 
-	calculateModifiedStats(clientPokemon: Pokemon | null, serverPokemon: ServerPokemon, statStagesOnly?: boolean) {
+	calculateModifiedStats(clientPokemon: Pokemon | null, serverPokemon: ServerPokemon) {
 		let stats = {...serverPokemon.stats};
 		let pokemon = clientPokemon || serverPokemon;
 		const isPowerTrick = clientPokemon?.volatiles['powertrick'];
@@ -1015,7 +991,6 @@ class BattleTooltips {
 				stats[statName] = Math.floor(stats[statName]);
 			}
 		}
-		if (statStagesOnly) return stats;
 
 		const ability = toID(
 			clientPokemon?.effectiveAbility(serverPokemon) ?? (serverPokemon.ability || serverPokemon.baseAbility)
@@ -1093,8 +1068,16 @@ class BattleTooltips {
 		}
 
 		let weather = this.battle.weather;
-		if (this.battle.abilityActive(['Air Lock', 'Cloud Nine'])) {
-			weather = '' as ID;
+		if (weather) {
+			// Check if anyone has an anti-weather ability
+			outer: for (const side of this.battle.sides) {
+				for (const active of side.active) {
+					if (active && ['Air Lock', 'Cloud Nine'].includes(active.ability)) {
+						weather = '' as ID;
+						break outer;
+					}
+				}
+			}
 		}
 
 		if (item === 'choiceband' && !clientPokemon?.volatiles['dynamax']) {
@@ -1113,13 +1096,13 @@ class BattleTooltips {
 			if (this.battle.gen >= 4 && this.pokemonHasType(pokemon, 'Rock') && weather === 'sandstorm') {
 				stats.spd = Math.floor(stats.spd * 1.5);
 			}
-			if (this.pokemonHasType(pokemon, 'Ice') && weather === 'snow') {
+			if (this.pokemonHasType(pokemon, 'Ice') && weather === 'hail') {
 				stats.def = Math.floor(stats.def * 1.5);
 			}
 			if (ability === 'sandrush' && weather === 'sandstorm') {
 				speedModifiers.push(2);
 			}
-			if ((ability === 'slushrush' || ability === 'icecleats') && (weather === 'hail' || weather === 'snow')) {
+			if (ability === 'slushrush' && weather === 'hail') {
 				speedModifiers.push(2);
 			}
 			if (ability === 'shadowdance' && weather === 'newmoon') {
@@ -1127,14 +1110,8 @@ class BattleTooltips {
 			}
 			if (item !== 'utilityumbrella') {
 				if (weather === 'sunnyday' || weather === 'desolateland') {
-					if (ability === 'chlorophyll') {
-						speedModifiers.push(2);
-					}
 					if (ability === 'solarpower') {
 						stats.spa = Math.floor(stats.spa * 1.5);
-					}
-					if (ability === 'orichalcumpulse') {
-						stats.atk = Math.floor(stats.atk * 1.3);
 					}
 					let allyActive = clientPokemon?.side.active;
 					if (allyActive) {
@@ -1148,16 +1125,16 @@ class BattleTooltips {
 						}
 					}
 				}
-				if (weather === 'raindance' || weather === 'primordialsea') {
-					if (ability === 'supercell') {
-						stats.spa = Math.floor(stats.spa * 1.5);
-					}
-					if (ability === 'swiftswim') {
-						speedModifiers.push(2);
-					}
+				if (ability === 'supercell' && (weather === 'raindance' || weather === 'primordialsea' || weather === 'newmoon')) {
+					stats.spa = Math.floor(stats.spa * 1.5);
 				}
-			}
-			if (ability === 'supercell' && weather === 'newmoon') {
+				if (ability === 'chlorophyll' && (weather === 'sunnyday' || weather === 'desolateland')) {
+					speedModifiers.push(2);
+				}
+				if (ability === 'swiftswim' && (weather === 'raindance' || weather === 'primordialsea')) {
+					speedModifiers.push(2);
+				}
+			} else if (ability === 'supercell' && weather === 'newmoon') {
 				stats.spa = Math.floor(stats.spa * 1.5);
 			}
 			if (ability === 'absolution' && weather === 'newmoon') {
@@ -1169,47 +1146,26 @@ class BattleTooltips {
 			stats.spa = Math.floor(stats.spa * 0.5);
 		}
 		if (clientPokemon) {
-			if (clientPokemon.volatiles['slowstart']) {
+			if ('slowstart' in clientPokemon.volatiles) {
 				stats.atk = Math.floor(stats.atk * 0.5);
 				speedModifiers.push(0.5);
 			}
-			if (ability === 'unburden' && clientPokemon.volatiles['itemremoved'] && !item) {
+			if (ability === 'unburden' && 'itemremoved' in clientPokemon.volatiles && !item) {
 				speedModifiers.push(2);
-			}
-			for (const statName of Dex.statNamesExceptHP) {
-				if (clientPokemon.volatiles['protosynthesis' + statName] || clientPokemon.volatiles['quarkdrive' + statName]) {
-					if (statName === 'spe') {
-						speedModifiers.push(1.5);
-					} else {
-						stats[statName] = Math.floor(stats[statName] * 1.3);
-					}
-				}
 			}
 		}
 		if (ability === 'marvelscale' && pokemon.status) {
 			stats.def = Math.floor(stats.def * 1.5);
 		}
-		const isNFE = this.battle.dex.species.get(serverPokemon.speciesForme).evos?.some(evo => {
-			const evoSpecies = this.battle.dex.species.get(evo);
-			return !evoSpecies.isNonstandard ||
-					evoSpecies.isNonstandard === this.battle.dex.species.get(serverPokemon.speciesForme)?.isNonstandard ||
-					// Pokemon with Hisui evolutions
-					evoSpecies.isNonstandard === "Unobtainable";
-		});
-		if (item === 'eviolite' && (isNFE || species === 'Eevee-Pre-Mega')) {
+		if (item === 'eviolite' && (Dex.species.get(pokemon.speciesForme).evos || species === 'Eevee-Pre-Mega')) {
 			stats.def = Math.floor(stats.def * 1.5);
 			stats.spd = Math.floor(stats.spd * 1.5);
 		}
 		if (ability === 'grasspelt' && this.battle.hasPseudoWeather('Grassy Terrain')) {
 			stats.def = Math.floor(stats.def * 1.5);
 		}
-		if (this.battle.hasPseudoWeather('Electric Terrain')) {
-			if (ability === 'surgesurfer') {
-				speedModifiers.push(2);
-			}
-			if (ability === 'hadronengine') {
-				stats.spa = Math.floor(stats.spa * 1.3);
-			}
+		if (ability === 'surgesurfer' && this.battle.hasPseudoWeather('Electric Terrain')) {
+			speedModifiers.push(2);
 		}
 		if (item === 'choicespecs' && !clientPokemon?.volatiles['dynamax']) {
 			stats.spa = Math.floor(stats.spa * 1.5);
@@ -1255,26 +1211,6 @@ class BattleTooltips {
 		}
 		if (ability === 'furcoat') {
 			stats.def *= 2;
-		}
-		if (this.battle.abilityActive('Vessel of Ruin')) {
-			if (ability !== 'vesselofruin') {
-				stats.spa = Math.floor(stats.spa * 0.75);
-			}
-		}
-		if (this.battle.abilityActive('Sword of Ruin')) {
-			if (ability !== 'swordofruin') {
-				stats.def = Math.floor(stats.def * 0.75);
-			}
-		}
-		if (this.battle.abilityActive('Tablets of Ruin')) {
-			if (ability !== 'tabletsofruin') {
-				stats.atk = Math.floor(stats.atk * 0.75);
-			}
-		}
-		if (this.battle.abilityActive('Beads of Ruin')) {
-			if (ability !== 'beadsofruin') {
-				stats.spd = Math.floor(stats.spd * 0.75);
-			}
 		}
 		const sideConditions = this.battle.mySide.sideConditions;
 		if (sideConditions['tailwind']) {
@@ -1398,9 +1334,8 @@ class BattleTooltips {
 		let level = pokemon.volatiles.transform?.[4] || pokemon.level;
 		let tier = this.battle.tier;
 		let gen = this.battle.gen;
-		let isCGT = tier.includes('Computer-Generated Teams');
 		let isRandomBattle = tier.includes('Random Battle') ||
-			(tier.includes('Random') && tier.includes('Battle') && gen >= 6) || isCGT;
+			(tier.includes('Random') && tier.includes('Battle') && gen >= 6);
 
 		let minNature = (isRandomBattle || gen < 3) ? 1 : 0.9;
 		let maxNature = (isRandomBattle || gen < 3) ? 1 : 1.1;
@@ -1415,8 +1350,8 @@ class BattleTooltips {
 			else if (tier.includes('Random')) max += 20;
 		} else {
 			let maxIvEvOffset = maxIv + ((isRandomBattle && gen >= 3) ? 21 : 63);
+			min = tr(tr(2 * baseSpe * level / 100 + 5) * minNature);
 			max = tr(tr((2 * baseSpe + maxIvEvOffset) * level / 100 + 5) * maxNature);
-			min = isCGT ? max : tr(tr(2 * baseSpe * level / 100 + 5) * minNature);
 		}
 		return [min, max];
 	}
@@ -1470,7 +1405,6 @@ class BattleTooltips {
 				moveType = 'Rock';
 				break;
 			case 'hail':
-			case 'snow':
 				moveType = 'Ice';
 				break;
 			case 'newmoon':
@@ -1489,72 +1423,42 @@ class BattleTooltips {
 				moveType = 'Psychic';
 			}
 		}
-		if (move.id === 'terablast' && pokemon.terastallized) {
-			moveType = pokemon.terastallized as TypeName;
-		}
 
 		// Aura Wheel as Morpeko-Hangry changes the type to Dark
 		if (move.id === 'aurawheel' && pokemon.getSpeciesForme() === 'Morpeko-Hangry') {
 			moveType = 'Dark';
-		}
-		// Raging Bull's type depends on the Tauros forme
-		if (move.id === 'ragingbull') {
-			switch (pokemon.getSpeciesForme()) {
-			case 'Tauros-Paldea-Combat':
-				moveType = 'Fighting';
-				break;
-			case 'Tauros-Paldea-Blaze':
-				moveType = 'Fire';
-				break;
-			case 'Tauros-Paldea-Aqua':
-				moveType = 'Water';
-				break;
-			}
 		}
 
 		// Other abilities that change the move type.
 		const noTypeOverride = [
 			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
 		];
-		const allowTypeOverride = !noTypeOverride.includes(move.id) && (move.id !== 'terablast' || !pokemon.terastallized);
-		if (allowTypeOverride) {
-			if (this.battle.rules['Revelationmons Mod']) {
-				const [types] = pokemon.getTypes(serverPokemon);
-				for (let i = 0; i < types.length; i++) {
-					if (serverPokemon.moves[i] && move.id === toID(serverPokemon.moves[i])) {
-						moveType = types[i];
-					}
-				}
-			}
+		const allowTypeOverride = !noTypeOverride.includes(move.id);
 
-			if (category !== 'Status' && !move.isZ && !move.id.startsWith('hiddenpower')) {
-				if (moveType === 'Normal') {
-					if (value.abilityModify(0, 'Aerilate')) moveType = 'Flying';
-					if (value.abilityModify(0, 'Galvanize')) moveType = 'Electric';
-					if (value.abilityModify(0, 'Pixilate')) moveType = 'Fairy';
-					if (value.abilityModify(0, 'Refrigerate')) moveType = 'Ice';
-					if (value.abilityModify(0, 'Intoxicate')) moveType = 'Poison';
-				}
-				if (moveType === 'Rock') {
-				  if (value.abilityModify(0, 'Foundry')) moveType = 'Fire';
-				}
-				if (value.abilityModify(0, 'Normalize')) moveType = 'Normal';
+		if (allowTypeOverride && category !== 'Status' && !move.isZ && !move.id.startsWith('hiddenpower')) {
+			if (moveType === 'Normal') {
+				if (value.abilityModify(0, 'Aerilate')) moveType = 'Flying';
+				if (value.abilityModify(0, 'Galvanize')) moveType = 'Electric';
+				if (value.abilityModify(0, 'Pixilate')) moveType = 'Fairy';
+				if (value.abilityModify(0, 'Refrigerate')) moveType = 'Ice';
+				if (value.abilityModify(0, 'Intoxicate')) moveType = 'Poison';
 			}
-
-			// There aren't any max moves with the sound flag, but if there were, Liquid Voice would make them water type
-			const isSound = !!(
-				forMaxMove ?
-				this.getMaxMoveFromType(moveType, forMaxMove !== true && forMaxMove || undefined) : move
-			).flags['sound'];
-			if (isSound && value.abilityModify(0, 'Liquid Voice')) {
-				moveType = 'Water';
-			}
+      if (moveType === 'Rock') {
+        if (value.abilityModify(0, 'Foundry')) moveType = 'Fire';
+      }
+			if (value.abilityModify(0, 'Normalize')) moveType = 'Normal';
 		}
+		// There aren't any max moves with the sound flag, but if there were, Liquid Voice would make them water type
+		const isSound = !!(
+			forMaxMove ?
+			this.getMaxMoveFromType(moveType, forMaxMove !== true && forMaxMove || undefined) : move
+		).flags['sound'];
 
-		if (move.id === 'photongeyser' || move.id === 'lightthatburnsthesky' ||
-			move.id === 'terablast' && pokemon.terastallized) {
-			const stats = this.calculateModifiedStats(pokemon, serverPokemon, true);
-			if (stats.atk > stats.spa) category = 'Physical';
+		if (allowTypeOverride && isSound && value.abilityModify(0, 'Liquid Voice')) {
+			moveType = 'Water';
+		}
+		if (this.battle.gen <= 3 && category !== 'Status') {
+			category = Dex.getGen3Category(moveType);
 		}
     if (value.abilityModify(0, 'Spectral Jaws')) category = 'Special';
 		return [moveType, category];
@@ -1570,11 +1474,10 @@ class BattleTooltips {
 			value.set(0, "Poison type");
 			return value;
 		}
-		if (move.id === 'blizzard' && this.battle.gen >= 4) {
+		if (move.id === 'blizzard') {
 			value.weatherModify(0, 'Hail');
-			value.weatherModify(0, 'Snow');
 		}
-		if (['hurricane', 'thunder', 'bleakwindstorm', 'wildboltstorm', 'sandsearstorm'].includes(move.id)) {
+		if (move.id === 'hurricane' || move.id === 'thunder') {
 			value.weatherModify(0, 'Rain Dance');
 			value.weatherModify(0, 'Primordial Sea');
 		}
@@ -1600,7 +1503,7 @@ class BattleTooltips {
 					value.set(value.value + pokemon.level - target.level, "+1% per level above target");
 				}
 			} else {
-				if (pokemon.level < 120) value.set(value.value, "fails if target's level is higher");
+				if (pokemon.level < 100) value.set(value.value, "fails if target's level is higher");
 				if (pokemon.level > 1) value.set(value.value, "+1% per level above target");
 			}
 			return value;
@@ -1725,11 +1628,8 @@ class BattleTooltips {
 			else basePower = 20;
 			value.set(basePower);
 		}
-		if (['hex', 'infernalparade'].includes(move.id) && target?.status) {
-			value.modify(2, move.name + ' + status');
-		}
-		if (move.id === 'lastrespects') {
-			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
+		if (move.id === 'hex' && target?.status) {
+			value.modify(2, 'Hex + status');
 		}
 		if (move.id === 'punishment' && target) {
 			let boostCount = 0;
@@ -1762,9 +1662,9 @@ class BattleTooltips {
 		if (move.id === 'magnitude') {
 			value.setRange(10, 150);
 		}
-		if (['venoshock', 'barbbarrage'].includes(move.id) && target) {
+		if (move.id === 'venoshock' && target) {
 			if (['psn', 'tox'].includes(target.status)) {
-				value.modify(2, move.name + ' + Poison');
+				value.modify(2, 'Venoshock + Poison');
 			}
 		}
 		if (move.id === 'wakeupslap' && target) {
@@ -1776,12 +1676,6 @@ class BattleTooltips {
 			if (this.battle.weather !== 'deltastream') {
 				value.weatherModify(2);
 			}
-		}
-		if (move.id === 'hydrosteam') {
-			value.weatherModify(1.5, 'Sunny Day');
-		}
-		if (move.id === 'psyblade' && this.battle.hasPseudoWeather('Electric Terrain')) {
-			value.modify(1.5, 'Electric Terrain');
 		}
 		if (move.id === 'terrainpulse' && pokemon.isGrounded(serverPokemon)) {
 			if (
@@ -1881,9 +1775,6 @@ class BattleTooltips {
 		if (pokemon.status === 'brn' && move.category === 'Special') {
 			value.abilityModify(1.5, "Flare Boost");
 		}
-		if (move.flags['punch']) {
-			value.abilityModify(1.2, 'Iron Fist');
-		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
 		}
@@ -1895,6 +1786,7 @@ class BattleTooltips {
 		}
 		if (['psn', 'tox'].includes(pokemon.status) && move.category === 'Physical') {
 			value.abilityModify(1.5, "Toxic Boost");
+			value.abilityModify(1.5, "Black Mamba");
 		}
 		if (this.battle.gen > 2 && serverPokemon.status === 'brn' && move.id !== 'facade' && move.category === 'Physical') {
 			if (!value.tryAbility("Guts")) value.modify(0.5, 'Burn');
@@ -1907,6 +1799,9 @@ class BattleTooltips {
 		}
 		if (move.flags['contact']) {
 			value.abilityModify(1.3, "Tough Claws");
+		}
+		if (moveType === 'Steel') {
+			value.abilityModify(1.5, "Steely Spirit");
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Punk Rock");
@@ -1929,9 +1824,8 @@ class BattleTooltips {
 		const noTypeOverride = [
 			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
 		];
-		const allowTypeOverride = !noTypeOverride.includes(move.id) && (move.id !== 'terablast' || !pokemon.terastallized);
 		if (
-			move.category !== 'Status' && allowTypeOverride && !move.isZ && !move.isMax &&
+			move.category !== 'Status' && !noTypeOverride.includes(move.id) && !move.isZ && !move.isMax &&
 			!move.id.startsWith('hiddenpower')
 		) {
 			if (move.type === 'Normal') {
@@ -1947,6 +1841,9 @@ class BattleTooltips {
 			if (this.battle.gen > 6) {
 				value.abilityModify(1.2, "Normalize");
 			}
+		}
+		if (move.flags['punch']) {
+			value.abilityModify(1.2, 'Iron Fist');
 		}
 		if (move.recoil || move.hasCrashDamage) {
 			value.abilityModify(1.2, 'Reckless');
@@ -1964,20 +1861,22 @@ class BattleTooltips {
 					auraBoosted = 'Dark Aura';
 				} else if (allyAbility === 'Aura Break') {
 					auraBroken = true;
-				} else if (allyAbility === 'Battery' && ally !== pokemon && move.category === 'Special') {
-					value.modify(1.3, 'Battery');
-				} else if (allyAbility === 'Power Spot' && ally !== pokemon) {
-					value.modify(1.3, 'Power Spot');
-				} else if (allyAbility === 'Steely Spirit' && moveType === 'Steel') {
-					value.modify(1.5, 'Steely Spirit');
+				} else if (allyAbility === 'Battery') {
+					if (ally !== pokemon && move.category === 'Special') {
+						value.modify(1.3, 'Battery');
+					}
+				} else if (allyAbility === 'Power Spot') {
+					if (ally !== pokemon) {
+						value.modify(1.3, 'Power Spot');
+					}
 				}
 			}
 			for (const foe of pokemon.side.foe.active) {
 				if (!foe || foe.fainted) continue;
-				if (foe.ability === 'Fairy Aura' && moveType === 'Fairy') {
-					auraBoosted = 'Fairy Aura';
-				} else if (foe.ability === 'Dark Aura' && moveType === 'Dark') {
-					auraBoosted = 'Dark Aura';
+				if (foe.ability === 'Fairy Aura') {
+					if (moveType === 'Fairy') auraBoosted = 'Fairy Aura';
+				} else if (foe.ability === 'Dark Aura') {
+					if (moveType === 'Dark') auraBoosted = 'Dark Aura';
 				} else if (foe.ability === 'Aura Break') {
 					auraBroken = true;
 				}
@@ -2064,23 +1963,18 @@ class BattleTooltips {
 		'Spell Tag': 'Ghost',
 		'Twisted Spoon': 'Psychic',
 	};
-	static orbUsers: {[speciesForme: string]: string[]} = {
-		'Latias': ['Soul Dew'],
-		'Latios': ['Soul Dew'],
-		'Dialga': ['Adamant Crystal', 'Adamant Orb'],
-		'Palkia': ['Lustrous Globe', 'Lustrous Orb'],
-		'Giratina': ['Griseous Core', 'Griseous Orb'],
-		'Venomicon': ['Vile Vial'],
+	static orbUsers: {[speciesForme: string]: string} = {
+		'Latias': 'Soul Dew',
+		'Latios': 'Soul Dew',
+		'Dialga': 'Adamant Orb',
+		'Palkia': 'Lustrous Orb',
+		'Giratina': 'Griseous Orb',
 	};
-	static orbTypes: {[itemName: string]: TypeName[]} = {
-		'Soul Dew': ['Psychic', 'Dragon'],
-		'Adamant Crystal': ['Steel', 'Dragon'],
-		'Adamant Orb': ['Steel', 'Dragon'],
-		'Lustrous Globe': ['Water', 'Dragon'],
-		'Lustrous Orb': ['Water', 'Dragon'],
-		'Griseous Core': ['Ghost', 'Dragon'],
-		'Griseous Orb': ['Ghost', 'Dragon'],
-		'Vile Vial': ['Poison', 'Flying'],
+	static orbTypes: {[itemName: string]: TypeName} = {
+		'Soul Dew': 'Psychic',
+		'Adamant Orb': 'Steel',
+		'Lustrous Orb': 'Water',
+		'Griseous Orb': 'Ghost',
 	};
 	static noGemMoves = [
 		'Fire Pledge',
@@ -2124,8 +2018,8 @@ class BattleTooltips {
 
 		// Pokemon-specific items
 		if (item.name === 'Soul Dew' && this.battle.gen < 7) return value;
-		if (BattleTooltips.orbUsers[speciesName]?.includes(item.name) &&
-			BattleTooltips.orbTypes[item.name]?.includes(moveType)) {
+		if (BattleTooltips.orbUsers[speciesName] === item.name &&
+			[BattleTooltips.orbTypes[item.name], 'Dragon'].includes(moveType)) {
 			value.itemModify(1.2);
 			return value;
 		}
@@ -2137,20 +2031,14 @@ class BattleTooltips {
 			return value;
 		}
 
-		if (itemName === 'Muscle Band' && move.category === 'Physical' ||
-			itemName === 'Wise Glasses' && move.category === 'Special' ||
-			itemName === 'Punching Glove' && move.flags['punch']) {
-			value.itemModify(1.1);
-		}
-
 		return value;
 	}
-	getPokemonTypes(pokemon: Pokemon | ServerPokemon, preterastallized = false): ReadonlyArray<TypeName> {
+	getPokemonTypes(pokemon: Pokemon | ServerPokemon): ReadonlyArray<TypeName> {
 		if (!(pokemon as Pokemon).getTypes) {
 			return this.battle.dex.species.get(pokemon.speciesForme).types;
 		}
 
-		return (pokemon as Pokemon).getTypeList(undefined, preterastallized);
+		return (pokemon as Pokemon).getTypeList();
 	}
 	pokemonHasType(pokemon: Pokemon | ServerPokemon, type: TypeName, types?: ReadonlyArray<TypeName>) {
 		if (!types) types = this.getPokemonTypes(pokemon);
@@ -2266,8 +2154,6 @@ interface PokemonSet {
 	dynamaxLevel?: number;
 	/** Defaults to no (can only be yes for certain Pokemon) */
 	gigantamax?: boolean;
-	/** Defaults to the primary type */
-	teraType?: string;
 }
 
 class BattleStatGuesser {
@@ -2285,7 +2171,7 @@ class BattleStatGuesser {
 		this.dex = formatid ? Dex.mod(formatid.slice(0, 4) as ID) : Dex;
 		this.ignoreEVLimits = (
 			this.dex.gen < 3 ||
-			((this.formatid.endsWith('hackmons') || this.formatid.endsWith('bh')) && this.dex.gen !== 6) ||
+			(this.formatid.endsWith('hackmons') && this.dex.gen !== 6) ||
 			this.formatid.includes('metronomebattle') ||
 			this.formatid.endsWith('norestrictions')
 		);
@@ -2341,7 +2227,7 @@ class BattleStatGuesser {
 		let needsFourMoves = !['unown', 'ditto'].includes(species.id);
 		let moveids = set.moves.map(toID);
 		if (moveids.includes('lastresort' as ID)) needsFourMoves = false;
-		if (set.moves.length < 4 && needsFourMoves && !this.formatid.includes('metronomebattle')) {
+		if (set.moves.length < 4 && needsFourMoves && this.formatid !== 'gen8metronomebattle') {
 			return '?';
 		}
 
@@ -2836,7 +2722,7 @@ class BattleStatGuesser {
 		let species = this.dex.species.get(set.species);
 		if (!species.exists) return 0;
 
-		let level = set.level || 120;
+		let level = set.level || 100;
 
 		let baseStat = species.baseStats[stat];
 

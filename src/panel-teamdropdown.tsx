@@ -274,7 +274,7 @@ class PSTeambuilder {
 		}
 
 		// details
-		if (set.level && set.level !== 120) {
+		if (set.level && set.level !== 100) {
 			text += `Level: ${set.level}  \n`;
 		}
 		if (set.shiny) {
@@ -826,7 +826,7 @@ class FormatDropdownPanel extends PSRoomPanel {
 			{columns.map(column => <ul class="options" onClick={this.click}>
 				{column.map(format => format.id ? (
 					<li><button value={format.name} class="option">
-						{format.name.replace('[Gen 8 ', '[').replace('[Gen 9] ', '').replace('[Gen 7 ', '[')}
+						{format.name.replace('[Gen 8 ', '[').replace('[Gen 8] ', '').replace('[Gen 7 ', '[')}
 					</button></li>
 				) : (
 					<li><h3>

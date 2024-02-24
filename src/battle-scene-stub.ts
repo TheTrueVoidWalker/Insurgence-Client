@@ -12,7 +12,6 @@ export class BattleSceneStub {
 	interruptionCount: number = NaN;
 	messagebarOpen: boolean = false;
 	log: BattleLog = {add: (args: Args, kwargs?: KWArgs) => {}} as any;
-	$frame?: JQuery;
 
 	abilityActivateAnim(pokemon: Pokemon, result: string): void { }
 	addPokemonSprite(pokemon: Pokemon): PokemonSprite { return null!; }
@@ -64,7 +63,6 @@ export class BattleSceneStub {
 	animUnsummon(pokemon: Pokemon, instant?: boolean) { }
 	animDragIn(pokemon: Pokemon, slot: number) { }
 	animDragOut(pokemon: Pokemon) { }
-	resetStatbar(pokemon: Pokemon, startHidden?: boolean) { }
 	updateStatbar(pokemon: Pokemon, updatePrevhp?: boolean, updateHp?: boolean) { }
 	updateStatbarIfExists(pokemon: Pokemon, updatePrevhp?: boolean, updateHp?: boolean) { }
 	animTransform(pokemon: Pokemon, isCustomAnim?: boolean, isPermanent?: boolean) { }
