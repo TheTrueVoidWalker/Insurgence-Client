@@ -87,8 +87,8 @@ _this.updateTime();
 };BattleBGM.
 
 update=function update(){
-var current=BattleSound.currentBgm();for(var _i=0,_BattleSound$bgm=
-BattleSound.bgm;_i<_BattleSound$bgm.length;_i++){var bgm=_BattleSound$bgm[_i];
+var current=BattleSound.currentBgm();for(var _i2=0,_BattleSound$bgm2=
+BattleSound.bgm;_i2<_BattleSound$bgm2.length;_i2++){var bgm=_BattleSound$bgm2[_i2];
 if(bgm.isPlaying){
 if(bgm===current){
 bgm.actuallyResume();
@@ -154,8 +154,8 @@ if(soundIndex>=0)BattleSound.bgm.splice(soundIndex,1);
 };_proto2.
 
 currentBgm=function currentBgm(){
-if(!this.bgmVolume||this.muted)return false;for(var _i2=0,_this$bgm=
-this.bgm;_i2<_this$bgm.length;_i2++){var bgm=_this$bgm[_i2];
+if(!this.bgmVolume||this.muted)return false;for(var _i4=0,_this$bgm2=
+this.bgm;_i4<_this$bgm2.length;_i4++){var bgm=_this$bgm2[_i4];
 if(bgm.isPlaying)return bgm;
 }
 return null;
@@ -180,8 +180,8 @@ BattleBGM.update();
 };_proto2.
 setEffectVolume=function setEffectVolume(effectVolume){
 this.effectVolume=this.loudnessPercentToAmplitudePercent(effectVolume);
-};return _class2;}())();
-
+};return _class2;}())(
+);
 
 if(typeof PS==='object'){
 PS.prefs.subscribeAndRun(function(key){

@@ -6,6 +6,9 @@ Config.bannedHosts = ['cool.jit.su', 'pokeball-nixonserver.rhcloud.com'];
 
 Config.whitelist = [
 	'wikipedia.org',
+        'wiki.p-insurgence.com',
+        'p-insurgence.com',
+        'discord.p-insurgence.com'
 
 	// The full list is maintained outside of this repository so changes to it
 	// don't clutter the commit log. Feel free to copy our list for your own
@@ -18,11 +21,11 @@ Config.whitelist = [
 // `defaultserver` specifies the server to use when the domain name in the
 // address bar is `Config.routes.client`.
 Config.defaultserver = {
-	id: 'showdown',
-	host: '77.162.113.75',
+	id: 'showdown-insurgence',
+	host: 'showdownserver.p-insurgence.com',
 	port: 443,
-	httpport: 8000,
-	altport: 80,
+	httpport: 443,
+	altport: 443,
 	registered: true
 };
 
@@ -33,13 +36,13 @@ Config.customcolors = {
 	'zarel': 'aeo'
 };
 /*** Begin automatically generated configuration ***/
-Config.version = "0.11.2 (5e14b796)";
+Config.version = "0.11.2 (b1136257)";
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
-	client: 'insurgence-battle-sim.nl',
+	client: 'battling.p-insurgence.com',
 	dex: 'dex.pokemonshowdown.com',
-	replays: 'replay.pokemonshowdown.com',
+	replays: 'battling.p-insurgence.com/replays',
 	users: 'pokemonshowdown.com/users',
 };
 /*** End automatically generated configuration ***/

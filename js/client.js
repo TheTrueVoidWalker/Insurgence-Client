@@ -215,12 +215,18 @@ function toId() {
 		 * to this file will always be made on the `play.pokemonshowdown.com`
 		 * domain in order to have access to the correct cookies.
 		 */
-		 getActionPHP: function () {
-		     var ret = 'https://play.pokemonshowdown.com/~~' + Config.server.id + '/action.php';
+		 /*getActionPHP: function () {
+		     var ret = 'https://battling.p-insurgence.com/login/action.php';
 		     return (this.getActionPHP = function () {
 		         return ret;
 		     })();
-		 },
+		 },*/
+		 getActionPHP: function () {
+			var ret = 'https://play.pokemonshowdown.com/~~' + Config.server.id + '/action.php';
+			return (this.getActionPHP = function () {
+				return ret;
+			})();
+		},
 		/**
 		 * Process a signed assertion returned from the login server.
 		 * Emits the following events (arguments in brackets):
@@ -390,6 +396,8 @@ function toId() {
 		},
 		focused: true,
 		initialize: function () {
+			// Gotta cache this since backbone removes it
+			this.query = window.location.search;
 			window.app = this;
 			this.initializeRooms();
 			this.initializePopups();
@@ -675,6 +683,11 @@ function toId() {
 
 			Storage.whenAppLoaded.load(this);
 
+			// load custom colors from loginserver
+			$.get('/config/colors.json', {}, function (data) {
+				Object.assign(Config.customcolors, data);
+			});
+
 			this.initializeConnection();
 		},
 		/**
@@ -745,11 +758,15 @@ function toId() {
 						// anyway, this affects SockJS because it makes HTTP requests to localhost
 						// but it turns out that making direct WebSocket connections to localhost is
 						// still supported, so we'll just bypass SockJS and use WebSocket directly.
+						var possiblePort = new URL(document.location + self.query).searchParams.get('port');
+						// We need to bypass the port as well because on most modern browsers, http gets forced
+						// to https, which means a ws connection is made to port 443 instead of wherever it's actually running,
+						// thus ensuring a failed connection.
+						var port = possiblePort || Config.server.port;
 						console.log("Bypassing SockJS for localhost");
-						console.log('ws' + protocol.slice('4') + '://' + Config.server.host + ':' + Config.server.port + Config.sockjsprefix + '/websocket');
-						return new WebSocket(
-							'ws' + protocol.slice('4') + '://' + Config.server.host + ':' + Config.server.port + Config.sockjsprefix + '/websocket'
-						);
+						var url = 'ws://' + Config.server.host + ':' + port + Config.sockjsprefix + '/websocket';
+						console.log(url);
+						return new WebSocket(url);
 					}
 					return new SockJS(
 						protocol + '://' + Config.server.host + ':' + Config.server.port + Config.sockjsprefix,
@@ -900,8 +917,8 @@ function toId() {
 		 */
 		sendTeam: function (team) {
 			var packedTeam = '' + Storage.getPackedTeam(team);
-			if (packedTeam.length > 100 * 1024 - 6) {
-				alert("Your team is over 100 KB, usually caused by having over 600 Pokemon in it. Please use a smaller team.");
+			if (packedTeam.length > 25 * 1024 - 6) {
+				alert("Your team is over 25 KB. Please use a smaller team.");
 				return;
 			}
 			this.send('/utm ' + packedTeam);
@@ -2616,9 +2633,10 @@ function toId() {
 		update: function (data) {
 			if (data && data.userid === this.data.userid) {
 				data = _.extend(this.data, data);
-				// Don't cache the roomGroup
+				// Don't cache the roomGroup or status
 				UserPopup.dataCache[data.userid] = _.clone(data);
 				delete UserPopup.dataCache[data.userid].roomGroup;
+				delete UserPopup.dataCache[data.userid].status;
 			} else {
 				data = this.data;
 			}

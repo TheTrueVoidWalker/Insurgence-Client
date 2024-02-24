@@ -28,27 +28,27 @@ function requireScript(url) {
 	document.head.appendChild(scriptEl);
 }
 
-linkStyle('https://insurgence-battle-sim.nl/style/font-awesome.css?');
-linkStyle('https://insurgence-battle-sim.nl/style/battle.css?a7');
-linkStyle('https://insurgence-battle-sim.nl/style/replay.css?a7');
-linkStyle('https://insurgence-battle-sim.nl/style/utilichart.css?a7');
+linkStyle('https://battling.p-insurgence.com/style/font-awesome.css?');
+linkStyle('https://battling.p-insurgence.com/style/battle.css?a7');
+linkStyle('https://battling.p-insurgence.com/style/replay.css?a7');
+linkStyle('https://battling.p-insurgence.com/style/utilichart.css?a7');
 
-requireScript('https://insurgence-battle-sim.nl/js/lib/ps-polyfill.js');
-requireScript('https://insurgence-battle-sim.nl/config/config.js?a7');
-requireScript('https://insurgence-battle-sim.nl/js/lib/jquery-1.11.0.min.js');
-requireScript('https://insurgence-battle-sim.nl/js/lib/html-sanitizer-minified.js');
-requireScript('https://insurgence-battle-sim.nl/js/battle-sound.js');
-requireScript('https://insurgence-battle-sim.nl/js/battledata.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/pokedex-mini.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/pokedex-mini-bw.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/graphics.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/pokedex.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/moves.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/abilities.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/items.js?a7');
-requireScript('https://insurgence-battle-sim.nl/data/teambuilder-tables.js?a7');
-requireScript('https://insurgence-battle-sim.nl/js/battle-tooltips.js?a7');
-requireScript('https://insurgence-battle-sim.nl/js/battle.js?a7');
+requireScript('https://battling.p-insurgence.com/js/lib/ps-polyfill.js');
+requireScript('https://battling.p-insurgence.com/config/config.js?a7');
+requireScript('https://battling.p-insurgence.com/js/lib/jquery-1.11.0.min.js');
+requireScript('https://battling.p-insurgence.com/js/lib/html-sanitizer-minified.js');
+requireScript('https://battling.p-insurgence.com/js/battle-sound.js');
+requireScript('https://battling.p-insurgence.com/js/battledata.js?a7');
+requireScript('https://battling.p-insurgence.com/data/pokedex-mini.js?a7');
+requireScript('https://battling.p-insurgence.com/data/pokedex-mini-bw.js?a7');
+requireScript('https://battling.p-insurgence.com/data/graphics.js?a7');
+requireScript('https://battling.p-insurgence.com/data/pokedex.js?a7');
+requireScript('https://battling.p-insurgence.com/data/moves.js?a7');
+requireScript('https://battling.p-insurgence.com/data/abilities.js?a7');
+requireScript('https://battling.p-insurgence.com/data/items.js?a7');
+requireScript('https://battling.p-insurgence.com/data/teambuilder-tables.js?a7');
+requireScript('https://battling.p-insurgence.com/js/battle-tooltips.js?a7');
+requireScript('https://battling.p-insurgence.com/js/battle.js?a7');
 
 var Replays = {
 	battle: null,
@@ -176,14 +176,14 @@ var Replays = {
 		this.battle.reset();
 	},
 	ff: function () {
-		this.battle.skipTurn();
+		this.battle.seekBy(1);
 	},
 	rewind: function () {
-		this.battle.seekTurn(this.battle.turn - 1);
+		this.battle.seekBy(-1);
 	},
 	ffto: function () {
 		var turn = prompt('Turn?');
-		if (!turn.trim()) return;
+		if (!turn || !turn.trim()) return;
 		if (turn === 'e' || turn === 'end' || turn === 'f' || turn === 'finish') turn = Infinity;
 		turn = Number(turn);
 		if (isNaN(turn) || turn < 0) alert("Invalid turn");

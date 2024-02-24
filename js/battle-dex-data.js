@@ -22,90 +22,90 @@
 var BattleNatures={
 Adamant:{
 plus:'atk',
-minus:'spa'},
-
+minus:'spa'
+},
 Bashful:{},
 Bold:{
 plus:'def',
-minus:'atk'},
-
+minus:'atk'
+},
 Brave:{
 plus:'atk',
-minus:'spe'},
-
+minus:'spe'
+},
 Calm:{
 plus:'spd',
-minus:'atk'},
-
+minus:'atk'
+},
 Careful:{
 plus:'spd',
-minus:'spa'},
-
+minus:'spa'
+},
 Docile:{},
 Gentle:{
 plus:'spd',
-minus:'def'},
-
+minus:'def'
+},
 Hardy:{},
 Hasty:{
 plus:'spe',
-minus:'def'},
-
+minus:'def'
+},
 Impish:{
 plus:'def',
-minus:'spa'},
-
+minus:'spa'
+},
 Jolly:{
 plus:'spe',
-minus:'spa'},
-
+minus:'spa'
+},
 Lax:{
 plus:'def',
-minus:'spd'},
-
+minus:'spd'
+},
 Lonely:{
 plus:'atk',
-minus:'def'},
-
+minus:'def'
+},
 Mild:{
 plus:'spa',
-minus:'def'},
-
+minus:'def'
+},
 Modest:{
 plus:'spa',
-minus:'atk'},
-
+minus:'atk'
+},
 Naive:{
 plus:'spe',
-minus:'spd'},
-
+minus:'spd'
+},
 Naughty:{
 plus:'atk',
-minus:'spd'},
-
+minus:'spd'
+},
 Quiet:{
 plus:'spa',
-minus:'spe'},
-
+minus:'spe'
+},
 Quirky:{},
 Rash:{
 plus:'spa',
-minus:'spd'},
-
+minus:'spd'
+},
 Relaxed:{
 plus:'def',
-minus:'spe'},
-
+minus:'spe'
+},
 Sassy:{
 plus:'spd',
-minus:'spe'},
-
+minus:'spe'
+},
 Serious:{},
 Timid:{
 plus:'spe',
-minus:'atk'}};
-
-
+minus:'atk'
+}
+};
 var BattleStatIDs={
 HP:'hp',
 hp:'hp',
@@ -125,8 +125,8 @@ SpDef:'spd',
 spd:'spd',
 Spe:'spe',
 Spd:'spe',
-spe:'spe'};
-
+spe:'spe'
+};
 
 var BattleStatNames={
 hp:'HP',
@@ -134,11 +134,11 @@ atk:'Atk',
 def:'Def',
 spa:'SpA',
 spd:'SpD',
-spe:'Spe'};
-
+spe:'Spe'
+};
 
 var BattleBaseSpeciesChart=[
-"unown","burmy","shellos","gastrodon","deerling","sawsbuck","vivillon","flabebe","floette","florges","furfrou","minior","alcremie","tatsugiri","pokestarufo","pokestarbrycenman","pokestarmt","pokestarmt2","pokestartransport","pokestargiant","pokestarhumanoid","pokestarmonster","pokestarf00","pokestarf002","pokestarspirit","pokestarblackdoor","pokestarwhitedoor","pokestarblackbelt","snorlaxdelta","mew"];
+"unown","burmy","shellos","gastrodon","deerling","sawsbuck","vivillon","flabebe","floette","florges","furfrou","minior","alcremie","tatsugiri","pokestarufo","pokestarbrycenman","pokestarmt","pokestarmt2","pokestartransport","pokestargiant","pokestarhumanoid","pokestarmonster","pokestarf00","pokestarf002","pokestarspirit","pokestarblackdoor","pokestarwhitedoor","pokestarblackbelt","snorlaxdelta","mukdelta","mew"];
 
 
 var BattlePokemonIconIndexes={
@@ -349,7 +349,6 @@ moltresgalar:1020+202,
 slowkinggalar:1020+203,
 calyrexice:1020+204,
 calyrexshadow:1020+205,
-
 growlithehisui:1020+206,
 arcaninehisui:1020+207,
 voltorbhisui:1020+208,
@@ -371,6 +370,9 @@ enamorustherian:1020+223,
 taurospaldea:1020+224,
 taurospaldeafire:1020+225,
 taurospaldeawater:1020+226,
+taurospaldeacombat:1020+224,
+taurospaldeablaze:1020+225,
+taurospaldeaaqua:1020+226,
 wooperpaldea:1020+227,
 oinkolognef:1020+228,
 palafinhero:1020+229,
@@ -385,9 +387,10 @@ dialgaorigin:1020+237,
 palkiaorigin:1020+238,
 basculinwhitestriped:1020+239,
 
+greninjabond:658,
 gumshoostotem:735,
-raticatealolatotem:900+120,
-marowakalolatotem:900+136,
+raticatealolatotem:1020+120,
+marowakalolatotem:1020+136,
 araquanidtotem:752,
 lurantistotem:754,
 salazzletotem:758,
@@ -484,76 +487,77 @@ inteleongmax:1260+81,
 urshifugmax:1260+82,
 urshifurapidstrikegmax:1260+83,
 
-syclant:1308+0,
-revenankh:1308+1,
-pyroak:1308+2,
-fidgit:1308+3,
-stratagem:1308+4,
-arghonaut:1308+5,
-kitsunoh:1308+6,
-cyclohm:1308+7,
-colossoil:1308+8,
-krilowatt:1308+9,
-voodoom:1308+10,
-tomohawk:1308+11,
-necturna:1308+12,
-mollux:1308+13,
-aurumoth:1308+14,
-malaconda:1308+15,
-cawmodore:1308+16,
-volkraken:1308+17,
-plasmanta:1308+18,
-naviathan:1308+19,
-crucibelle:1308+20,
-crucibellemega:1308+21,
-kerfluffle:1308+22,
-pajantom:1308+23,
-jumbao:1308+24,
-caribolt:1308+25,
-smokomodo:1308+26,
-snaelstrom:1308+27,
-equilibra:1308+28,
-astrolotl:1308+29,
-miasmaw:1308+30,
-chromera:1308+31,
-venomicon:1308+32,
-venomiconepilogue:1308+33,
-saharaja:1308+34,
+syclant:1452+0,
+revenankh:1452+1,
+pyroak:1452+2,
+fidgit:1452+3,
+stratagem:1452+4,
+arghonaut:1452+5,
+kitsunoh:1452+6,
+cyclohm:1452+7,
+colossoil:1452+8,
+krilowatt:1452+9,
+voodoom:1452+10,
+tomohawk:1452+11,
+necturna:1452+12,
+mollux:1452+13,
+aurumoth:1452+14,
+malaconda:1452+15,
+cawmodore:1452+16,
+volkraken:1452+17,
+plasmanta:1452+18,
+naviathan:1452+19,
+crucibelle:1452+20,
+crucibellemega:1452+21,
+kerfluffle:1452+22,
+pajantom:1452+23,
+jumbao:1452+24,
+caribolt:1452+25,
+smokomodo:1452+26,
+snaelstrom:1452+27,
+equilibra:1452+28,
+astrolotl:1452+29,
+miasmaw:1452+30,
+chromera:1452+31,
+venomicon:1452+32,
+venomiconepilogue:1452+33,
+saharaja:1452+34,
+hemogoblin:1452+35,
 
-syclar:1344+0,
-embirch:1344+1,
-flarelm:1344+2,
-breezi:1344+3,
-scratchet:1344+4,
-necturine:1344+5,
-cupra:1344+6,
-argalis:1344+7,
-brattler:1344+8,
-cawdet:1344+9,
-volkritter:1344+10,
-snugglow:1344+11,
-floatoy:1344+12,
-caimanoe:1344+13,
-pluffle:1344+14,
-rebble:1344+15,
-tactite:1344+16,
-privatyke:1344+17,
-nohface:1344+18,
-monohm:1344+19,
-duohm:1344+20,
-protowatt:1344+21,
-voodoll:1344+22,
-mumbao:1344+23,
-fawnifer:1344+24,
-electrelk:1344+25,
-smogecko:1344+26,
-smoguana:1344+27,
-swirlpool:1344+28,
-coribalis:1344+29,
-justyke:1344+30,
-solotl:1344+31,
-miasmite:1344+32,
-dorsoil:1344+33,
+syclar:1488+0,
+embirch:1488+1,
+flarelm:1488+2,
+breezi:1488+3,
+scratchet:1488+4,
+necturine:1488+5,
+cupra:1488+6,
+argalis:1488+7,
+brattler:1488+8,
+cawdet:1488+9,
+volkritter:1488+10,
+snugglow:1488+11,
+floatoy:1488+12,
+caimanoe:1488+13,
+pluffle:1488+14,
+rebble:1488+15,
+tactite:1488+16,
+privatyke:1488+17,
+nohface:1488+18,
+monohm:1488+19,
+duohm:1488+20,
+protowatt:1488+21,
+voodoll:1488+22,
+mumbao:1488+23,
+fawnifer:1488+24,
+electrelk:1488+25,
+smogecko:1488+26,
+smoguana:1488+27,
+swirlpool:1488+28,
+coribalis:1488+29,
+justyke:1488+30,
+solotl:1488+31,
+miasmite:1488+32,
+dorsoil:1488+33,
 
 bulbasaurdelta:1524+0,
 ivysaurdelta:1524+1,
@@ -626,7 +630,7 @@ mismagiusdelta:1524+61,
 cyndaquildelta:1524+62,
 quilavadelta:1524+63,
 typhlosiondelta:1524+64,
-typhlosiondeltamega:1801,
+typhlosiondeltamega:1788+13,
 typhlosiondeltamegaactive:1524+65,
 treeckodelta:1524+66,
 grovyledelta:1524+67,
@@ -786,7 +790,7 @@ registeeldelta:1524+220,
 meloettadeltamime:1524+221,
 meloettadeltamagician:1524+222,
 hoopadelta:1524+223,
-hoopadeltaunbound:1524+224,
+hoopadeltaunleashed:1524+224,
 ufi:1524+225,
 
 
@@ -808,7 +812,7 @@ typhlosionmega:1752+4,
 feraligatrmega:1752+5,
 sudowoodomega:1752+6,
 politoedmega:1752+7,
-sunflorammega:1752+8,
+sunfloramegam:1752+8,
 girafarigmega:1752+9,
 steelixmegafire:1752+10,
 magcargomega:1752+11,
@@ -837,7 +841,7 @@ hydreigonmegasix:1752+31,
 hydreigonmegaseven:1752+31,
 hydreigonmegaeight:1752+31,
 hydreigonmeganine:1752+31,
-sunflorafmega:1752+32,
+sunfloramegaf:1752+32,
 venusaurdeltamegaf:1752+33,
 
 mewtwoarmor:1788+0,
@@ -862,10 +866,8 @@ ivysaurdeltaf:1788+19,
 venusaurdeltaf:1788+20,
 deinodeltaf:1788+21,
 zweilousdeltaf:1788+22,
-hydreigondeltaf:1788+23,
-
-druddigondelta:1812+0};
-
+hydreigondeltaf:1788+23
+};
 
 var BattlePokemonIconIndexesLeft={
 pikachubelle:1344+0,
@@ -942,6 +944,7 @@ kyurem:1344+70,
 keldeoresolute:1344+71,
 meloetta:1344+72,
 greninja:1344+73,
+greninjabond:1344+73,
 greninjaash:1344+74,
 furfroudebutante:1344+75,
 barbaracle:1344+76,
@@ -973,8 +976,8 @@ necrozmaduskmane:1344+101,
 necrozmadawnwings:1344+102,
 necrozmaultra:1344+103,
 stakataka:1344+104,
-blacephalon:1344+105};
-
+blacephalon:1344+105
+};
 
 var BattleAvatarNumbers={
 1:'lucas',
@@ -1288,8 +1291,8 @@ breederf:'pokemonbreederf',
 1002:'#1002',
 1003:'#1003',
 1005:'#1005',
-1010:'#1010'};var
-
+1010:'#1010'
+};var
 
 
 
@@ -1736,6 +1739,7 @@ var baseId=toID(this.baseSpecies);
 this.formeid=baseId===this.id?'':'-'+toID(this.forme);
 this.spriteid=baseId+this.formeid;
 if(this.spriteid.slice(-5)==='totem')this.spriteid=this.spriteid.slice(0,-5);
+if(this.spriteid==='greninja-bond')this.spriteid='greninja';
 if(this.spriteid.slice(-1)==='-')this.spriteid=this.spriteid.slice(0,-1);
 this.baseForme=data.baseForme||'';
 
@@ -1776,7 +1780,9 @@ this.isNonstandard=data.isNonstandard||null;
 this.unreleasedHidden=data.unreleasedHidden||false;
 this.changesFrom=data.changesFrom||undefined;
 if(!this.gen){
-if(this.num>=810||this.formeid.startsWith('-galar')){
+if(this.num>=906||this.formeid.startsWith('-paldea')){
+this.gen=9;
+}else if(this.num>=810||this.formeid.startsWith('-galar')||this.formeid.startsWith('-hisui')){
 this.gen=8;
 }else if(this.num>=722||this.formeid==='-alola'||this.formeid==='-starter'){
 this.gen=7;

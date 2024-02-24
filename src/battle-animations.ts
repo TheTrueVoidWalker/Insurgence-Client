@@ -204,6 +204,7 @@ export class BattleScene implements BattleSceneStub {
 
 	animationOff() {
 		this.$battle.append('<div class="seeking"><strong>seeking...</strong></div>');
+		this.$frame.find('div.playbutton').remove();
 		this.stopAnimation();
 
 		this.animating = false;
@@ -235,10 +236,8 @@ export class BattleScene implements BattleSceneStub {
 	pause() {
 		this.stopAnimation();
 		this.updateBgm();
-		if (this.battle.turn > 0) {
-			this.$frame.append('<div class="playbutton"><button name="play"><i class="fa fa-play icon-play"></i> Resume</button></div>');
-		} else {
-			this.$frame.append('<div class="playbutton"><button name="play"><i class="fa fa-play"></i> Play</button><br /><br /><button name="play-muted" class="startsoundchooser" style="font-size:10pt;display:none">Play (music off)</button></div>');
+		if (!this.battle.started) {
+			this.$frame.append('<div class="playbutton"><button name="play" class="button"><i class="fa fa-play"></i> Play</button><br /><br /><button name="play-muted" class="startsoundchooser button" style="font-size:10pt">Play (music off)</button></div>');
 			this.$frame.find('div.playbutton button[name=play-muted]').click(() => {
 				this.setMute(true);
 				this.battle.play();
@@ -833,7 +832,7 @@ export class BattleScene implements BattleSceneStub {
 				if (gender === 'M' || gender === 'F') {
 					buf2 += `<img src="${Dex.fxPrefix}gender-${gender.toLowerCase()}.png" alt="${gender}" width="7" height="10" class="pixelated" style="margin-bottom:-1px" /> `;
 				}
-				if (pokemon.level !== 100) {
+				if (pokemon.level !== 120) {
 					buf2 += '<span style="text-shadow:#000 1px 1px 0,#000 1px -1px 0,#000 -1px 1px 0,#000 -1px -1px 0"><small>L</small>' + pokemon.level + '</span>';
 				}
 				if (pokemon.item === '(mail)') {
@@ -924,6 +923,7 @@ export class BattleScene implements BattleSceneStub {
 				primordialsea: 'Heavy Rain',
 				sandstorm: 'Sandstorm',
 				hail: 'Hail',
+				snow: 'Snow',
 				deltastream: 'Strong Winds',
        			newmoon: 'Darkness',
 			};
@@ -1646,6 +1646,9 @@ export class BattleScene implements BattleSceneStub {
 	animDragOut(pokemon: Pokemon) {
 		return pokemon.sprite.animDragOut(pokemon);
 	}
+	resetStatbar(pokemon: Pokemon, startHidden?: boolean) {
+		return pokemon.sprite.resetStatbar(pokemon, startHidden);
+	}
 	updateStatbar(pokemon: Pokemon, updatePrevhp?: boolean, updateHp?: boolean) {
 		return pokemon.sprite.updateStatbar(pokemon, updatePrevhp, updateHp);
 	}
@@ -1955,9 +1958,25 @@ export class PokemonSprite extends Sprite {
 		smackdown: ['Smack Down', 'bad'],
 		focusenergy: ['Critical Hit Boost', 'good'],
 		slowstart: ['Slow Start', 'bad'],
+		protosynthesisatk: ['Protosynthesis: Atk', 'good'],
+		protosynthesisdef: ['Protosynthesis: Def', 'good'],
+		protosynthesisspa: ['Protosynthesis: SpA', 'good'],
+		protosynthesisspd: ['Protosynthesis: SpD', 'good'],
+		protosynthesisspe: ['Protosynthesis: Spe', 'good'],
+		quarkdriveatk: ['Quark Drive: Atk', 'good'],
+		quarkdrivedef: ['Quark Drive: Def', 'good'],
+		quarkdrivespa: ['Quark Drive: SpA', 'good'],
+		quarkdrivespd: ['Quark Drive: SpD', 'good'],
+		quarkdrivespe: ['Quark Drive: Spe', 'good'],
+		fallen1: ['Fallen: 1', 'good'],
+		fallen2: ['Fallen: 2', 'good'],
+		fallen3: ['Fallen: 3', 'good'],
+		fallen4: ['Fallen: 4', 'good'],
+		fallen5: ['Fallen: 5', 'good'],
 		noretreat: ['No Retreat', 'bad'],
 		octolock: ['Octolock', 'bad'],
 		tarshot: ['Tar Shot', 'bad'],
+		saltcure: ['Salt Cure', 'bad'],
 		doomdesire: null,
 		futuresight: null,
 		mimic: ['Mimic', 'good'],
@@ -1985,6 +2004,7 @@ export class PokemonSprite extends Sprite {
 		shelltrap: ['Trap set', 'neutral'],
 		powder: ['Powder', 'bad'],
 		electrify: ['Electrify', 'bad'],
+		glaiverush: ['Glaive Rush', 'bad'],
 		ragepowder: ['Rage Powder', 'good'],
 		followme: ['Follow Me', 'good'],
 		instruct: ['Instruct', 'neutral'],
@@ -2213,7 +2233,7 @@ export class PokemonSprite extends Sprite {
 	reset(pokemon: Pokemon) {
 		this.clearEffects();
 
-		if (pokemon.volatiles.formechange || pokemon.volatiles.dynamax) {
+		if (pokemon.volatiles.formechange || pokemon.volatiles.dynamax || pokemon.volatiles.terastallize) {
 			if (!this.oldsp) this.oldsp = this.sp;
 			this.sp = Dex.getSpriteData(pokemon, this.isFrontSprite, {
 				gen: this.scene.gen,
@@ -2674,27 +2694,32 @@ export class PokemonSprite extends Sprite {
 			xscale: 0,
 			opacity: 0,
 		}, sp));
-		this.$el.animate(this.scene.pos({
-			x: this.x,
-			y: this.y,
-			z: this.z,
-			yscale: 0,
-			xscale: 0,
-			opacity: 0.3,
-		}, oldsp), 300, () => {
-			if (this.cryurl && doCry) {
-				BattleSound.playEffect(this.cryurl);
-			}
+		if (speciesid === 'palafinhero') {
 			this.$el.replaceWith($newEl);
 			this.$el = $newEl;
-			this.$el.animate(scene.pos({
+		} else {
+			this.$el.animate(this.scene.pos({
 				x: this.x,
 				y: this.y,
 				z: this.z,
-				opacity: 1,
-			}, sp), 300);
-		});
-		this.scene.wait(500);
+				yscale: 0,
+				xscale: 0,
+				opacity: 0.3,
+			}, oldsp), 300, () => {
+				if (this.cryurl && doCry) {
+					BattleSound.playEffect(this.cryurl);
+				}
+				this.$el.replaceWith($newEl);
+				this.$el = $newEl;
+				this.$el.animate(scene.pos({
+					x: this.x,
+					y: this.y,
+					z: this.z,
+					opacity: 1,
+				}, sp), 300);
+			});
+			this.scene.wait(500);
+		}
 
 		this.scene.updateSidebar(pokemon.side);
 		if (isPermanent) {
@@ -2722,7 +2747,7 @@ export class PokemonSprite extends Sprite {
 			return;
 		}
 		const spriten = +this.isFrontSprite;
-		if (id === 'substitute') {
+		if (id === 'substitute' || id === 'shedtail') {
 			this.animSub(instant);
 		} else if (id === 'leechseed') {
 			const pos1 = {
@@ -2806,15 +2831,26 @@ export class PokemonSprite extends Sprite {
 	// Statbar
 	/////////////////////////////////////////////////////////////////////
 
+	getClassForPosition(slot: number) {
+		// DOUBLES: Slot0 -> left / Slot1 -> Right
+		// TRIPLES: slot0 -> left / Slot1 -> Center / Slot2 -> Right
+		const position = [
+			' leftstatbar',
+			this.scene.activeCount === 3 ? ' centerstatbar' : ' rightstatbar',
+			' rightstatbar',
+		];
+		return position[slot];
+	}
+
 	getStatbarHTML(pokemon: Pokemon) {
-		let buf = '<div class="statbar' + (this.isFrontSprite ? ' lstatbar' : ' rstatbar') + '" style="display: none">';
+		let buf = '<div class="statbar' + (this.isFrontSprite ? ' lstatbar' : ' rstatbar') + this.getClassForPosition(pokemon.slot) + '" style="display: none">';
 		const ignoreNick = this.isFrontSprite && (this.scene.battle.ignoreOpponent || this.scene.battle.ignoreNicks);
 		buf += `<strong>${BattleLog.escapeHTML(ignoreNick ? pokemon.speciesForme : pokemon.name)}`;
 		const gender = pokemon.gender;
 		if (gender === 'M' || gender === 'F') {
 			buf += ` <img src="${Dex.fxPrefix}gender-${gender.toLowerCase()}.png" alt="${gender}" width="7" height="10" class="pixelated" />`;
 		}
-		buf += (pokemon.level === 100 ? `` : ` <small>L${pokemon.level}</small>`);
+		buf += (pokemon.level === 120 ? `` : ` <small>L${pokemon.level}</small>`);
 
 		let symbol = '';
 		if (pokemon.speciesForme.indexOf('-Mega') >= 0) symbol = 'mega';
@@ -2822,6 +2858,9 @@ export class PokemonSprite extends Sprite {
 		else if (pokemon.speciesForme === 'Groudon-Primal') symbol = 'omega';
 		if (symbol) {
 			buf += ` <img src="${Dex.resourcePrefix}sprites/misc/${symbol}.png" alt="${symbol}" style="vertical-align:text-bottom;" />`;
+		}
+		if (pokemon.terastallized) {
+			buf += ` <img src="${Dex.resourcePrefix}sprites/types/Tera${pokemon.terastallized}.png" alt="Tera-${pokemon.terastallized}" style="vertical-align:text-bottom;" height="16" width="16" />`;
 		}
 
 		buf += `</strong><div class="hpbar"><div class="hptext"></div><div class="hptextborder"></div><div class="prevhp"><div class="hp"></div></div><div class="status"></div>`;
@@ -2897,7 +2936,9 @@ export class PokemonSprite extends Sprite {
 		} else if (pokemon.status === 'frz') {
 			status += '<span class="frz">FRZ</span> ';
 		}
-		if (pokemon.volatiles.typechange && pokemon.volatiles.typechange[1]) {
+		if (pokemon.terastallized) {
+			status += `<img src="${Dex.resourcePrefix}sprites/types/${encodeURIComponent(pokemon.terastallized)}.png" alt="${pokemon.terastallized}" class="pixelated" /> `;
+		} else if (pokemon.volatiles.typechange && pokemon.volatiles.typechange[1]) {
 			const types = pokemon.volatiles.typechange[1].split('/');
 			for (const type of types) {
 				status += '<img src="' + Dex.resourcePrefix + 'sprites/types/' + encodeURIComponent(type) + '.png" alt="' + type + '" class="pixelated" /> ';
@@ -2931,7 +2972,19 @@ export class PokemonSprite extends Sprite {
 		let effect = PokemonSprite.statusTable[id];
 		if (typeof effect === 'string') return effect;
 		if (effect === null) return PokemonSprite.statusTable[id] = '';
-		if (effect === undefined) effect = [`[[${id}]]`, 'neutral'];
+		if (effect === undefined) {
+			let label = `[[${id}]]`;
+			if (Dex.species.get(id).exists) {
+				label = Dex.species.get(id).name;
+			} else if (Dex.items.get(id).exists) {
+				label = Dex.items.get(id).name;
+			} else if (Dex.moves.get(id).exists) {
+				label = Dex.moves.get(id).name;
+			} else if (Dex.abilities.get(id).exists) {
+				label = Dex.abilities.get(id).name;
+			}
+			effect = [label, 'neutral'];
+		}
 		return PokemonSprite.statusTable[id] = `<span class="${effect[1]}">${effect[0].replace(/ /g, '&nbsp;')}</span> `;
 	}
 

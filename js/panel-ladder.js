@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Ladder Panel
  *
  * Panel for ladder formats and associated ladder tables.
@@ -54,9 +54,9 @@ query:{
 format:_this.format,
 server:PS.server.id,
 output:'html',
-prefix:toID(searchValue)}}).
-
-
+prefix:toID(searchValue)
+}
+}).
 then(_this.setLadderData)["catch"](
 _this.setError);
 }
@@ -84,8 +84,8 @@ var RenderHeader=function(){
 if(!PS.teams.usesLocalLadder){
 return preact.h("h3",null,
 BattleLog.escapeFormat(format)," Top"," ",
-BattleLog.escapeHTML(lastSearch?"- '"+lastSearch+"'":"500"));
-
+BattleLog.escapeHTML(lastSearch?"- '"+lastSearch+"'":"500")
+);
 }
 return null;
 };
@@ -98,10 +98,10 @@ name:"searchValue",
 "class":"textbox searchinput",
 value:BattleLog.escapeHTML(searchValue),
 placeholder:"username prefix",
-onChange:changeSearch}),
-
-preact.h("button",{type:"submit"}," Search"));
-
+onChange:changeSearch}
+),
+preact.h("button",{type:"submit"}," Search")
+);
 }
 return null;
 };
@@ -118,22 +118,22 @@ return null;
 return preact.h(preact.Fragment,null,
 preact.h("p",null,
 preact.h("button",{"class":"button","data-href":"ladder","data-target":"replace"},
-preact.h("i",{"class":"fa fa-refresh"})," Refresh"),
-
-preact.h(RenderSearch,null)),
-
+preact.h("i",{"class":"fa fa-refresh"})," Refresh"
+),
+preact.h(RenderSearch,null)
+),
 preact.h(RenderHeader,null),
-preact.h(SanitizedHTML,null,ladderData));
-
+preact.h(SanitizedHTML,null,ladderData)
+);
 };
 return preact.h("div",{"class":"ladder pad"},
 preact.h("p",null,
 preact.h("button",{"class":"button","data-href":"ladder","data-target":"replace"},
-preact.h("i",{"class":"fa fa-chevron-left"})," Format List")),
-
-
-preact.h(RenderFormat,null));
-
+preact.h("i",{"class":"fa fa-chevron-left"})," Format List"
+)
+),
+preact.h(RenderFormat,null)
+);
 }var
 
 LadderPanel=function(_PSRoomPanel){_inheritsLoose(LadderPanel,_PSRoomPanel);function LadderPanel(){return _PSRoomPanel.apply(this,arguments)||this;}var _proto=LadderPanel.prototype;_proto.
@@ -154,14 +154,14 @@ room.setLadderData(ladderData);
 }
 }
 _this2.forceUpdate();
-}));
-
+})
+);
 this.subscriptions.push(
 PS.teams.subscribe(function(){
 if(room.format!==undefined)room.requestLadderData();
 _this2.forceUpdate();
-}));
-
+})
+);
 };_proto.
 
 
@@ -234,15 +234,15 @@ preact.h("div",{"class":"ladder pad"},
 room.format===undefined&&
 preact.h(LadderPanel.ShowFormatList,{room:room}),
 
-room.format!==undefined&&preact.h(LadderFormat,{room:room})));
-
-
-};return LadderPanel;}(PSRoomPanel);LadderPanel.Notice=function(props){var notice=props.notice;if(notice){return preact.h("p",null,preact.h("strong",{style:"color:red"},notice));}return null;};LadderPanel.BattleFormatList=function(){if(!BattleFormats){return preact.h("p",null,"Loading...");}var currentSection="";var sections=[];var formats=[];for(var _i=0,_Object$entries=Object.entries(BattleFormats);_i<_Object$entries.length;_i++){var _ref=_Object$entries[_i];var key=_ref[0];var format=_ref[1];if(!format.rated||!format.searchShow)continue;if(format.section!==currentSection){if(formats.length>0){sections.push(preact.h(preact.Fragment,{key:currentSection},preact.h("h3",null,currentSection),preact.h("ul",{style:"list-style:none;margin:0;padding:0"},formats)));formats=[];}currentSection=format.section;}formats.push(preact.h("li",{key:key,style:"margin:5px"},preact.h("button",{name:"joinRoom",value:"ladder-"+key,"class":"button",style:"width:320px;height:30px;text-align:left;font:12pt Verdana"},BattleLog.escapeFormat(format.id))));}return preact.h(preact.Fragment,null,sections);};LadderPanel.ShowFormatList=function(props){var room=props.room;return preact.h(preact.Fragment,null,preact.h("p",null,preact.h("a",{"class":"button",href:"/"+Config.routes.users+"/",target:"_blank"},"Look up a specific user's rating")),preact.h(LadderPanel.Notice,{notice:room.notice}),preact.h("p",null,preact.h("button",{name:"joinRoom",value:"view-ladderhelp","class":"button"},preact.h("i",{"class":"fa fa-info-circle"})," How the ladder works")),preact.h(LadderPanel.BattleFormatList,null));};
+room.format!==undefined&&preact.h(LadderFormat,{room:room})
+)
+);
+};return LadderPanel;}(PSRoomPanel);LadderPanel.Notice=function(props){var notice=props.notice;if(notice){return preact.h("p",null,preact.h("strong",{style:"color:red"},notice));}return null;};LadderPanel.BattleFormatList=function(){if(!BattleFormats){return preact.h("p",null,"Loading...");}var currentSection="";var sections=[];var formats=[];for(var _i2=0,_Object$entries2=Object.entries(BattleFormats);_i2<_Object$entries2.length;_i2++){var _ref=_Object$entries2[_i2];var key=_ref[0];var format=_ref[1];if(!format.rated||!format.searchShow)continue;if(format.section!==currentSection){if(formats.length>0){sections.push(preact.h(preact.Fragment,{key:currentSection},preact.h("h3",null,currentSection),preact.h("ul",{style:"list-style:none;margin:0;padding:0"},formats)));formats=[];}currentSection=format.section;}formats.push(preact.h("li",{key:key,style:"margin:5px"},preact.h("button",{name:"joinRoom",value:"ladder-"+key,"class":"button",style:"width:320px;height:30px;text-align:left;font:12pt Verdana"},BattleLog.escapeFormat(format.id))));}return preact.h(preact.Fragment,null,sections);};LadderPanel.ShowFormatList=function(props){var room=props.room;return preact.h(preact.Fragment,null,preact.h("p",null,preact.h("a",{"class":"button",href:"/"+Config.routes.users+"/",target:"_blank"},"Look up a specific user's rating")),preact.h(LadderPanel.Notice,{notice:room.notice}),preact.h("p",null,preact.h("button",{name:"joinRoom",value:"view-ladderhelp","class":"button"},preact.h("i",{"class":"fa fa-info-circle"})," How the ladder works")),preact.h(LadderPanel.BattleFormatList,null));};
 
 
 PS.roomTypes['ladder']={
 Model:LadderRoom,
-Component:LadderPanel};
-
+Component:LadderPanel
+};
 PS.updateRoomTypes();
 //# sourceMappingURL=panel-ladder.js.map

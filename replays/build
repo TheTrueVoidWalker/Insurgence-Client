@@ -35,7 +35,7 @@ function runReplace(a, b, c) {
 		const fstr = fs.readFileSync(filepath, {encoding: 'utf8'});
 		hash = crypto.createHash('md5').update(fstr).digest('hex').substr(0, 8);
 	 } catch (e) {}
-	c = c.replace('/replay.pokemonshowdown.com/', '/' + routes.replays + '/');
+	c = c.replace('/battling.p-insurgence.com/replays/', '/' + routes.replays + '/');
 	c = c.replace('/dex.pokemonshowdown.com/', '/' + routes.dex + '/');
 	c = c.replace('/play.pokemonshowdown.com/', '/' + routes.client + '/');
 	c = c.replace('/pokemonshowdown.com/users/', '/' + routes.users + '/');

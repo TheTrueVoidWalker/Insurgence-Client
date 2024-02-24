@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Teambuilder panel
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
@@ -59,8 +59,8 @@ format:copyFrom.format,
 folder:copyFrom.folder,
 packedTeam:copyFrom.packedTeam,
 iconCache:null,
-key:''};
-
+key:''
+};
 }else{
 var format=this.curFolder&&!this.curFolder.endsWith('/')?this.curFolder:this.DEFAULT_FORMAT;
 var _folder=this.curFolder.endsWith('/')?this.curFolder.slice(0,-1):'';
@@ -70,8 +70,8 @@ format:format,
 folder:_folder,
 packedTeam:'',
 iconCache:null,
-key:''};
-
+key:''
+};
 }
 };return TeambuilderRoom;}(PSRoom);var
 
@@ -106,8 +106,8 @@ var room=this.props.room;
 
 
 var folderTable={'':1};
-var folders=[];for(var _i=0,_PS$teams$list=
-PS.teams.list;_i<_PS$teams$list.length;_i++){var team=_PS$teams$list[_i];
+var folders=[];for(var _i2=0,_PS$teams$list2=
+PS.teams.list;_i2<_PS$teams$list2.length;_i2++){var team=_PS$teams$list2[_i2];
 var _folder2=team.folder;
 if(_folder2&&!(_folder2+"/"in folderTable)){
 folders.push(_folder2+"/");
@@ -135,20 +135,20 @@ folders.push(room.curFolder);
 
 PSUtils.sortBy(folders,function(folder){return[
 folder.endsWith('/')?10:-parseInt(folder.charAt(3),10),
-folder];});
-
+folder];}
+);
 
 var renderedFormatFolders=[
 preact.h("div",{"class":"foldersep"}),
 preact.h(TeamFolder,{cur:false,value:"+"},
-preact.h("i",{"class":"fa fa-plus"}),preact.h("em",null,"(add format folder)"))];
-
+preact.h("i",{"class":"fa fa-plus"}),preact.h("em",null,"(add format folder)")
+)];
 
 
 var renderedFolders=[];
 
-var gen=-1;for(var _i2=0;_i2<
-folders.length;_i2++){var _format=folders[_i2];
+var gen=-1;for(var _i4=0;_i4<
+folders.length;_i4++){var _format=folders[_i4];
 var newGen=_format.endsWith('/')?0:parseInt(_format.charAt(3),10);
 if(gen!==newGen){
 gen=newGen;
@@ -165,17 +165,17 @@ var folderOpenIcon=room.curFolder===_format?'fa-folder-open':'fa-folder';
 if(gen===0){
 renderedFolders.push(preact.h(TeamFolder,{cur:room.curFolder===_format,value:_format},
 preact.h("i",{"class":"fa "+
-folderOpenIcon+(_format==='/'?'-o':'')}),
-
-_format.slice(0,-1)||'(uncategorized)'));
-
+folderOpenIcon+(_format==='/'?'-o':'')}
+),
+_format.slice(0,-1)||'(uncategorized)'
+));
 continue;
 }
 
 renderedFolders.push(preact.h(TeamFolder,{cur:room.curFolder===_format,value:_format},
 preact.h("i",{"class":"fa "+folderOpenIcon+"-o"}),
-_format.slice(4)||'(uncategorized)'));
-
+_format.slice(4)||'(uncategorized)'
+));
 }
 renderedFolders.push.apply(renderedFolders,renderedFormatFolders);
 
@@ -183,16 +183,16 @@ return preact.h("div",{"class":"folderlist",onClick:this.selectFolder},
 preact.h("div",{"class":"folderlistbefore"}),
 
 preact.h(TeamFolder,{cur:!room.curFolder,value:""},
-preact.h("em",null,"(all)")),
-
+preact.h("em",null,"(all)")
+),
 renderedFolders,
 preact.h("div",{"class":"foldersep"}),
 preact.h(TeamFolder,{cur:false,value:"++"},
-preact.h("i",{"class":"fa fa-plus"}),preact.h("em",null,"(add folder)")),
+preact.h("i",{"class":"fa fa-plus"}),preact.h("em",null,"(add folder)")
+),
 
-
-preact.h("div",{"class":"folderlistafter"}));
-
+preact.h("div",{"class":"folderlistafter"})
+);
 };_proto2.
 
 render=function render(){
@@ -218,19 +218,19 @@ teams=teams.filter(function(team){return!team||team.format===filterFormat;});
 
 return preact.h(PSPanelWrapper,{room:room},
 preact.h("div",{"class":"folderpane"},
-this.renderFolderList()),
-
+this.renderFolderList()
+),
 preact.h("div",{"class":"teampane"},
 filterFolder?
 preact.h("h2",null,
 preact.h("i",{"class":"fa fa-folder-open"})," ",filterFolder," ",
 preact.h("button",{"class":"button small",style:"margin-left:5px",name:"renameFolder"},
-preact.h("i",{"class":"fa fa-pencil"})," Rename")," ",
-
+preact.h("i",{"class":"fa fa-pencil"})," Rename"
+)," ",
 preact.h("button",{"class":"button small",style:"margin-left:5px",name:"promptDeleteFolder"},
-preact.h("i",{"class":"fa fa-times"})," Remove")):
-
-
+preact.h("i",{"class":"fa fa-times"})," Remove"
+)
+):
 filterFolder===''?
 preact.h("h2",null,preact.h("i",{"class":"fa fa-folder-open-o"})," Teams not in any folders"):
 filterFormat?
@@ -239,30 +239,31 @@ preact.h("h2",null,preact.h("i",{"class":"fa fa-folder-open-o"})," ",filterForma
 preact.h("h2",null,"All Teams ",preact.h("small",null,"(",teams.length,")")),
 
 preact.h("p",null,
-preact.h("button",{name:"cmd",value:"/newteam","class":"button big"},preact.h("i",{"class":"fa fa-plus-circle"})," New Team")),
-
+preact.h("button",{name:"cmd",value:"/newteam","class":"button big"},preact.h("i",{"class":"fa fa-plus-circle"})," New Team")
+),
 preact.h("ul",{"class":"teamlist"},
 teams.map(function(team){return team?
 preact.h("li",{key:team.key},
 preact.h(TeamBox,{team:team})," ",
-preact.h("button",{name:"cmd",value:"/deleteteam "+team.key},preact.h("i",{"class":"fa fa-trash"})," Delete")):
-
+preact.h("button",{name:"cmd",value:"/deleteteam "+team.key},preact.h("i",{"class":"fa fa-trash"})," Delete")
+):
 
 preact.h("li",{key:"undelete"},
-preact.h("button",{name:"cmd",value:"/undeleteteam"},preact.h("i",{"class":"fa fa-undo"})," Undo delete"));})),
-
-
-
+preact.h("button",{name:"cmd",value:"/undeleteteam"},preact.h("i",{"class":"fa fa-undo"})," Undo delete")
+);}
+)
+),
 preact.h("p",null,
-preact.h("button",{name:"cmd",value:"/newteam bottom","class":"button"},preact.h("i",{"class":"fa fa-plus-circle"})," New Team"))));
-
-
-
+preact.h("button",{name:"cmd",value:"/newteam bottom","class":"button"},preact.h("i",{"class":"fa fa-plus-circle"})," New Team")
+)
+)
+);
 };return TeambuilderPanel;}(PSRoomPanel);
 
 
 PS.roomTypes['teambuilder']={
 Model:TeambuilderRoom,
 Component:TeambuilderPanel,
-title:"Teambuilder"};
+title:"Teambuilder"
+};
 //# sourceMappingURL=panel-teambuilder.js.map

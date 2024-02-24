@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Main menu panel
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
@@ -32,8 +32,8 @@ case'challstr':{
 var challstr=args[1];
 PSLoginServer.query({
 act:'upkeep',
-challstr:challstr}).
-then(function(res){
+challstr:challstr
+}).then(function(res){
 if(!res)return;
 if(!res.loggedin)return;
 _this2.send("/trn "+res.username+",0,"+res.assertion);
@@ -168,8 +168,8 @@ section:section,
 column:column,
 rated:false,
 isTeambuilderFormat:true,
-effectType:'Format'};
-
+effectType:'Format'
+};
 }
 isTeambuilderFormat=false;
 }
@@ -192,8 +192,8 @@ rated:searchShow&&_id.substr(4,7)!=='unrated',
 teambuilderLevel:teambuilderLevel,
 teambuilderFormat:teambuilderFormat,
 isTeambuilderFormat:isTeambuilderFormat,
-effectType:'Format'};
-
+effectType:'Format'
+};
 }
 }
 
@@ -223,8 +223,8 @@ if(!room){
 var pmTarget=PS.user.userid===userid1?user2:user1;
 PS.addRoom({
 id:roomid,
-pmTarget:pmTarget},
-true);
+pmTarget:pmTarget
+},true);
 room=PS.rooms[roomid];
 }
 room.receiveLine(["c",user1,message]);
@@ -244,13 +244,13 @@ var userRoom=PS.rooms["user-"+_userid2];
 if(userRoom)userRoom.update(null);
 break;
 case'rooms':
-if(response.pspl){for(var _i=0,_response$pspl=
-response.pspl;_i<_response$pspl.length;_i++){var roomInfo=_response$pspl[_i];roomInfo.spotlight="Spotlight";}
+if(response.pspl){for(var _i2=0,_response$pspl2=
+response.pspl;_i2<_response$pspl2.length;_i2++){var roomInfo=_response$pspl2[_i2];roomInfo.spotlight="Spotlight";}
 response.chat=[].concat(response.pspl,response.chat);
 response.pspl=null;
 }
-if(response.official){for(var _i2=0,_response$official=
-response.official;_i2<_response$official.length;_i2++){var _roomInfo=_response$official[_i2];_roomInfo.section="Official";}
+if(response.official){for(var _i4=0,_response$official2=
+response.official;_i4<_response$official2.length;_i4++){var _roomInfo=_response$official2[_i4];_roomInfo.section="Official";}
 response.chat=[].concat(response.official,response.chat);
 response.official=null;
 }
@@ -272,20 +272,20 @@ battlesRoom.update(null);
 }
 break;
 case'laddertop':
-var ladderRoomEntries=Object.entries(PS.rooms).filter(function(entry){return entry[0].startsWith('ladder');});for(var _i3=0;_i3<
-ladderRoomEntries.length;_i3++){var _ref=ladderRoomEntries[_i3];var ladderRoom=_ref[1];
+var ladderRoomEntries=Object.entries(PS.rooms).filter(function(entry){return entry[0].startsWith('ladder');});for(var _i6=0;_i6<
+ladderRoomEntries.length;_i6++){var _ref=ladderRoomEntries[_i6];var ladderRoom=_ref[1];
 ladderRoom.update(response);
 }
-break;}
-
+break;
+}
 };return MainMenuRoom;}(PSRoom);var
 
 
 NewsPanel=function(_PSRoomPanel){_inheritsLoose(NewsPanel,_PSRoomPanel);function NewsPanel(){return _PSRoomPanel.apply(this,arguments)||this;}var _proto2=NewsPanel.prototype;_proto2.
 render=function render(){
 return preact.h(PSPanelWrapper,{room:this.props.room,scrollable:true},
-preact.h("div",{"class":"mini-window-body",dangerouslySetInnerHTML:{__html:PS.newsHTML}}));
-
+preact.h("div",{"class":"mini-window-body",dangerouslySetInnerHTML:{__html:PS.newsHTML}})
+);
 };return NewsPanel;}(PSRoomPanel);var
 
 
@@ -313,11 +313,11 @@ preact.h("div",{"class":"mini-window"},
 preact.h("h3",{draggable:true,onDragStart:_this4.handleDragStart,"data-roomid":roomid},
 preact.h("button",{"class":"closebutton",name:"closeRoom",value:roomid,"aria-label":"Close",tabIndex:-1},preact.h("i",{"class":"fa fa-times-circle"})),
 preact.h("button",{"class":"minimizebutton",tabIndex:-1},preact.h("i",{"class":"fa fa-minus-circle"})),
-room.title),
-
-_this4.renderMiniRoom(room)));
-
-
+room.title
+),
+_this4.renderMiniRoom(room)
+)
+);
 });
 };_proto3.
 renderSearchButton=function renderSearchButton(){
@@ -330,28 +330,28 @@ preact.h("p",{"class":"error"},preact.h("strong",null,"Pok\xE9mon Showdown is of
 
 preact.h("p",null,
 preact.h("div",{style:{textAlign:'center'}},
-preact.h("img",{width:"96",height:"96",src:"//"+Config.routes.client+"/sprites/gen5/teddiursa.png",alt:""})),"Bear with us as we freak out."),
+preact.h("img",{width:"96",height:"96",src:"//"+Config.routes.client+"/sprites/gen5/teddiursa.png",alt:""})
+),"Bear with us as we freak out."
 
-
-
-preact.h("p",null,"(We'll be back up in a few hours.)"));
-
+),
+preact.h("p",null,"(We'll be back up in a few hours.)")
+);
 }
 
 if(!PS.user.userid||PS.isOffline){
 return preact.h(TeamForm,{"class":"menugroup",onSubmit:this.submit},
 preact.h("button",{"class":"mainmenu1 big button disabled",name:"search"},
-preact.h("em",null,PS.isOffline?"Disconnected":"Connecting...")));
-
-
+preact.h("em",null,PS.isOffline?"Disconnected":"Connecting...")
+)
+);
 }
 
 return preact.h(TeamForm,{"class":"menugroup",onSubmit:this.submit},
 preact.h("button",{"class":"mainmenu1 big button",name:"search"},
 preact.h("strong",null,"Battle!"),preact.h("br",null),
-preact.h("small",null,"Find a random opponent")));
-
-
+preact.h("small",null,"Find a random opponent")
+)
+);
 };_proto3.
 render=function render(){
 var onlineButton=' button'+(PS.isOffline?' disabled':'');
@@ -359,31 +359,31 @@ return preact.h(PSPanelWrapper,{room:this.props.room,scrollable:true},
 preact.h("div",{"class":"mainmenuwrapper"},
 preact.h("div",{"class":"leftmenu"},
 preact.h("div",{"class":"activitymenu"},
-this.renderMiniRooms()),
-
+this.renderMiniRooms()
+),
 preact.h("div",{"class":"mainmenu"},
 this.renderSearchButton(),
 
 preact.h("div",{"class":"menugroup"},
 preact.h("p",null,preact.h("button",{"class":"mainmenu2 button",name:"joinRoom",value:"teambuilder"},"Teambuilder")),
-preact.h("p",null,preact.h("button",{"class":"mainmenu3"+onlineButton,name:"joinRoom",value:"ladder"},"Ladder"))),
-
+preact.h("p",null,preact.h("button",{"class":"mainmenu3"+onlineButton,name:"joinRoom",value:"ladder"},"Ladder"))
+),
 
 preact.h("div",{"class":"menugroup"},
 preact.h("p",null,preact.h("button",{"class":"mainmenu4"+onlineButton,name:"joinRoom",value:"battles"},"Watch a battle")),
-preact.h("p",null,preact.h("button",{"class":"mainmenu5"+onlineButton,name:"finduser"},"Find a user"))))),
-
-
-
+preact.h("p",null,preact.h("button",{"class":"mainmenu5"+onlineButton,name:"finduser"},"Find a user"))
+)
+)
+),
 preact.h("div",{"class":"rightmenu",style:{display:PS.leftRoomWidth?'none':'block'}},
 preact.h("div",{"class":"menugroup"},
 PS.server.id==='showdown'?
 preact.h("p",null,preact.h("button",{"class":"mainmenu1"+onlineButton,name:"joinRoom",value:"rooms"},"Join chat")):
 
-preact.h("p",null,preact.h("button",{"class":"mainmenu1"+onlineButton,name:"joinRoom",value:"lobby"},"Join lobby chat")))),
+preact.h("p",null,preact.h("button",{"class":"mainmenu1"+onlineButton,name:"joinRoom",value:"lobby"},"Join lobby chat"))
 
-
-
+)
+),
 preact.h("div",{"class":"mainmenufooter"},
 preact.h("div",{"class":"bgcredit"}),
 preact.h("small",null,
@@ -391,11 +391,11 @@ preact.h("a",{href:"//"+Config.routes.dex+"/",target:"_blank"},"Pok\xE9dex")," |
 preact.h("a",{href:"//"+Config.routes.replays+"/",target:"_blank"},"Replays")," | ",
 preact.h("a",{href:"//"+Config.routes.root+"/rules",target:"_blank"},"Rules")," | ",
 preact.h("a",{href:"//"+Config.routes.dex+"/credits",target:"_blank"},"Credits")," | ",
-preact.h("a",{href:"//smogon.com/forums/",target:"_blank"},"Forum")))));
-
-
-
-
+preact.h("a",{href:"//smogon.com/forums/",target:"_blank"},"Forum")
+)
+)
+)
+);
 };return MainMenuPanel;}(PSRoomPanel);var
 
 
@@ -418,8 +418,8 @@ return preact.h("button",{
 name:"format",value:this.format,
 "class":"select formatselect","data-href":"/formatdropdown",onChange:this.change},
 
-this.format);
-
+this.format
+);
 };return FormatDropdown;}(preact.Component);var
 
 
@@ -431,8 +431,8 @@ if(!_this6.base)return;
 _this6.teamKey=_this6.base.value;
 _this6.forceUpdate();
 };return _this6;}var _proto5=TeamDropdown.prototype;_proto5.
-getDefaultTeam=function getDefaultTeam(teambuilderFormat){for(var _i4=0,_PS$teams$list=
-PS.teams.list;_i4<_PS$teams$list.length;_i4++){var _team2=_PS$teams$list[_i4];
+getDefaultTeam=function getDefaultTeam(teambuilderFormat){for(var _i8=0,_PS$teams$list2=
+PS.teams.list;_i8<_PS$teams$list2.length;_i8++){var _team2=_PS$teams$list2[_i8];
 if(_team2.format===teambuilderFormat)return _team2.key;
 }
 return'';
@@ -450,10 +450,10 @@ preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(null)}),
 preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(null)}),
 preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(null)}),
 preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(null)}),
-preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(null)}))));
-
-
-
+preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(null)})
+)
+)
+);
 }
 if(teamFormat!==this.teamFormat){
 this.teamFormat=teamFormat;
@@ -464,8 +464,8 @@ return preact.h("button",{
 name:"team",value:this.teamKey,
 "class":"select teamselect","data-href":"/teamdropdown","data-format":teamFormat,onChange:this.change},
 
-PS.roomTypes['teamdropdown']&&preact.h(TeamBox,{team:team,noLink:true}));
-
+PS.roomTypes['teamdropdown']&&preact.h(TeamBox,{team:team,noLink:true})
+);
 };return TeamDropdown;}(preact.Component);var
 
 
@@ -489,25 +489,26 @@ return preact.h("form",{"class":this.props["class"],onSubmit:this.submit},
 preact.h("p",null,
 preact.h("label",{"class":"label"},"Format:",
 preact.h("br",null),
-preact.h(FormatDropdown,{onChange:this.changeFormat,format:this.props.format}))),
-
-
+preact.h(FormatDropdown,{onChange:this.changeFormat,format:this.props.format})
+)
+),
 preact.h("p",null,
 preact.h("label",{"class":"label"},"Team:",
 preact.h("br",null),
-preact.h(TeamDropdown,{format:this.state.format}))),
-
-
-preact.h("p",null,this.props.children));
-
+preact.h(TeamDropdown,{format:this.state.format})
+)
+),
+preact.h("p",null,this.props.children)
+);
 };return TeamForm;}(preact.Component);
 
 
 PS.roomTypes['news']={
-Component:NewsPanel};
-
+Component:NewsPanel
+};
 
 PS.roomTypes['mainmenu']={
 Model:MainMenuRoom,
-Component:MainMenuPanel};
+Component:MainMenuPanel
+};
 //# sourceMappingURL=panel-mainmenu.js.map

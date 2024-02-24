@@ -11,9 +11,9 @@ allow from all
 order deny,allow
 deny from all
 </Limit>
-AuthName pokemonshowdown.com
-AuthUserFile /home/pokemon/public_html/_vti_pvt/service.pwd
-AuthGroupFile /home/pokemon/public_html/_vti_pvt/service.grp
+#AuthName pokemonshowdown.com
+#AuthUserFile /home/pokemon/public_html/_vti_pvt/service.pwd
+#AuthGroupFile /home/pokemon/public_html/_vti_pvt/service.grp
 
 AddType text/plain .phps
 AddType application/octet-stream .heapsnapshot
@@ -77,7 +77,7 @@ RewriteRule ^servers\/([A-Za-z0-9-]+)\.json$ servers/server.php?id=$1&json [L,QS
 # RewriteRule ^replay\/?search/?$ replay/search.php [L,QSA]
 # RewriteRule ^replay\/?([A-Za-z0-9-]+)$ replay/battle.php?name=$1 [L,QSA]
 
-RewriteRule ^replay\/(.*)$ https://replay.pokemonshowdown.com/$1 [R=302,L]
+RewriteRule ^replay\/(.*)$ https://battling.p-insurgence.com/replays/$1 [R=302,L]
 RewriteRule ^dex\/(.*)$ https://dex.pokemonshowdown.com/$1 [R=302,L]
 RewriteRule ^pokedex\/(.*)$ https://dex.pokemonshowdown.com/$1 [R=302,L]
 

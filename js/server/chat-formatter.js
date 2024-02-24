@@ -149,7 +149,7 @@ if(span[0]!=='spoiler')break;
 if(stackPosition===-1)return false;
 
 this.pushSlice(start);
-while(this.stack.length>stackPosition){this.popSpan(start);}
+while(this.stack.length>stackPosition)this.popSpan(start);
 this.offset=start;
 return true;
 };_proto.
@@ -170,7 +170,7 @@ break;
 if(stackPosition===-1)return false;
 
 this.pushSlice(start);
-while(this.stack.length>stackPosition+1){this.popSpan(start);}
+while(this.stack.length>stackPosition+1)this.popSpan(start);
 var span=this.stack.pop();
 var startIndex=span[1];
 var tagName='';
@@ -181,8 +181,8 @@ case'*':tagName='b';break;
 case'~':tagName='s';break;
 case'^':tagName='sup';break;
 case'\\':tagName='sub';break;
-case'|':tagName='span';attrs=' class="spoiler"';break;}
-
+case'|':tagName='span';attrs=' class="spoiler"';break;
+}
 if(tagName){
 this.buffers[startIndex]="<"+tagName+attrs+">";
 this.buffers.push("</"+tagName+">");
@@ -211,13 +211,13 @@ this.buffers[span[1]]="<span class=\"greentext\">";
 break;
 default:
 
-break;}
-
+break;
+}
 return true;
 };_proto.
 
 popAllSpans=function popAllSpans(end){
-while(this.stack.length){this.popSpan(end);}
+while(this.stack.length)this.popSpan(end);
 this.pushSlice(end);
 };_proto.
 
@@ -328,8 +328,8 @@ if(key==='item')dir+='s';
 if(key==='category')dir='categories';
 
 uri="//dex.pokemonshowdown.com/"+dir+"/"+toID(term);
-term=display;}
-
+term=display;
+}
 }
 if(!uri){
 uri="//www.google.com/search?ie=UTF-8&btnI&q="+this.toUriComponent(term);
@@ -343,7 +343,7 @@ case'<':
 {
 if(this.slice(start,start+8)!=='&lt;&lt;')return false;
 var _i2=start+8;
-while(/[a-z0-9-]/.test(this.at(_i2))){_i2++;}
+while(/[a-z0-9-]/.test(this.at(_i2)))_i2++;
 if(this.slice(_i2,_i2+8)!=='&gt;&gt;')return false;
 this.pushSlice(start);
 var roomid=this.slice(start+8,_i2);
@@ -354,12 +354,12 @@ return true;
 case'a':
 {
 var _i3=start+1;
-while(this.at(_i3)!=='/'||this.at(_i3+1)!=='a'||this.at(_i3+2)!=='>'){_i3++;}
+while(this.at(_i3)!=='/'||this.at(_i3+1)!=='a'||this.at(_i3+2)!=='>')_i3++;
 _i3+=3;
 this.pushSlice(_i3);
 }
-return true;}
-
+return true;
+}
 return false;
 };_proto.
 
@@ -384,7 +384,7 @@ i=this.offset-1;
 break;
 }
 }
-while(this.at(i+1)===char){i++;}
+while(this.at(i+1)===char)i++;
 break;
 case'(':
 this.stack.push(['(',-1]);
@@ -402,7 +402,7 @@ if(i<this.offset){
 i=this.offset-1;
 break;
 }
-while(this.at(i+1)==='`'){i++;}
+while(this.at(i+1)==='`')i++;
 break;
 case'[':
 this.runLookahead('[',i);
@@ -410,7 +410,7 @@ if(i<this.offset){
 i=this.offset-1;
 break;
 }
-while(this.at(i+1)==='['){i++;}
+while(this.at(i+1)==='[')i++;
 break;
 case':':
 if(i<7)break;
@@ -432,7 +432,7 @@ if(i<this.offset){
 i=this.offset-1;
 break;
 }
-while(this.slice(i+1,i+5)==='lt;&'){i+=4;}
+while(this.slice(i+1,i+5)==='lt;&')i+=4;
 break;
 case'<':
 this.runLookahead('a',i);
@@ -450,8 +450,8 @@ this.buffers.push("<br />");
 this.offset++;
 }
 beginningOfLine=i+1;
-break;}
-
+break;
+}
 }
 
 this.popAllSpans(this.str.length);

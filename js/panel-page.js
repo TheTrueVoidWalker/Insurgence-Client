@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Page Panel
  *
  * Panel for static content and server-rendered HTML.
@@ -39,33 +39,33 @@ var room=props.room;
 return preact.h("div",{"class":"ladder pad"},
 preact.h("p",null,
 preact.h("button",{name:"selectFormat","data-href":"ladder","data-target":"replace"},
-preact.h("i",{"class":"fa fa-chevron-left"})," Format List")),
-
-
+preact.h("i",{"class":"fa fa-chevron-left"})," Format List"
+)
+),
 preact.h("h3",null,"How the ladder works"),
-preact.h("p",null,"Our ladder displays three ratings: Elo, GXE, and Glicko-1."),
+preact.h("p",null,"Our ladder displays three ratings: Elo, GXE, and Glicko-1."
 
-
+),
 preact.h("p",null,
-preact.h("strong",null,"Elo")," is the main ladder rating. It's a pretty normal ladder rating: goes up when you win and down when you lose."),
+preact.h("strong",null,"Elo")," is the main ladder rating. It's a pretty normal ladder rating: goes up when you win and down when you lose."
 
 
-
+),
 preact.h("p",null,
-preact.h("strong",null,"GXE")," (Glicko X-Act Estimate) is an estimate of your win chance against an average ladder player."),
+preact.h("strong",null,"GXE")," (Glicko X-Act Estimate) is an estimate of your win chance against an average ladder player."
 
-
+),
 preact.h("p",null,
-preact.h("strong",null,"Glicko-1")," is a different rating system. It has rating and deviation values."),
+preact.h("strong",null,"Glicko-1")," is a different rating system. It has rating and deviation values."
 
-
-preact.h("p",null,"Note that win/loss should not be used to estimate skill, since who you play against is much more important than how many times you win or lose. Our other stats like Elo and GXE are much better for estimating skill."));
-
-
+),
+preact.h("p",null,"Note that win/loss should not be used to estimate skill, since who you play against is much more important than how many times you win or lose. Our other stats like Elo and GXE are much better for estimating skill."
 
 
 
 
+)
+);
 }var
 
 PagePanel=function(_PSRoomPanel){_inheritsLoose(PagePanel,_PSRoomPanel);function PagePanel(){var _this2;for(var _len=arguments.length,args=new Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}_this2=_PSRoomPanel.call.apply(_PSRoomPanel,[this].concat(args))||this;_this2.
@@ -105,8 +105,8 @@ room.setHTMLData(args[2]);
 return true;
 case'pagehtml':
 room.setHTMLData(args[1]);
-return true;}
-
+return true;
+}
 };_proto2.
 render=function render(){
 var room=this.props.room;
@@ -118,19 +118,19 @@ if(room.loading){
 renderPage=preact.h("p",null,"Loading...");
 }else{
 renderPage=preact.h("div",{"class":"page-html-container"},
-preact.h(SanitizedHTML,null,room.htmlData||''));
-
+preact.h(SanitizedHTML,null,room.htmlData||'')
+);
 }
 }
 return preact.h(PSPanelWrapper,{room:room,scrollable:true},
-renderPage);
-
+renderPage
+);
 };return PagePanel;}(PSRoomPanel);
 
 
 PS.roomTypes['html']={
 Model:PageRoom,
-Component:PagePanel};
-
+Component:PagePanel
+};
 PS.updateRoomTypes();
 //# sourceMappingURL=panel-page.js.map

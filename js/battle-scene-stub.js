@@ -11,7 +11,8 @@ numericId=NaN;this.
 timeOffset=NaN;this.
 interruptionCount=NaN;this.
 messagebarOpen=false;this.
-log={add:function(args,kwargs){}};}var _proto=BattleSceneStub.prototype;_proto.
+log={add:function(args,kwargs){}};this.
+$frame=void 0;}var _proto=BattleSceneStub.prototype;_proto.
 
 abilityActivateAnim=function abilityActivateAnim(pokemon,result){};_proto.
 addPokemonSprite=function addPokemonSprite(pokemon){return null;};_proto.
@@ -63,6 +64,7 @@ animSummon=function animSummon(pokemon,slot,instant){};_proto.
 animUnsummon=function animUnsummon(pokemon,instant){};_proto.
 animDragIn=function animDragIn(pokemon,slot){};_proto.
 animDragOut=function animDragOut(pokemon){};_proto.
+resetStatbar=function resetStatbar(pokemon,startHidden){};_proto.
 updateStatbar=function updateStatbar(pokemon,updatePrevhp,updateHp){};_proto.
 updateStatbarIfExists=function updateStatbarIfExists(pokemon,updatePrevhp,updateHp){};_proto.
 animTransform=function animTransform(pokemon,isCustomAnim,isPermanent){};_proto.

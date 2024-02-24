@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Client core
  *
  * No dependencies.
@@ -73,8 +73,8 @@ if(!window.console){
 
 
 window.console={
-log:function(){}};
-
+log:function(){}
+};
 }
 
 
@@ -114,8 +114,8 @@ var subscription=this.subscribe(listener);
 subscription.listener();
 return subscription;
 };_proto2.
-update=function update(){for(var _i=0,_this$subscriptions=
-this.subscriptions;_i<_this$subscriptions.length;_i++){var subscription=_this$subscriptions[_i];
+update=function update(){for(var _i2=0,_this$subscriptions2=
+this.subscriptions;_i2<_this$subscriptions2.length;_i2++){var subscription=_this$subscriptions2[_i2];
 subscription.listener();
 }
 };return PSModel;}();var
@@ -135,8 +135,8 @@ subscribe=function subscribe(listener){
 
 var subscription=new PSSubscription(this,listener);
 this.subscriptions.push(subscription);
-if(this.updates.length){for(var _i2=0,_this$updates=
-this.updates;_i2<_this$updates.length;_i2++){var update=_this$updates[_i2];
+if(this.updates.length){for(var _i4=0,_this$updates2=
+this.updates;_i4<_this$updates2.length;_i4++){var update=_this$updates2[_i4];
 subscription.listener(update);
 }
 this.updates=[];
@@ -152,8 +152,8 @@ update=function update(value){
 if(!this.subscriptions.length){
 
 this.updates.push(value);
-}for(var _i3=0,_this$subscriptions2=
-this.subscriptions;_i3<_this$subscriptions2.length;_i3++){var subscription=_this$subscriptions2[_i3];
+}for(var _i6=0,_this$subscriptions4=
+this.subscriptions;_i6<_this$subscriptions4.length;_i6++){var subscription=_this$subscriptions4[_i6];
 subscription.listener(value);
 }
 };return PSStreamModel;}();
@@ -245,8 +245,8 @@ menuColors=[
 attrib={
 url:'https://vtas.deviantart.com/art/Pokemon-Horizon-312267168',
 title:'Horizon',
-artist:'Vivian Zou'};
-
+artist:'Vivian Zou'
+};
 break;
 case'ocean':
 menuColors=[
@@ -260,8 +260,8 @@ menuColors=[
 attrib={
 url:'https://quanyails.deviantart.com/art/Sunrise-Ocean-402667154',
 title:'Sunrise Ocean',
-artist:'Yijing Chen'};
-
+artist:'Quanyails'
+};
 break;
 case'waterfall':
 menuColors=[
@@ -275,8 +275,8 @@ menuColors=[
 attrib={
 url:'https://yilx.deviantart.com/art/Irie-372292729',
 title:'Irie',
-artist:'Samuel Teo'};
-
+artist:'Samuel Teo'
+};
 break;
 case'shaymin':
 menuColors=[
@@ -290,8 +290,8 @@ menuColors=[
 attrib={
 url:'http://cargocollective.com/bluep',
 title:'Shaymin',
-artist:'Daniel Kong'};
-
+artist:'Daniel Kong'
+};
 break;
 case'charizards':
 menuColors=[
@@ -305,8 +305,8 @@ menuColors=[
 attrib={
 url:'https://seiryuuden.deviantart.com/art/The-Ultimate-Mega-Showdown-Charizards-414587079',
 title:'Charizards',
-artist:'Jessica Valencia'};
-
+artist:'Jessica Valencia'
+};
 break;
 case'digimon':
 menuColors=[
@@ -315,9 +315,9 @@ menuColors=[
 "112.50000000000001,7.8431372549019605%",
 "217.82608695652175,54.761904761904766%",
 "0,1.6949152542372816%",
-""];}
+""];
 
-
+}
 if(!menuColors&&bgUrl.charAt(0)==='#'){
 var r=parseInt(bgUrl.slice(1,3),16)/255;
 var g=parseInt(bgUrl.slice(3,5),16)/255;
@@ -374,12 +374,12 @@ var h=0;
 switch(max){
 case r:h=(g-b)/d+(g<b?6:0);break;
 case g:h=(b-r)/d+2;break;
-case b:h=(r-g)/d+4;break;}
-
+case b:h=(r-g)/d+4;break;
+}
 h/=6;
 return h*360+","+s*100+"%";
-};return _class2;}(PSStreamModel))();
-
+};return _class2;}(PSStreamModel))(
+);
 
 
 
@@ -410,8 +410,8 @@ document.body.style.backgroundSize='cover';
 
 var cssBuf="";
 var n=0;
-if(PSBackground.menuColors){for(var _i4=0,_PSBackground$menuCol=
-PSBackground.menuColors;_i4<_PSBackground$menuCol.length;_i4++){var hs=_PSBackground$menuCol[_i4];
+if(PSBackground.menuColors){for(var _i8=0,_PSBackground$menuCol2=
+PSBackground.menuColors;_i8<_PSBackground$menuCol2.length;_i8++){var hs=_PSBackground$menuCol2[_i8];
 n++;
 cssBuf+="body .button.mainmenu"+n+" { background: linear-gradient(to bottom,  hsl("+hs+",72%),  hsl("+hs+",52%)); border-color: hsl("+hs+",40%); }\n";
 cssBuf+="body .button.mainmenu"+n+":hover { background: linear-gradient(to bottom,  hsl("+hs+",62%),  hsl("+hs+",42%)); border-color: hsl("+hs+",21%); }\n";

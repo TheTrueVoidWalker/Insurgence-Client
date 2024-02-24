@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Battle panel
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
@@ -49,8 +49,8 @@ var minEloMessage=typeof battle.minElo==='number'?"rated "+battle.minElo:battle.
 return preact.h("div",null,preact.h("a",{href:"/"+battle.id,"class":"blocklink"},
 minEloMessage&&preact.h("small",{style:"float:right"},"(",minEloMessage,")"),
 preact.h("small",null,"[",format,"]"),preact.h("br",null),
-preact.h("em",{"class":"p1"},battle.p1)," ",preact.h("small",{"class":"vs"},"vs.")," ",preact.h("em",{"class":"p2"},battle.p2)));
-
+preact.h("em",{"class":"p1"},battle.p1)," ",preact.h("small",{"class":"vs"},"vs.")," ",preact.h("em",{"class":"p2"},battle.p2)
+));
 };_proto2.
 render=function render(){var _this3=this;
 var room=this.props.room;
@@ -58,12 +58,12 @@ return preact.h(PSPanelWrapper,{room:room,scrollable:true},preact.h("div",{"clas
 preact.h("button",{"class":"button",style:"float:right;font-size:10pt;margin-top:3px",name:"close"},preact.h("i",{"class":"fa fa-times"})," Close"),
 preact.h("div",{"class":"roomlist"},
 preact.h("p",null,
-preact.h("button",{"class":"button",name:"refresh",onClick:this.refresh},preact.h("i",{"class":"fa fa-refresh"})," Refresh")," ",preact.h("span",{style:Dex.getPokemonIcon('meloetta-pirouette')+';display:inline-block;vertical-align:middle',"class":"picon",title:"Meloetta is PS's mascot! The Pirouette forme is Fighting-type, and represents our battles."})),
-
+preact.h("button",{"class":"button",name:"refresh",onClick:this.refresh},preact.h("i",{"class":"fa fa-refresh"})," Refresh")," ",preact.h("span",{style:Dex.getPokemonIcon('meloetta-pirouette')+';display:inline-block;vertical-align:middle',"class":"picon",title:"Meloetta is PS's mascot! The Pirouette forme is Fighting-type, and represents our battles."})
+),
 
 preact.h("p",null,
-preact.h("label",{"class":"label"},"Format:"),preact.h(FormatDropdown,{onChange:this.changeFormat})),
-
+preact.h("label",{"class":"label"},"Format:"),preact.h(FormatDropdown,{onChange:this.changeFormat})
+),
 
 
 
@@ -76,10 +76,10 @@ preact.h("p",null,"Loading..."):
 !room.battles.length?
 preact.h("p",null,"No battles are going on"):
 
-room.battles.map(function(battle){return _this3.renderBattleLink(battle);})))));
-
-
-
+room.battles.map(function(battle){return _this3.renderBattleLink(battle);})
+)
+)
+));
 };return BattlesPanel;}(PSRoomPanel);var
 
 
@@ -174,8 +174,8 @@ function MoveButton(props)
 {
 return preact.h("button",{name:"cmd",value:props.cmd,"class":"type-"+props.type+" has-tooltip","data-tooltip":props.tooltip},
 props.children,preact.h("br",null),
-preact.h("small",{"class":"type"},props.type)," ",preact.h("small",{"class":"pp"},props.moveData.pp,"/",props.moveData.maxpp),"\xA0");
-
+preact.h("small",{"class":"type"},props.type)," ",preact.h("small",{"class":"pp"},props.moveData.pp,"/",props.moveData.maxpp),"\xA0"
+);
 }
 function PokemonButton(props)
 
@@ -184,18 +184,18 @@ var pokemon=props.pokemon;
 if(!pokemon){
 return preact.h("button",{
 name:"cmd",value:props.cmd,"class":(props.disabled?'disabled ':'')+"has-tooltip",
-style:{opacity:props.disabled==='fade'?0.5:1},"data-tooltip":props.tooltip},"(empty slot)");
+style:{opacity:props.disabled==='fade'?0.5:1},"data-tooltip":props.tooltip},
+"(empty slot)"
 
-
-
+);
 }
 
 var hpColorClass;
 switch(BattleScene.getHPColor(pokemon)){
 case'y':hpColorClass='hpbar hpbar-yellow';break;
 case'r':hpColorClass='hpbar hpbar-red';break;
-default:hpColorClass='hpbar';break;}
-
+default:hpColorClass='hpbar';break;
+}
 
 return preact.h("button",{
 name:"cmd",value:props.cmd,"class":(props.disabled?'disabled ':'')+"has-tooltip",
@@ -206,11 +206,11 @@ pokemon.name,
 
 !props.noHPBar&&!pokemon.fainted&&
 preact.h("span",{"class":hpColorClass},
-preact.h("span",{style:{width:Math.round(pokemon.hp*92/pokemon.maxhp)||1}})),
+preact.h("span",{style:{width:Math.round(pokemon.hp*92/pokemon.maxhp)||1}})
+),
 
-
-!props.noHPBar&&pokemon.status&&preact.h("span",{"class":"status "+pokemon.status}));
-
+!props.noHPBar&&pokemon.status&&preact.h("span",{"class":"status "+pokemon.status})
+);
 }var
 
 BattlePanel=function(_PSRoomPanel2){_inheritsLoose(BattlePanel,_PSRoomPanel2);function BattlePanel(){var _this5;for(var _len3=arguments.length,args=new Array(_len3),_key3=0;_key3<_len3;_key3++){args[_key3]=arguments[_key3];}_this5=_PSRoomPanel2.call.apply(_PSRoomPanel2,[this].concat(args))||this;_this5.
@@ -253,16 +253,16 @@ choices.current.z=checkbox.checked;
 break;
 case'max':
 choices.current.max=checkbox.checked;
-break;}
-
+break;
+}
 _this5.props.room.update(null);
 };return _this5;}var _proto5=BattlePanel.prototype;_proto5.focus=function focus(){this.base.querySelector('textarea').focus();};_proto5.
 componentDidMount=function componentDidMount(){var _this6=this;
 var $elem=$(this.base);
 var battle=new Battle({
 $frame:$elem.find('.battle'),
-$logFrame:$elem.find('.battle-log')});
-
+$logFrame:$elem.find('.battle-log')
+});
 this.props.room.battle=battle;
 battle.scene.tooltips.listen($elem.find('.battle-controls'));
 _PSRoomPanel2.prototype.componentDidMount.call(this);
@@ -288,8 +288,8 @@ if(args[1].startsWith('[Invalid choice]')&&room.request){
 room.choices=new BattleChoiceBuilder(room.request);
 room.update(null);
 }
-break;}
-
+break;
+}
 room.battle.add('|'+args.join('|'));
 };_proto5.
 receiveRequest=function receiveRequest(request){
@@ -326,17 +326,17 @@ preact.h("button",{"class":"button disabled",name:"cmd",value:"/play"},preact.h(
 room.battle.paused?
 preact.h("button",{"class":"button",name:"cmd",value:"/play"},preact.h("i",{"class":"fa fa-play"}),preact.h("br",null),"Play"):
 
-preact.h("button",{"class":"button",name:"cmd",value:"/pause"},preact.h("i",{"class":"fa fa-pause"}),preact.h("br",null),"Pause")," ",
-
+preact.h("button",{"class":"button",name:"cmd",value:"/pause"},preact.h("i",{"class":"fa fa-pause"}),preact.h("br",null),"Pause"),
+" ",
 preact.h("button",{"class":"button",name:"cmd",value:"/ffto -1"},preact.h("i",{"class":"fa fa-step-backward"}),preact.h("br",null),"Last turn"),
 preact.h("button",{"class":"button"+(atEnd?" disabled":""),name:"cmd",value:"/ffto +1"},preact.h("i",{"class":"fa fa-step-forward"}),preact.h("br",null),"Skip turn")," ",
 preact.h("button",{"class":"button",name:"cmd",value:"/ffto 0"},preact.h("i",{"class":"fa fa-undo"}),preact.h("br",null),"First turn"),
-preact.h("button",{"class":"button"+(atEnd?" disabled":""),name:"cmd",value:"/ffto end"},preact.h("i",{"class":"fa fa-fast-forward"}),preact.h("br",null),"Skip to end")),
-
+preact.h("button",{"class":"button"+(atEnd?" disabled":""),name:"cmd",value:"/ffto end"},preact.h("i",{"class":"fa fa-fast-forward"}),preact.h("br",null),"Skip to end")
+),
 preact.h("p",null,
-preact.h("button",{"class":"button",name:"cmd",value:"/switchsides"},preact.h("i",{"class":"fa fa-random"})," Switch sides")));
-
-
+preact.h("button",{"class":"button",name:"cmd",value:"/switchsides"},preact.h("i",{"class":"fa fa-random"})," Switch sides")
+)
+);
 };_proto5.
 renderMoveControls=function renderMoveControls(request,choices){
 var dex=this.props.room.battle.dex;
@@ -354,8 +354,8 @@ var maxMoveData=active.maxMoves[i];
 var gmaxTooltip=maxMoveData.id.startsWith('gmax')?"|"+maxMoveData.id:"";
 var tooltip="maxmove|"+moveData.name+"|"+pokemonIndex+gmaxTooltip;
 return preact.h(MoveButton,{cmd:"/move "+(i+1)+" max",type:move.type,tooltip:tooltip,moveData:moveData},
-maxMoveData.name);
-
+maxMoveData.name
+);
 });
 }
 
@@ -371,8 +371,8 @@ return preact.h("button",{disabled:true},"\xA0");
 }
 var tooltip="zmove|"+moveData.name+"|"+pokemonIndex;
 return preact.h(MoveButton,{cmd:"/move "+(i+1)+" zmove",type:move.type,tooltip:tooltip,moveData:{pp:1,maxpp:1}},
-zMoveData.name);
-
+zMoveData.name
+);
 });
 }
 
@@ -380,8 +380,8 @@ return active.moves.map(function(moveData,i){
 var move=dex.moves.get(moveData.name);
 var tooltip="move|"+moveData.name+"|"+pokemonIndex;
 return preact.h(MoveButton,{cmd:"/move "+(i+1),type:move.type,tooltip:tooltip,moveData:moveData},
-move.name);
-
+move.name
+);
 });
 };_proto5.
 renderMoveTargetControls=function renderMoveTargetControls(request,choices){
@@ -404,8 +404,8 @@ if(Math.abs(userSlotCross-i)>1)disabled=true;
 if((_pokemon=pokemon)!=null&&_pokemon.fainted)pokemon=null;
 return preact.h(PokemonButton,{
 pokemon:pokemon,
-cmd:disabled?"":"/"+moveChoice+" +"+(i+1),disabled:disabled&&'fade',tooltip:"activepokemon|1|"+i});
-
+cmd:disabled?"":"/"+moveChoice+" +"+(i+1),disabled:disabled&&'fade',tooltip:"activepokemon|1|"+i}
+);
 }).reverse(),
 preact.h("div",{style:"clear: left"}),
 battle.nearSide.active.map(function(pokemon,i){var _pokemon2;
@@ -420,8 +420,8 @@ if(moveTarget!=='adjacentAllyOrSelf'&&userSlot===i)disabled=true;
 if((_pokemon2=pokemon)!=null&&_pokemon2.fainted)pokemon=null;
 return preact.h(PokemonButton,{
 pokemon:pokemon,
-cmd:disabled?"":"/"+moveChoice+" -"+(i+1),disabled:disabled&&'fade',tooltip:"activepokemon|0|"+i});
-
+cmd:disabled?"":"/"+moveChoice+" -"+(i+1),disabled:disabled&&'fade',tooltip:"activepokemon|0|"+i}
+);
 })];
 
 };_proto5.
@@ -433,16 +433,16 @@ var trapped=(_choices$currentMoveR=choices.currentMoveRequest())==null?void 0:_c
 return request.side.pokemon.map(function(serverPokemon,i){
 var cantSwitch=trapped||i<numActive||choices.alreadySwitchingIn.includes(i+1)||serverPokemon.fainted;
 return preact.h(PokemonButton,{
-pokemon:serverPokemon,cmd:"/switch "+(i+1),disabled:cantSwitch,tooltip:"switchpokemon|"+i});
-
+pokemon:serverPokemon,cmd:"/switch "+(i+1),disabled:cantSwitch,tooltip:"switchpokemon|"+i}
+);
 });
 };_proto5.
 renderTeamControls=function renderTeamControls(request,choices){
 return request.side.pokemon.map(function(serverPokemon,i){
 var cantSwitch=choices.alreadySwitchingIn.includes(i+1);
 return preact.h(PokemonButton,{
-pokemon:serverPokemon,cmd:"/switch "+(i+1),noHPBar:true,disabled:cantSwitch&&'fade',tooltip:"switchpokemon|"+i});
-
+pokemon:serverPokemon,cmd:"/switch "+(i+1),noHPBar:true,disabled:cantSwitch&&'fade',tooltip:"switchpokemon|"+i}
+);
 });
 };_proto5.
 renderTeamList=function renderTeamList(){
@@ -453,18 +453,18 @@ preact.h("h3",{"class":"switchselect"},"Team"),
 preact.h("div",{"class":"switchmenu"},
 team.map(function(serverPokemon,i){
 return preact.h(PokemonButton,{
-pokemon:serverPokemon,cmd:"",noHPBar:true,disabled:true,tooltip:"switchpokemon|"+i});
-
-})));
-
-
+pokemon:serverPokemon,cmd:"",noHPBar:true,disabled:true,tooltip:"switchpokemon|"+i}
+);
+})
+)
+);
 };_proto5.
 renderChosenTeam=function renderChosenTeam(request,choices){
 return choices.alreadySwitchingIn.map(function(slot){
 var serverPokemon=request.side.pokemon[slot-1];
 return preact.h(PokemonButton,{
-pokemon:serverPokemon,cmd:"/switch "+slot,disabled:true,tooltip:"switchpokemon|"+(slot-1)});
-
+pokemon:serverPokemon,cmd:"/switch "+slot,disabled:true,tooltip:"switchpokemon|"+(slot-1)}
+);
 });
 };_proto5.
 renderOldChoices=function renderOldChoices(request,choices){
@@ -532,13 +532,13 @@ if(choices.isDone()){
 return preact.h("div",{"class":"controls"},
 preact.h("div",{"class":"whatdo"},
 preact.h("button",{name:"openTimer","class":"button disabled timerbutton"},preact.h("i",{"class":"fa fa-hourglass-start"})," Timer"),
-this.renderOldChoices(request,choices)),
-
+this.renderOldChoices(request,choices)
+),
 preact.h("div",{"class":"pad"},
-request.noCancel?null:preact.h("button",{name:"cmd",value:"/cancel","class":"button"},"Cancel")),
-
-this.renderTeamList());
-
+request.noCancel?null:preact.h("button",{name:"cmd",value:"/cancel","class":"button"},"Cancel")
+),
+this.renderTeamList()
+);
 }
 if(request.side)room.battle.myPokemon=request.side.pokemon;
 switch(request.requestType){
@@ -557,14 +557,14 @@ return preact.h("div",{"class":"controls"},
 preact.h("div",{"class":"whatdo"},
 preact.h("button",{name:"openTimer","class":"button disabled timerbutton"},preact.h("i",{"class":"fa fa-hourglass-start"})," Timer"),
 this.renderOldChoices(request,choices),
-pokemon.name," should use ",preact.h("strong",null,moveName)," at where? "),
-
+pokemon.name," should use ",preact.h("strong",null,moveName)," at where? "
+),
 preact.h("div",{"class":"switchcontrols"},
 preact.h("div",{"class":"switchmenu"},
-this.renderMoveTargetControls(request,choices))));
-
-
-
+this.renderMoveTargetControls(request,choices)
+)
+)
+);
 }
 
 var canShift=room.battle.gameType==='triples'&&index!==1;
@@ -573,8 +573,8 @@ return preact.h("div",{"class":"controls"},
 preact.h("div",{"class":"whatdo"},
 preact.h("button",{name:"openTimer","class":"button disabled timerbutton"},preact.h("i",{"class":"fa fa-hourglass-start"})," Timer"),
 this.renderOldChoices(request,choices),"What will ",
-preact.h("strong",null,pokemon.name)," do?"),
-
+preact.h("strong",null,pokemon.name)," do?"
+),
 preact.h("div",{"class":"movecontrols"},
 preact.h("h3",{"class":"moveselect"},"Attack"),
 preact.h("div",{"class":"movemenu"},
@@ -582,22 +582,22 @@ this.renderMoveControls(request,choices),
 preact.h("div",{style:"clear:left"}),
 canDynamax&&preact.h("label",{"class":"megaevo"+(choices.current.max?' cur':'')},
 preact.h("input",{type:"checkbox",name:"max",checked:choices.current.max,onChange:this.toggleBoostedMove})," ",
-moveRequest.canGigantamax?'Gigantamax':'Dynamax'),
-
+moveRequest.canGigantamax?'Gigantamax':'Dynamax'
+),
 canMegaEvo&&preact.h("label",{"class":"megaevo"+(choices.current.mega?' cur':'')},
-preact.h("input",{type:"checkbox",name:"mega",checked:choices.current.mega,onChange:this.toggleBoostedMove})," ","Mega Evolution"),
+preact.h("input",{type:"checkbox",name:"mega",checked:choices.current.mega,onChange:this.toggleBoostedMove})," ","Mega Evolution"
 
-
+),
 moveRequest.canUltraBurst&&preact.h("label",{"class":"megaevo"+(choices.current.ultra?' cur':'')},
-preact.h("input",{type:"checkbox",name:"ultra",checked:choices.current.ultra,onChange:this.toggleBoostedMove})," ","Ultra Burst"),
+preact.h("input",{type:"checkbox",name:"ultra",checked:choices.current.ultra,onChange:this.toggleBoostedMove})," ","Ultra Burst"
 
-
+),
 canZMove&&preact.h("label",{"class":"megaevo"+(choices.current.z?' cur':'')},
-preact.h("input",{type:"checkbox",name:"z",checked:choices.current.z,onChange:this.toggleBoostedMove})," ","Z-Power"))),
+preact.h("input",{type:"checkbox",name:"z",checked:choices.current.z,onChange:this.toggleBoostedMove})," ","Z-Power"
 
-
-
-
+)
+)
+),
 preact.h("div",{"class":"switchcontrols"},
 canShift&&[
 preact.h("h3",{"class":"shiftselect"},"Shift"),
@@ -605,25 +605,25 @@ preact.h("button",{name:"cmd",value:"/shift"},"Move to center")],
 
 preact.h("h3",{"class":"switchselect"},"Switch"),
 preact.h("div",{"class":"switchmenu"},
-this.renderSwitchControls(request,choices))));
-
-
-
+this.renderSwitchControls(request,choices)
+)
+)
+);
 }case'switch':{
 var _pokemon3=request.side.pokemon[choices.index()];
 return preact.h("div",{"class":"controls"},
 preact.h("div",{"class":"whatdo"},
 preact.h("button",{name:"openTimer","class":"button disabled timerbutton"},preact.h("i",{"class":"fa fa-hourglass-start"})," Timer"),
 this.renderOldChoices(request,choices),"What will ",
-preact.h("strong",null,_pokemon3.name)," do?"),
-
+preact.h("strong",null,_pokemon3.name)," do?"
+),
 preact.h("div",{"class":"switchcontrols"},
 preact.h("h3",{"class":"switchselect"},"Switch"),
 preact.h("div",{"class":"switchmenu"},
-this.renderSwitchControls(request,choices))));
-
-
-
+this.renderSwitchControls(request,choices)
+)
+)
+);
 }case'team':{
 return preact.h("div",{"class":"controls"},
 preact.h("div",{"class":"whatdo"},
@@ -632,23 +632,23 @@ choices.alreadySwitchingIn.length>0?
 [preact.h("button",{name:"cmd",value:"/cancel","class":"button"},preact.h("i",{"class":"fa fa-chevron-left"})," Back"),
 " What about the rest of your team? "]:
 
-"How will you start the battle? "),
+"How will you start the battle? "
 
-
+),
 preact.h("div",{"class":"switchcontrols"},
 preact.h("h3",{"class":"switchselect"},"Choose ",choices.alreadySwitchingIn.length<=0?"lead":"slot "+(choices.alreadySwitchingIn.length+1)),
 preact.h("div",{"class":"switchmenu"},
 this.renderTeamControls(request,choices),
-preact.h("div",{style:"clear:left"}))),
-
-
+preact.h("div",{style:"clear:left"})
+)
+),
 preact.h("div",{"class":"switchcontrols"},
 choices.alreadySwitchingIn.length>0&&preact.h("h3",{"class":"switchselect"},"Team so far"),
 preact.h("div",{"class":"switchmenu"},
-this.renderChosenTeam(request,choices))));
-
-
-
+this.renderChosenTeam(request,choices)
+)
+)
+);
 }}
 };_proto5.
 render=function render(){
@@ -656,25 +656,25 @@ var room=this.props.room;
 
 return preact.h(PSPanelWrapper,{room:room},
 preact.h(BattleDiv,null),
-preact.h(ChatLog,{"class":"battle-log hasuserlist",room:this.props.room,onClick:this.focusIfNoSelection,left:640,noSubscription:true}),
+preact.h(ChatLog,{"class":"battle-log hasuserlist",room:this.props.room,onClick:this.focusIfNoSelection,left:640,noSubscription:true}
 
-
+),
 preact.h(ChatTextEntry,{room:this.props.room,onMessage:this.send,onKey:this.onKey,left:640}),
 preact.h(ChatUserList,{room:this.props.room,left:640,minimized:true}),
 preact.h("div",{"class":"battle-controls",role:"complementary","aria-label":"Battle Controls",style:"top: 370px;"},
-this.renderControls()));
-
-
+this.renderControls()
+)
+);
 };return BattlePanel;}(PSRoomPanel);
 
 
 PS.roomTypes['battle']={
 Model:BattleRoom,
-Component:BattlePanel};
-
+Component:BattlePanel
+};
 PS.roomTypes['battles']={
 Model:BattlesRoom,
-Component:BattlesPanel};
-
+Component:BattlesPanel
+};
 PS.updateRoomTypes();
 //# sourceMappingURL=panel-battle.js.map

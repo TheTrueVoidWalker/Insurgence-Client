@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Team Selector Panel
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
@@ -8,9 +8,9 @@ function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(su
 PSTeambuilder=function(){function PSTeambuilder(){}PSTeambuilder.
 packTeam=function packTeam(team){
 var buf='';
-if(!team)return'';for(var _i=0;_i<
+if(!team)return'';for(var _i2=0;_i2<
 
-team.length;_i++){var set=team[_i];
+team.length;_i2++){var set=team[_i2];
 var hasHP='';
 if(buf)buf+=']';
 
@@ -113,9 +113,9 @@ return buf;
 unpackTeam=function unpackTeam(buf){
 if(!buf)return[];
 
-var team=[];for(var _i2=0,_buf$split=
+var team=[];for(var _i4=0,_buf$split2=
 
-buf.split("]");_i2<_buf$split.length;_i2++){var setBuf=_buf$split[_i2];
+buf.split("]");_i4<_buf$split2.length;_i4++){var setBuf=_buf$split2[_i4];
 var parts=setBuf.split("|");
 if(parts.length<11)continue;
 var set={species:'',moves:[]};
@@ -142,8 +142,8 @@ Dex.abilities.get(parts[3]).name;
 
 
 set.moves=parts[4].split(',').map(function(moveid){return(
-Dex.moves.get(moveid).name);});
-
+Dex.moves.get(moveid).name);}
+);
 
 
 set.nature=parts[5];
@@ -159,8 +159,8 @@ atk:Number(evs[1])||0,
 def:Number(evs[2])||0,
 spa:Number(evs[3])||0,
 spd:Number(evs[4])||0,
-spe:Number(evs[5])||0};
-
+spe:Number(evs[5])||0
+};
 }else if(parts[6]==='0'){
 set.evs={hp:0,atk:0,def:0,spa:0,spd:0,spe:0};
 }
@@ -178,8 +178,8 @@ atk:ivs[1]===''?31:Number(ivs[1]),
 def:ivs[2]===''?31:Number(ivs[2]),
 spa:ivs[3]===''?31:Number(ivs[3]),
 spd:ivs[4]===''?31:Number(ivs[4]),
-spe:ivs[5]===''?31:Number(ivs[5])};
-
+spe:ivs[5]===''?31:Number(ivs[5])
+};
 }
 
 
@@ -223,8 +223,8 @@ text+="  \n";
 if(set.ability){
 text+="Ability: "+set.ability+"  \n";
 }
-if(set.moves){for(var _i3=0,_set$moves=
-set.moves;_i3<_set$moves.length;_i3++){var move=_set$moves[_i3];
+if(set.moves){for(var _i6=0,_set$moves2=
+set.moves;_i6<_set$moves2.length;_i6++){var move=_set$moves2[_i6];
 if(move.substr(0,13)==='Hidden Power '){
 var hpType=move.slice(13);
 move=move.slice(0,13);
@@ -238,8 +238,8 @@ text+="- "+move+"  \n";
 
 
 var first=true;
-if(set.evs){for(var _i4=0,_Dex$statNames=
-Dex.statNames;_i4<_Dex$statNames.length;_i4++){var stat=_Dex$statNames[_i4];
+if(set.evs){for(var _i8=0,_Dex$statNames2=
+Dex.statNames;_i8<_Dex$statNames2.length;_i8++){var stat=_Dex$statNames2[_i8];
 if(!set.evs[stat])continue;
 if(first){
 text+="EVs: ";
@@ -257,8 +257,8 @@ if(set.nature){
 text+=set.nature+" Nature  \n";
 }
 first=true;
-if(set.ivs){for(var _i5=0,_Dex$statNames2=
-Dex.statNames;_i5<_Dex$statNames2.length;_i5++){var _stat=_Dex$statNames2[_i5];
+if(set.ivs){for(var _i10=0,_Dex$statNames4=
+Dex.statNames;_i10<_Dex$statNames4.length;_i10++){var _stat=_Dex$statNames4[_i10];
 if(set.ivs[_stat]===undefined||isNaN(set.ivs[_stat])||set.ivs[_stat]===31)continue;
 if(first){
 text+="IVs: ";
@@ -274,7 +274,7 @@ text+="  \n";
 }
 
 
-if(set.level&&set.level!==100){
+if(set.level&&set.level!==120){
 text+="Level: "+set.level+"  \n";
 }
 if(set.shiny){
@@ -294,8 +294,8 @@ text+="\n";
 return text;
 };PSTeambuilder.
 exportTeam=function exportTeam(sets){
-var text='';for(var _i6=0;_i6<
-sets.length;_i6++){var set=sets[_i6];
+var text='';for(var _i12=0;_i12<
+sets.length;_i12++){var set=sets[_i12];
 
 text+=PSTeambuilder.exportSet(set);
 }
@@ -363,8 +363,8 @@ set.gigantamax=true;
 }else if(line.startsWith('EVs: ')){
 line=line.slice(5);
 var evLines=line.split('/');
-set.evs={hp:0,atk:0,def:0,spa:0,spd:0,spe:0};for(var _i7=0;_i7<
-evLines.length;_i7++){var evLine=evLines[_i7];
+set.evs={hp:0,atk:0,def:0,spa:0,spd:0,spe:0};for(var _i14=0;_i14<
+evLines.length;_i14++){var evLine=evLines[_i14];
 evLine=evLine.trim();
 var spaceIndex=evLine.indexOf(' ');
 if(spaceIndex===-1)continue;
@@ -376,8 +376,8 @@ set.evs[statid]=statval;
 }else if(line.startsWith('IVs: ')){
 line=line.slice(5);
 var ivLines=line.split(' / ');
-set.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};for(var _i8=0;_i8<
-ivLines.length;_i8++){var ivLine=ivLines[_i8];
+set.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};for(var _i16=0;_i16<
+ivLines.length;_i16++){var ivLine=ivLines[_i16];
 ivLine=ivLine.trim();
 var _spaceIndex=ivLine.indexOf(' ');
 if(_spaceIndex===-1)continue;
@@ -418,13 +418,13 @@ var lines=buffer.split("\n");
 var sets=[];
 var curSet=null;
 
-while(lines.length&&!lines[0]){lines.shift();}
-while(lines.length&&!lines[lines.length-1]){lines.pop();}
+while(lines.length&&!lines[0])lines.shift();
+while(lines.length&&!lines[lines.length-1])lines.pop();
 
 if(lines.length===1&&lines[0].includes('|')){
 return this.unpackTeam(lines[0]);
-}for(var _i9=0;_i9<
-lines.length;_i9++){var line=lines[_i9];
+}for(var _i18=0;_i18<
+lines.length;_i18++){var line=lines[_i18];
 line=line.trim();
 if(line===''||line==='---'){
 curSet=null;
@@ -438,8 +438,8 @@ return this.unpackTeam(team.packedTeam);
 }else if(!curSet){
 curSet={
 name:'',species:'',gender:'',
-moves:[]};
-
+moves:[]
+};
 sets.push(curSet);
 this.parseExportedTeamLine(line,true,curSet);
 }else{
@@ -457,10 +457,10 @@ var sets=null;
 
 var curSet=null;
 
-while(lines.length&&!lines[0]){lines.shift();}
-while(lines.length&&!lines[lines.length-1]){lines.pop();}for(var _i10=0;_i10<
+while(lines.length&&!lines[0])lines.shift();
+while(lines.length&&!lines[lines.length-1])lines.pop();for(var _i20=0;_i20<
 
-lines.length;_i10++){var line=lines[_i10];
+lines.length;_i20++){var line=lines[_i20];
 line=line.trim();
 if(line===''||line==='---'){
 curSet=null;
@@ -477,8 +477,8 @@ format:'',
 packedTeam:'',
 folder:'',
 key:'',
-iconCache:''};
-
+iconCache:''
+};
 sets=[];
 
 line=line.slice(3,-3).trim();var _ref=
@@ -501,8 +501,8 @@ if(team)teams.push(team);
 if(!sets)continue;
 curSet={
 name:'',species:'',gender:'',
-moves:[]};
-
+moves:[]
+};
 sets.push(curSet);
 this.parseExportedTeamLine(line,true,curSet);
 }else{
@@ -547,12 +547,12 @@ function TeamFolder(props){
 if(props.cur){
 return preact.h("div",{"class":"folder cur"},preact.h("div",{"class":"folderhack3"},
 preact.h("div",{"class":"folderhack1"}),preact.h("div",{"class":"folderhack2"}),
-preact.h("div",{"class":"selectFolder","data-value":props.value},props.children)));
-
+preact.h("div",{"class":"selectFolder","data-value":props.value},props.children)
+));
 }
 return preact.h("div",{"class":"folder"},
-preact.h("div",{"class":"selectFolder","data-value":props.value},props.children));
-
+preact.h("div",{"class":"selectFolder","data-value":props.value},props.children)
+);
 }
 
 function TeamBox(props){
@@ -565,8 +565,8 @@ if(!team.packedTeam){
 icons=preact.h("em",null,"(empty team)");
 }else{
 icons=PSTeambuilder.packedTeamNames(team.packedTeam).map(function(species){return(
-preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(species)}));});
-
+preact.h("span",{"class":"picon",style:Dex.getPokemonIcon(species)}));}
+);
 }
 team.iconCache=icons;
 }
@@ -584,12 +584,12 @@ preact.h("em",null,"Select a team")];
 }
 if(props.button){
 return preact.h("button",{"class":"team",value:team?team.key:''},
-contents);
-
+contents
+);
 }
 return preact.h("div",{"data-href":props.noLink?'':"/team-"+(team?team.key:''),"class":"team",draggable:true},
-contents);
-
+contents
+);
 }var
 
 
@@ -630,8 +630,8 @@ render=function render(){var _this3=this;
 var room=this.props.room;
 if(!room.parentElem){
 return preact.h(PSPanelWrapper,{room:room},
-preact.h("p",null,"Error: You tried to open a team selector, but you have nothing to select a team for."));
-
+preact.h("p",null,"Error: You tried to open a team selector, but you have nothing to select a team for.")
+);
 }
 var baseFormat=room.parentElem.getAttribute('data-format')||Dex.modid;
 var isFirstLoad=this.format===null;
@@ -654,8 +654,8 @@ var width=307;
 if(availableWidth>636)width=613;
 if(availableWidth>945)width=919;
 
-var teamBuckets={};for(var _i11=0,_teams=
-teams;_i11<_teams.length;_i11++){var team=_teams[_i11];
+var teamBuckets={};for(var _i22=0,_teams2=
+teams;_i22<_teams2.length;_i22++){var team=_teams2[_i22];
 var list=teamBuckets[team.folder]||(teamBuckets[team.folder]=[]);
 list.push(team);
 }
@@ -663,8 +663,8 @@ list.push(team);
 var teamList=[];
 
 var baseGen=baseFormat.slice(0,4);
-var genList=[];for(var _i12=0,_PS$teams$list=
-PS.teams.list;_i12<_PS$teams$list.length;_i12++){var _team=_PS$teams$list[_i12];
+var genList=[];for(var _i24=0,_PS$teams$list2=
+PS.teams.list;_i24<_PS$teams$list2.length;_i24++){var _team=_PS$teams$list2[_i24];
 var gen=_team.format.slice(0,4);
 if(gen&&!genList.includes(gen))genList.push(gen);
 }
@@ -672,22 +672,22 @@ var hasOtherGens=genList.length>1||genList[0]!==baseGen;
 
 teamList.push(preact.h("p",null,
 baseFormat.length>4&&preact.h("button",{"class":'button'+(baseFormat===this.format?' disabled':''),onClick:this.setFormat,name:"format",value:baseFormat},
-preact.h("i",{"class":"fa fa-folder-o"})," [",baseFormat.slice(0,4),"] ",baseFormat.slice(4))," ",
-preact.h("button",{"class":'button'+(baseGen===this.format?' disabled':''),onClick:this.setFormat,name:"format",value:baseGen},
-preact.h("i",{"class":"fa fa-folder-o"})," [",baseGen,"] ",preact.h("em",null,"(uncategorized)"))," ",
-preact.h("button",{"class":'button'+(baseGen===this.gen?' disabled':''),onClick:this.setFormat,name:"gen",value:baseGen},
-preact.h("i",{"class":"fa fa-folder-o"})," [",baseGen,"] ",preact.h("em",null,"(all)"))," ",
-hasOtherGens&&!this.gen&&preact.h("button",{"class":"button",onClick:this.setFormat,name:"gen",value:baseGen},"Other gens")));
-
+preact.h("i",{"class":"fa fa-folder-o"})," [",baseFormat.slice(0,4),"] ",baseFormat.slice(4)
+)," ",preact.h("button",{"class":'button'+(baseGen===this.format?' disabled':''),onClick:this.setFormat,name:"format",value:baseGen},
+preact.h("i",{"class":"fa fa-folder-o"})," [",baseGen,"] ",preact.h("em",null,"(uncategorized)")
+)," ",preact.h("button",{"class":'button'+(baseGen===this.gen?' disabled':''),onClick:this.setFormat,name:"gen",value:baseGen},
+preact.h("i",{"class":"fa fa-folder-o"})," [",baseGen,"] ",preact.h("em",null,"(all)")
+)," ",hasOtherGens&&!this.gen&&preact.h("button",{"class":"button",onClick:this.setFormat,name:"gen",value:baseGen},"Other gens")
+));
 
 if(hasOtherGens&&this.gen){
 teamList.push(preact.h("h2",null,"Other gens"));
 teamList.push(preact.h("p",null,genList.sort().map(function(gen){return[
 preact.h("button",{"class":'button'+(gen===_this3.gen?' disabled':''),onClick:_this3.setFormat,name:"gen",value:gen},
-preact.h("i",{"class":"fa fa-folder-o"})," [",gen,"] ",preact.h("em",null,"(all)")),
-
-" "];})));
-
+preact.h("i",{"class":"fa fa-folder-o"})," [",gen,"] ",preact.h("em",null,"(all)")
+),
+" "];}
+)));
 }
 
 var isEmpty=true;
@@ -695,33 +695,33 @@ for(var _folder in teamBuckets){
 if(_folder&&(this.gen||this.format)){
 teamList.push(preact.h("h2",null,
 preact.h("i",{"class":"fa fa-folder-open"})," ",_folder," + ",
-preact.h("i",{"class":"fa fa-folder-open-o"})," ",this.format||this.gen));
-
+preact.h("i",{"class":"fa fa-folder-open-o"})," ",this.format||this.gen
+));
 }else if(_folder){
 teamList.push(preact.h("h2",null,
-preact.h("i",{"class":"fa fa-folder-open"})," ",_folder));
-
+preact.h("i",{"class":"fa fa-folder-open"})," ",_folder
+));
 }else if(this.gen||this.format){
 teamList.push(preact.h("h2",null,
-preact.h("i",{"class":"fa fa-folder-open-o"})," ",this.format||this.gen));
-
+preact.h("i",{"class":"fa fa-folder-open-o"})," ",this.format||this.gen
+));
 }else{
 teamList.push(preact.h("h2",null,
-preact.h("i",{"class":"fa fa-folder-open-o"})," Teams not in any folders"));
-
+preact.h("i",{"class":"fa fa-folder-open-o"})," Teams not in any folders"
+));
 }
 teamList.push(preact.h("ul",{"class":"teamdropdown",onClick:this.click},
 teamBuckets[_folder].map(function(team){return preact.h("li",{key:team.key,style:"display:inline-block"},
-preact.h(TeamBox,{team:team,button:true}));})));
-
-
+preact.h(TeamBox,{team:team,button:true})
+);})
+));
 isEmpty=false;
 }
 
 return preact.h(PSPanelWrapper,{room:room,width:width},
 teamList,
-isEmpty&&preact.h("p",null,preact.h("em",null,"No teams found")));
-
+isEmpty&&preact.h("p",null,preact.h("em",null,"No teams found"))
+);
 };return TeamDropdownPanel;}(PSRoomPanel);var
 
 
@@ -766,8 +766,8 @@ render=function render(){var _this5=this;
 var room=this.props.room;
 if(!room.parentElem){
 return preact.h(PSPanelWrapper,{room:room},
-preact.h("p",null,"Error: You tried to open a format selector, but you have nothing to select a format for."));
-
+preact.h("p",null,"Error: You tried to open a format selector, but you have nothing to select a format for.")
+);
 }
 
 var formatsLoaded=!!window.BattleFormats;
@@ -780,8 +780,8 @@ break;
 }
 if(!formatsLoaded){
 return preact.h(PSPanelWrapper,{room:room},
-preact.h("p",null,"Loading..."));
-
+preact.h("p",null,"Loading...")
+);
 }
 
 
@@ -802,8 +802,8 @@ return true;
 var curSection='';
 var curColumnNum=0;
 var curColumn=[];
-var columns=[curColumn];for(var _i13=0;_i13<
-formats.length;_i13++){var format=formats[_i13];
+var columns=[curColumn];for(var _i26=0;_i26<
+formats.length;_i26++){var format=formats[_i26];
 if(format.column!==curColumnNum){
 if(curColumn.length){
 curColumn=[];
@@ -826,23 +826,24 @@ return preact.h(PSPanelWrapper,{room:room,width:width},
 columns.map(function(column){return preact.h("ul",{"class":"options",onClick:_this5.click},
 column.map(function(format){return format.id?
 preact.h("li",null,preact.h("button",{value:format.name,"class":"option"},
-format.name.replace('[Gen 8 ','[').replace('[Gen 8] ','').replace('[Gen 7 ','['))):
-
+format.name.replace('[Gen 8 ','[').replace('[Gen 9] ','').replace('[Gen 7 ','[')
+)):
 
 preact.h("li",null,preact.h("h3",null,
-format.section));}));}),
-
-
-
-preact.h("div",{style:"float: left"}));
-
+format.section
+));}
+)
+);}),
+preact.h("div",{style:"float: left"})
+);
 };return FormatDropdownPanel;}(PSRoomPanel);
 
 
 PS.roomTypes['teamdropdown']={
-Component:TeamDropdownPanel};
-
+Component:TeamDropdownPanel
+};
 
 PS.roomTypes['formatdropdown']={
-Component:FormatDropdownPanel};
+Component:FormatDropdownPanel
+};
 //# sourceMappingURL=panel-teamdropdown.js.map

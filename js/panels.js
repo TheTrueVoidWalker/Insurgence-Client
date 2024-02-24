@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Panels
  *
  * Main view - sets up the frame, and the generic panels.
@@ -35,7 +35,7 @@ url=url.slice(document.location.host.length);
 url=url.slice(24);
 }else if(PS.server.id==='showdown'&&url.startsWith('psim.us')){
 url=url.slice(7);
-}else if(url.startsWith('replay.pokemonshowdown.com')){
+}else if(url.startsWith('battling.p-insurgence.com/replays')){
 url=url.slice(26).replace('/','/battle-');
 }
 }
@@ -139,8 +139,8 @@ this.props.room.setDimensions(this.base.offsetWidth,this.base.offsetHeight);
 }
 };_proto2.
 componentWillUnmount=function componentWillUnmount(){
-this.props.room.onParentEvent=null;for(var _i=0,_this$subscriptions=
-this.subscriptions;_i<_this$subscriptions.length;_i++){var subscription=_this$subscriptions[_i];
+this.props.room.onParentEvent=null;for(var _i2=0,_this$subscriptions2=
+this.subscriptions;_i2<_this$subscriptions2.length;_i2++){var subscription=_this$subscriptions2[_i2];
 subscription.unsubscribe();
 }
 this.subscriptions=[];
@@ -161,8 +161,8 @@ PS.closePopup();
 focus=function focus(){};_proto2.
 render=function render(){
 return preact.h(PSPanelWrapper,{room:this.props.room},
-preact.h("div",{"class":"mainmessage"},preact.h("p",null,"Loading...")));
-
+preact.h("div",{"class":"mainmessage"},preact.h("p",null,"Loading..."))
+);
 };return PSRoomPanel;}(preact.Component);
 
 
@@ -179,8 +179,8 @@ return preact.h("div",{id:"room-"+room.id,"class":"mini-window-contents ps-room-
 if(room.location!=='left'&&room.location!=='right'){
 var _style=PSMain.getPopupStyle(room,props.width);
 return preact.h("div",{"class":"ps-popup",id:"room-"+room.id,style:_style},
-props.children);
-
+props.children
+);
 }
 var style=PSMain.posStyle(room);
 return preact.h("div",{
@@ -188,8 +188,8 @@ return preact.h("div",{
 id:"room-"+room.id,
 style:style},
 
-props.children);
-
+props.children
+);
 }var
 
 PSMain=function(_preact$Component2){_inheritsLoose(PSMain,_preact$Component2);
@@ -216,8 +216,8 @@ id:roomid,
 parentElem:elem,
 parentRoomid:PSMain.containingRoomid(elem),
 rightPopup:elem.className==='userbutton username',
-username:name});
-
+username:name
+});
 PS.update();
 e.preventDefault();
 e.stopImmediatePropagation();
@@ -234,8 +234,8 @@ if(room)PS.leave(room.id);
 }
 PS.addRoom({
 id:_roomid,
-parentElem:elem});
-
+parentElem:elem
+});
 PS.update();
 e.preventDefault();
 e.stopImmediatePropagation();
@@ -336,16 +336,16 @@ return true;
 case'joinRoom':
 PS.addRoom({
 id:elem.value,
-parentElem:elem});
-
+parentElem:elem
+});
 PS.update();
 return true;
 case'send':
 case'cmd':
 var room=this.getRoom(elem)||PS.mainmenu;
 room.send(elem.value,elem.name==='send');
-return true;}
-
+return true;
+}
 return false;
 };PSMain.
 containingRoomid=function containingRoomid(elem){
@@ -405,8 +405,8 @@ height:height===null?"auto":height+"px",
 bottom:bottom===null?"auto":-bottom+"px",
 left:left===null?"auto":left+"px",
 width:width===null?"auto":width+"px",
-right:right===null?"auto":-right+"px"};
-
+right:right===null?"auto":-right+"px"
+};
 };PSMain.
 getPopupStyle=function getPopupStyle(room,width){
 if(room.location==='modal-popup'||!room.parentElem){
@@ -418,14 +418,14 @@ position:'absolute',
 visibility:'hidden',
 margin:0,
 top:0,
-left:0};
-
+left:0
+};
 }
 
 var style={
 position:'absolute',
-margin:0};
-
+margin:0
+};
 var offset=room.parentElem.getBoundingClientRect();
 var sourceWidth=offset.width;
 var sourceHeight=offset.height;
@@ -489,8 +489,8 @@ if(room.location==='popup'&&room.parentElem){
 return preact.h(Panel,{key:room.id,room:room});
 }
 return preact.h("div",{key:room.id,"class":"ps-overlay"},
-preact.h(Panel,{room:room}));
-
+preact.h(Panel,{room:room})
+);
 };_proto3.
 render=function render(){var _this5=this;
 var rooms=[];
@@ -503,8 +503,8 @@ rooms.push(this.renderRoom(room));
 return preact.h("div",{"class":"ps-frame"},
 preact.h(PSHeader,{style:{top:0,left:0,right:0,height:'50px'}}),
 rooms,
-PS.popups.map(function(roomid){return _this5.renderPopup(PS.rooms[roomid]);}));
-
+PS.popups.map(function(roomid){return _this5.renderPopup(PS.rooms[roomid]);})
+);
 };return PSMain;}(preact.Component);
 
 

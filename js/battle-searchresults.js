@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Search Results
  *
  * Code for displaying sesrch results from battle-dex-search.ts
@@ -24,8 +24,8 @@ preact.h("button",{"class":"sortcol statsortcol"+(sortCol==='def'?' cur':''),"da
 preact.h("button",{"class":"sortcol statsortcol"+(sortCol==='spa'?' cur':''),"data-sort":"spa"},"SpA"),
 preact.h("button",{"class":"sortcol statsortcol"+(sortCol==='spd'?' cur':''),"data-sort":"spd"},"SpD"),
 preact.h("button",{"class":"sortcol statsortcol"+(sortCol==='spe'?' cur':''),"data-sort":"spe"},"Spe"),
-preact.h("button",{"class":"sortcol statsortcol"+(sortCol==='bst'?' cur':''),"data-sort":"bst"},"BST")));
-
+preact.h("button",{"class":"sortcol statsortcol"+(sortCol==='bst'?' cur':''),"data-sort":"bst"},"BST")
+));
 };_proto.
 
 renderMoveSortRow=function renderMoveSortRow(){
@@ -36,8 +36,8 @@ preact.h("button",{"class":"sortcol movetypesortcol"+(sortCol==='type'?' cur':''
 preact.h("button",{"class":"sortcol movetypesortcol"+(sortCol==='category'?' cur':''),"data-sort":"category"},"Cat"),
 preact.h("button",{"class":"sortcol powersortcol"+(sortCol==='power'?' cur':''),"data-sort":"power"},"Pow"),
 preact.h("button",{"class":"sortcol accuracysortcol"+(sortCol==='accuracy'?' cur':''),"data-sort":"accuracy"},"Acc"),
-preact.h("button",{"class":"sortcol ppsortcol"+(sortCol==='pp'?' cur':''),"data-sort":"pp"},"PP")));
-
+preact.h("button",{"class":"sortcol ppsortcol"+(sortCol==='pp'?' cur':''),"data-sort":"pp"},"PP")
+));
 };_proto.
 
 renderPokemonRow=function renderPokemonRow(id,matchStart,matchEnd,errorMessage){
@@ -48,8 +48,8 @@ if(!pokemon)return preact.h("li",{"class":"result"},"Unrecognized pokemon");
 var tagStart=pokemon.forme?pokemon.name.length-pokemon.forme.length-1:0;
 
 var stats=pokemon.baseStats;
-var bst=0;for(var _i=0,_Object$values=
-Object.values(stats);_i<_Object$values.length;_i++){var stat=_Object$values[_i];bst+=stat;}
+var bst=0;for(var _i2=0,_Object$values2=
+Object.values(stats);_i2<_Object$values2.length;_i2++){var stat=_Object$values2[_i2];bst+=stat;}
 if(search.dex.gen<2)bst-=stats['spd'];
 
 if(errorMessage){
@@ -57,29 +57,29 @@ return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"pokemo
 preact.h("span",{"class":"col numcol"},search.getTier(pokemon)),
 
 preact.h("span",{"class":"col iconcol"},
-preact.h("span",{style:Dex.getPokemonIcon(pokemon.id)})),
-
+preact.h("span",{style:Dex.getPokemonIcon(pokemon.id)})
+),
 
 preact.h("span",{"class":"col pokemonnamecol"},this.renderName(pokemon.name,matchStart,matchEnd,tagStart)),
 
-errorMessage));
-
+errorMessage
+));
 }
 
 return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"pokemon/"+id,"data-target":"push","data-entry":"pokemon|"+pokemon.name},
 preact.h("span",{"class":"col numcol"},search.getTier(pokemon)),
 
 preact.h("span",{"class":"col iconcol"},
-preact.h("span",{style:Dex.getPokemonIcon(pokemon.id)})),
-
+preact.h("span",{style:Dex.getPokemonIcon(pokemon.id)})
+),
 
 preact.h("span",{"class":"col pokemonnamecol"},this.renderName(pokemon.name,matchStart,matchEnd,tagStart)),
 
 preact.h("span",{"class":"col typecol"},
 pokemon.types.map(function(type){return(
-preact.h("img",{src:Dex.resourcePrefix+"sprites/types/"+type+".png",alt:type,height:"14",width:"32","class":"pixelated"}));})),
-
-
+preact.h("img",{src:Dex.resourcePrefix+"sprites/types/"+type+".png",alt:type,height:"14",width:"32","class":"pixelated"}));}
+)
+),
 
 search.dex.gen>=3&&(pokemon.abilities['1']?
 preact.h("span",{"class":"col twoabilitycol"},pokemon.abilities['0'],preact.h("br",null),pokemon.abilities['1']):
@@ -101,8 +101,8 @@ search.dex.gen>2&&preact.h("span",{"class":"col statcol"},preact.h("em",null,"Sp
 search.dex.gen>2&&preact.h("span",{"class":"col statcol"},preact.h("em",null,"SpD"),preact.h("br",null),stats.spd),
 search.dex.gen<2&&preact.h("span",{"class":"col statcol"},preact.h("em",null,"Spc"),preact.h("br",null),stats.spa),
 preact.h("span",{"class":"col statcol"},preact.h("em",null,"Spe"),preact.h("br",null),stats.spe),
-preact.h("span",{"class":"col bstcol"},preact.h("em",null,"BST",preact.h("br",null),bst))));
-
+preact.h("span",{"class":"col bstcol"},preact.h("em",null,"BST",preact.h("br",null),bst))
+));
 };_proto.
 
 renderName=function renderName(name,matchStart,matchEnd,tagStart){
@@ -130,8 +130,8 @@ if(matchStart<tagStart){
 matchStart=tagStart;
 }
 output.push(
-preact.h("small",null,name.slice(tagStart,matchStart),preact.h("b",null,name.slice(matchStart,matchEnd)),name.slice(matchEnd)));
-
+preact.h("small",null,name.slice(tagStart,matchStart),preact.h("b",null,name.slice(matchStart,matchEnd)),name.slice(matchEnd))
+);
 }else{
 output.push(preact.h("small",null,name.slice(tagStart)));
 }
@@ -146,15 +146,15 @@ if(!item)return preact.h("li",{"class":"result"},"Unrecognized item");
 
 return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"items/"+id,"data-target":"push","data-entry":"item|"+item.name},
 preact.h("span",{"class":"col itemiconcol"},
-preact.h("span",{style:Dex.getItemIcon(item)})),
-
+preact.h("span",{style:Dex.getItemIcon(item)})
+),
 
 preact.h("span",{"class":"col namecol"},this.renderName(item.name,matchStart,matchEnd)),
 
 errorMessage,
 
-!errorMessage&&preact.h("span",{"class":"col itemdesccol"},item.shortDesc)));
-
+!errorMessage&&preact.h("span",{"class":"col itemdesccol"},item.shortDesc)
+));
 };_proto.
 
 renderAbilityRow=function renderAbilityRow(id,matchStart,matchEnd,errorMessage){
@@ -167,8 +167,8 @@ preact.h("span",{"class":"col namecol"},this.renderName(ability.name,matchStart,
 
 errorMessage,
 
-!errorMessage&&preact.h("span",{"class":"col abilitydesccol"},ability.shortDesc)));
-
+!errorMessage&&preact.h("span",{"class":"col abilitydesccol"},ability.shortDesc)
+));
 };_proto.
 
 renderMoveRow=function renderMoveRow(id,matchStart,matchEnd,errorMessage){
@@ -182,8 +182,8 @@ if(errorMessage){
 return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"move/"+id,"data-target":"push","data-entry":"move|"+move.name},
 preact.h("span",{"class":"col movenamecol"},this.renderName(move.name,matchStart,matchEnd,tagStart)),
 
-errorMessage));
-
+errorMessage
+));
 }
 
 var pp=move.pp===1||move.noPPBoosts?move.pp:move.pp*8/5;
@@ -193,22 +193,22 @@ preact.h("span",{"class":"col movenamecol"},this.renderName(move.name,matchStart
 
 preact.h("span",{"class":"col typecol"},
 preact.h("img",{src:Dex.resourcePrefix+"sprites/types/"+move.type+".png",alt:move.type,height:"14",width:"32","class":"pixelated"}),
-preact.h("img",{src:Dex.resourcePrefix+"sprites/categories/"+move.category+".png",alt:move.category,height:"14",width:"32","class":"pixelated"})),
-
+preact.h("img",{src:Dex.resourcePrefix+"sprites/categories/"+move.category+".png",alt:move.category,height:"14",width:"32","class":"pixelated"})
+),
 
 preact.h("span",{"class":"col labelcol"},
-move.category!=='Status'?[preact.h("em",null,"Power"),preact.h("br",null),""+move.basePower||"\u2014"]:''),
-
+move.category!=='Status'?[preact.h("em",null,"Power"),preact.h("br",null),""+move.basePower||"\u2014"]:''
+),
 preact.h("span",{"class":"col widelabelcol"},
-preact.h("em",null,"Accuracy"),preact.h("br",null),move.accuracy&&move.accuracy!==true?move.accuracy+"%":"\u2014"),
-
+preact.h("em",null,"Accuracy"),preact.h("br",null),move.accuracy&&move.accuracy!==true?move.accuracy+"%":"\u2014"
+),
 preact.h("span",{"class":"col pplabelcol"},
-preact.h("em",null,"PP"),preact.h("br",null),pp),
+preact.h("em",null,"PP"),preact.h("br",null),pp
+),
 
+preact.h("span",{"class":"col movedesccol"},move.shortDesc)
 
-preact.h("span",{"class":"col movedesccol"},move.shortDesc)));
-
-
+));
 };_proto.
 
 renderTypeRow=function renderTypeRow(id,matchStart,matchEnd,errorMessage){
@@ -219,11 +219,11 @@ return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"types/
 preact.h("span",{"class":"col namecol"},this.renderName(name,matchStart,matchEnd)),
 
 preact.h("span",{"class":"col typecol"},
-preact.h("img",{src:Dex.resourcePrefix+"sprites/types/"+name+".png",alt:name,height:"14",width:"32","class":"pixelated"})),
+preact.h("img",{src:Dex.resourcePrefix+"sprites/types/"+name+".png",alt:name,height:"14",width:"32","class":"pixelated"})
+),
 
-
-errorMessage));
-
+errorMessage
+));
 };_proto.
 
 renderCategoryRow=function renderCategoryRow(id,matchStart,matchEnd,errorMessage){
@@ -234,11 +234,11 @@ return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"catego
 preact.h("span",{"class":"col namecol"},this.renderName(name,matchStart,matchEnd)),
 
 preact.h("span",{"class":"col typecol"},
-preact.h("img",{src:Dex.resourcePrefix+"sprites/categories/"+name+".png",alt:name,height:"14",width:"32","class":"pixelated"})),
+preact.h("img",{src:Dex.resourcePrefix+"sprites/categories/"+name+".png",alt:name,height:"14",width:"32","class":"pixelated"})
+),
 
-
-errorMessage));
-
+errorMessage
+));
 };_proto.
 
 renderArticleRow=function renderArticleRow(id,matchStart,matchEnd,errorMessage){
@@ -252,8 +252,8 @@ preact.h("span",{"class":"col namecol"},this.renderName(name,matchStart,matchEnd
 
 preact.h("span",{"class":"col movedesccol"},isSearchType?"(search type)":"(article)"),
 
-errorMessage));
-
+errorMessage
+));
 };_proto.
 
 renderEggGroupRow=function renderEggGroupRow(id,matchStart,matchEnd,errorMessage){
@@ -275,8 +275,8 @@ preact.h("span",{"class":"col namecol"},this.renderName(name,matchStart,matchEnd
 
 preact.h("span",{"class":"col movedesccol"},"(egg group)"),
 
-errorMessage));
-
+errorMessage
+));
 };_proto.
 
 renderTierRow=function renderTierRow(id,matchStart,matchEnd,errorMessage){
@@ -285,8 +285,8 @@ var search=this.props.search;
 var tierTable={
 uber:"Uber",
 caplc:"CAP LC",
-capnfe:"CAP NFE"};
-
+capnfe:"CAP NFE"
+};
 var name=tierTable[id]||id.toUpperCase();
 
 return preact.h("li",{"class":"result"},preact.h("a",{href:this.URL_ROOT+"tiers/"+id,"data-target":"push","data-entry":"tier|"+name},
@@ -294,8 +294,8 @@ preact.h("span",{"class":"col namecol"},this.renderName(name,matchStart,matchEnd
 
 preact.h("span",{"class":"col movedesccol"},"(tier)"),
 
-errorMessage));
-
+errorMessage
+));
 };_proto.
 
 renderRow=function renderRow(row){
@@ -322,8 +322,8 @@ var sanitizedHTML=id.replace(/</g,'&lt;').
 replace(/&lt;em>/g,'<em>').replace(/&lt;\/em>/g,'</em>').
 replace(/&lt;strong>/g,'<strong>').replace(/&lt;\/strong>/g,'</strong>');
 return preact.h("li",{"class":"result"},
-preact.h("p",{dangerouslySetInnerHTML:{__html:sanitizedHTML}}));
-
+preact.h("p",{dangerouslySetInnerHTML:{__html:sanitizedHTML}})
+);
 case'header':
 return preact.h("li",{"class":"result"},preact.h("h3",null,id));
 case'sortpokemon':
@@ -347,8 +347,8 @@ return this.renderTierRow(id,matchStart,matchEnd,errorMessage);
 case'category':
 return this.renderCategoryRow(id,matchStart,matchEnd,errorMessage);
 case'article':
-return this.renderArticleRow(id,matchStart,matchEnd,errorMessage);}
-
+return this.renderArticleRow(id,matchStart,matchEnd,errorMessage);
+}
 return preact.h("li",null,"Error: not found");
 };_proto.
 
@@ -359,17 +359,17 @@ search.filters&&preact.h("p",null,"Filters: ",
 
 search.filters.map(function(_ref){var type=_ref[0],name=_ref[1];return(
 preact.h("button",{"class":"filter",value:type+":"+name},"$",
-name," ",preact.h("i",{"class":"fa fa-times-circle"})));}),
-
-
-!search.query&&preact.h("small",{style:"color: #888"},"(backspace = delete filter)")),
-
+name," ",preact.h("i",{"class":"fa fa-times-circle"})
+));}
+),
+!search.query&&preact.h("small",{style:"color: #888"},"(backspace = delete filter)")
+),
 search.results&&
 
 
 search.results.slice(0,20).map(function(result){return(
-_this2.renderRow(result));}));
-
-
+_this2.renderRow(result));}
+)
+);
 };return PSSearchResults;}(preact.Component);
 //# sourceMappingURL=battle-searchresults.js.map

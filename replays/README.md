@@ -1,7 +1,7 @@
 PS replays database
 ===================
 
-This is the code powering https://replay.pokemonshowdown.com/
+This is the code powering https://battling.p-insurgence.com/replays/
 
 
 JSON API

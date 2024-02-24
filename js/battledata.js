@@ -122,8 +122,8 @@ throw new Error("Passed value "+a+" is not comparable");
 sortBy=function sortBy(array,callback){
 if(!callback)return array.sort(PSUtils.compare);
 return array.sort(function(a,b){return PSUtils.compare(callback(a),callback(b));});
-};return _class;}())();
-
+};return _class;}())(
+);
 
 
 
@@ -141,8 +141,8 @@ if(name.length>18)name=name.substr(0,18).trim();
 
 name=name.replace(
 /[\u0300-\u036f\u0483-\u0489\u0610-\u0615\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06ED\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]{3,}/g,
-'');
-
+''
+);
 name=name.replace(/[\u239b-\u23b9]/g,'');
 
 return name;
@@ -170,8 +170,8 @@ return name;
 
 
 var Dex=new(function(){function _class3(){var _this=this;this.
-gen=8;this.
-modid='gen8';this.
+gen=9;this.
+modid='gen9';this.
 cache=null;this.
 
 statNames=['hp','atk','def','spa','spd','spe'];this.
@@ -179,15 +179,15 @@ statNamesExceptHP=['atk','def','spa','spd','spe'];this.
 
 pokeballs=null;this.
 
-resourcePrefix=function(){var _window$document,_window$document$loca;
+resourcePrefix=function(_window$document){
 var prefix='';
-if(((_window$document=window.document)==null?void 0:(_window$document$loca=_window$document.location)==null?void 0:_window$document$loca.protocol)!=='http:')prefix='https:';
-return prefix+"//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/";
+if(((_window$document=window.document)==null||(_window$document=_window$document.location)==null?void 0:_window$document.protocol)!=='http:')prefix='https:';
+return prefix+"//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/";
 }();this.
 
-fxPrefix=function(){var _window$document2,_window$document2$loc;
-var protocol=((_window$document2=window.document)==null?void 0:(_window$document2$loc=_window$document2.location)==null?void 0:_window$document2$loc.protocol)!=='http:'?'https:':'';
-return protocol+"//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/fx/";
+fxPrefix=function(_window$document2){
+var protocol=((_window$document2=window.document)==null||(_window$document2=_window$document2.location)==null?void 0:_window$document2.protocol)!=='http:'?'https:':'';
+return protocol+"//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/fx/";
 }();this.
 
 loadedSpriteData={xy:1,bw:0};this.
@@ -307,8 +307,8 @@ if(!data)data={exists:false};
 var move=new Move(id,name,data);
 window.BattleMovedex[id]=move;
 return move;
-}};this.
-
+}
+};this.
 
 
 
@@ -335,8 +335,8 @@ if(!data)data={exists:false};
 var item=new Item(id,name,data);
 window.BattleItems[id]=item;
 return item;
-}};this.
-
+}
+};this.
 
 abilities={
 get:function(nameOrAbility){
@@ -357,8 +357,8 @@ if(!data)data={exists:false};
 var ability=new Ability(id,name,data);
 window.BattleAbilities[id]=ability;
 return ability;
-}};this.
-
+}
+};this.
 
 species={
 get:function(nameOrSpecies){
@@ -374,8 +374,8 @@ if(formid in window.BattlePokedexAltForms)return window.BattlePokedexAltForms[fo
 if(window.BattleAliases&&id in BattleAliases){
 name=BattleAliases[id];
 id=toID(name);
-}else if(window.BattlePokedex&&!(id in BattlePokedex)&&window.BattleBaseSpeciesChart){for(var _i=0,_BattleBaseSpeciesCha=
-BattleBaseSpeciesChart;_i<_BattleBaseSpeciesCha.length;_i++){var baseSpeciesId=_BattleBaseSpeciesCha[_i];
+}else if(window.BattlePokedex&&!(id in BattlePokedex)&&window.BattleBaseSpeciesChart){for(var _i2=0,_BattleBaseSpeciesCha2=
+BattleBaseSpeciesChart;_i2<_BattleBaseSpeciesCha2.length;_i2++){var baseSpeciesId=_BattleBaseSpeciesCha2[_i2];
 if(formid.startsWith(baseSpeciesId)){
 id=baseSpeciesId;
 break;
@@ -400,8 +400,8 @@ species=new Species(id,name,data);
 window.BattlePokedex[id]=species;
 }
 
-if(species.cosmeticFormes){for(var _i2=0,_species$cosmeticForm=
-species.cosmeticFormes;_i2<_species$cosmeticForm.length;_i2++){var forme=_species$cosmeticForm[_i2];
+if(species.cosmeticFormes){for(var _i4=0,_species$cosmeticForm2=
+species.cosmeticFormes;_i4<_species$cosmeticForm2.length;_i4++){var forme=_species$cosmeticForm2[_i4];
 if(toID(forme)===formid){
 species=new Species(formid,name,Object.assign({},
 species,{
@@ -409,8 +409,8 @@ name:forme,
 forme:forme.slice(species.name.length+1),
 baseForme:"",
 baseSpecies:species.name,
-otherFormes:null}));
-
+otherFormes:null})
+);
 window.BattlePokedexAltForms[formid]=species;
 break;
 }
@@ -418,8 +418,8 @@ break;
 }
 
 return species;
-}};this.
-
+}
+};this.
 
 types={
 allCache:null,
@@ -450,8 +450,8 @@ isName:function(name){
 var id=toID(name);
 if(name!==id.substr(0,1).toUpperCase()+id.substr(1))return false;
 return(window.BattleTypeChart||{}).hasOwnProperty(id);
-}};}var _proto2=_class3.prototype;_proto2.mod=function mod(modid){if(modid==='gen8')return this;if(!window.BattleTeambuilderTable)return this;if(modid in this.moddedDexes){return this.moddedDexes[modid];}this.moddedDexes[modid]=new ModdedDex(modid);return this.moddedDexes[modid];};_proto2.forGen=function forGen(gen){if(!gen)return this;return this.mod("gen"+gen);};_proto2.resolveAvatar=function resolveAvatar(avatar){var _window$Config,_window$Config$server;if(window.BattleAvatarNumbers&&avatar in BattleAvatarNumbers){avatar=BattleAvatarNumbers[avatar];}if(avatar.charAt(0)==='#'){return Dex.resourcePrefix+'sprites/trainers-custom/'+toID(avatar.substr(1))+'.png';}if(avatar.includes('.')&&(_window$Config=window.Config)!=null&&(_window$Config$server=_window$Config.server)!=null&&_window$Config$server.registered){var protocol=Config.server.port===443?'https':'http';return protocol+'://'+Config.server.host+':'+Config.server.port+'/avatars/'+encodeURIComponent(avatar).replace(/\%3F/g,'?');}return Dex.resourcePrefix+'sprites/trainers/'+Dex.sanitizeName(avatar||'unknown')+'.png';};_proto2.sanitizeName=function sanitizeName(name){if(!name)return'';return(''+name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').slice(0,50);};_proto2.prefs=function prefs(prop){var _window$Storage;return(_window$Storage=window.Storage)==null?void 0:_window$Storage.prefs==null?void 0:_window$Storage.prefs(prop);};_proto2.getShortName=function getShortName(name){var shortName=name.replace(/[^A-Za-z0-9]+$/,'');if(shortName.indexOf('(')>=0){shortName+=name.slice(shortName.length).replace(/[^\(\)]+/g,'').replace(/\(\)/g,'');}return shortName;};_proto2.getEffect=function getEffect(name){name=(name||'').trim();if(name.substr(0,5)==='item:'){return Dex.items.get(name.substr(5).trim());}else if(name.substr(0,8)==='ability:'){return Dex.abilities.get(name.substr(8).trim());}else if(name.substr(0,5)==='move:'){return Dex.moves.get(name.substr(5).trim());}var id=toID(name);return new PureEffect(id,name);};_proto2.getGen3Category=function getGen3Category(type){return['Fire','Water','Grass','Electric','Ice','Psychic','Dark','Dragon'].includes(type)?'Special':'Physical';};_proto2.
-
+}
+};}var _proto2=_class3.prototype;_proto2.mod=function mod(modid){if(modid==='gen9')return this;if(!window.BattleTeambuilderTable)return this;if(modid in this.moddedDexes){return this.moddedDexes[modid];}this.moddedDexes[modid]=new ModdedDex(modid);return this.moddedDexes[modid];};_proto2.forGen=function forGen(gen){if(!gen)return this;return this.mod("gen"+gen);};_proto2.resolveAvatar=function resolveAvatar(avatar){var _window$Config;if(window.BattleAvatarNumbers&&avatar in BattleAvatarNumbers){avatar=BattleAvatarNumbers[avatar];}if(avatar.charAt(0)==='#'){return Dex.resourcePrefix+'sprites/trainers-custom/'+toID(avatar.substr(1))+'.png';}if(avatar.includes('.')&&(_window$Config=window.Config)!=null&&(_window$Config=_window$Config.server)!=null&&_window$Config.registered){var protocol=Config.server.port===443?'https':'http';return protocol+'://'+Config.server.host+':'+Config.server.port+'/avatars/'+encodeURIComponent(avatar).replace(/\%3F/g,'?');}return Dex.resourcePrefix+'sprites/trainers/'+Dex.sanitizeName(avatar||'unknown')+'.png';};_proto2.sanitizeName=function sanitizeName(name){if(!name)return'';return(''+name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').slice(0,50);};_proto2.prefs=function prefs(prop){var _window$Storage;return(_window$Storage=window.Storage)==null||_window$Storage.prefs==null?void 0:_window$Storage.prefs(prop);};_proto2.getShortName=function getShortName(name){var shortName=name.replace(/[^A-Za-z0-9]+$/,'');if(shortName.indexOf('(')>=0){shortName+=name.slice(shortName.length).replace(/[^\(\)]+/g,'').replace(/\(\)/g,'');}return shortName;};_proto2.getEffect=function getEffect(name){name=(name||'').trim();if(name.substr(0,5)==='item:'){return Dex.items.get(name.substr(5).trim());}else if(name.substr(0,8)==='ability:'){return Dex.abilities.get(name.substr(8).trim());}else if(name.substr(0,5)==='move:'){return Dex.moves.get(name.substr(5).trim());}var id=toID(name);return new PureEffect(id,name);};_proto2.getGen3Category=function getGen3Category(type){return['Fire','Water','Grass','Electric','Ice','Psychic','Dark','Dragon'].includes(type)?'Special':'Physical';};_proto2.
 
 hasAbility=function hasAbility(species,ability){
 for(var i in species.abilities){
@@ -514,8 +514,8 @@ url:Dex.resourcePrefix+'sprites/',
 pixelated:true,
 isFrontSprite:false,
 cryurl:'',
-shiny:options.shiny};
-
+shiny:options.shiny
+};
 var name=species.spriteid;
 var dir;
 var facing;
@@ -543,7 +543,7 @@ var graphicsGen=mechanicsGen;
 if(Dex.prefs('nopastgens'))graphicsGen=6;
 if(Dex.prefs('bwgfx')&&graphicsGen>=6)graphicsGen=5;
 spriteData.gen=Math.max(graphicsGen,Math.min(species.gen,5));
-var baseDir=['','gen1','gen2','gen3','gen4','gen5','','',''][spriteData.gen];
+var baseDir=['','gen1','gen2','gen3','gen4','gen5','','','',''][spriteData.gen];
 
 var animationData=null;
 var miscData=null;
@@ -568,11 +568,14 @@ if(species.isMega||formeid&&(
 formeid==='-crowned'||
 formeid==='-eternal'||
 formeid==='-eternamax'||
+formeid==='-four'||
 formeid==='-hangry'||
+formeid==='-hero'||
 formeid==='-lowkey'||
 formeid==='-noice'||
 formeid==='-primal'||
 formeid==='-rapidstrike'||
+formeid==='-roaming'||
 formeid==='-school'||
 formeid==='-sky'||
 formeid==='-starter'||
@@ -585,8 +588,10 @@ baseSpeciesid==='cramorant'||
 baseSpeciesid==='indeedee'||
 baseSpeciesid==='lycanroc'||
 baseSpeciesid==='necrozma'||
+baseSpeciesid==='oinkologne'||
 baseSpeciesid==='oricorio'||
 baseSpeciesid==='slowpoke'||
+baseSpeciesid==='tatsugiri'||
 baseSpeciesid==='zygarde'))
 {
 spriteData.cryurl+=formeid;
@@ -677,17 +682,17 @@ spriteData.y+=-11;
 return spriteData;
 };_proto2.
 
-getPokemonIconNum=function getPokemonIconNum(id,isFemale,facingLeft){var _window$BattlePokemon,_window$BattlePokemon2,_window$BattlePokedex,_window$BattlePokedex2,_window$BattlePokemon3;
+getPokemonIconNum=function getPokemonIconNum(id,isFemale,facingLeft){var _window$BattlePokemon,_window$BattlePokedex,_window$BattlePokemon2;
 var num=0;
-if((_window$BattlePokemon=window.BattlePokemonSprites)!=null&&(_window$BattlePokemon2=_window$BattlePokemon[id])!=null&&_window$BattlePokemon2.num){
+if((_window$BattlePokemon=window.BattlePokemonSprites)!=null&&(_window$BattlePokemon=_window$BattlePokemon[id])!=null&&_window$BattlePokemon.num){
 num=BattlePokemonSprites[id].num;
-}else if((_window$BattlePokedex=window.BattlePokedex)!=null&&(_window$BattlePokedex2=_window$BattlePokedex[id])!=null&&_window$BattlePokedex2.num){
+}else if((_window$BattlePokedex=window.BattlePokedex)!=null&&(_window$BattlePokedex=_window$BattlePokedex[id])!=null&&_window$BattlePokedex.num){
 num=BattlePokedex[id].num;
 }
 if(num<0)num=0;
 if(num>1010)num=0;
 
-if((_window$BattlePokemon3=window.BattlePokemonIconIndexes)!=null&&_window$BattlePokemon3[id]){
+if((_window$BattlePokemon2=window.BattlePokemonIconIndexes)!=null&&_window$BattlePokemon2[id]){
 num=BattlePokemonIconIndexes[id];
 }
 
@@ -707,7 +712,7 @@ num=BattlePokemonIconIndexesLeft[id];
 return num;
 };_proto2.
 
-getPokemonIcon=function getPokemonIcon(pokemon,facingLeft){var _pokemon,_pokemon2,_pokemon3,_pokemon3$volatiles,_pokemon4,_pokemon5;
+getPokemonIcon=function getPokemonIcon(pokemon,facingLeft){var _pokemon,_pokemon2,_pokemon3,_pokemon4,_pokemon5;
 if(pokemon==='pokeball'){
 return"background:transparent url("+Dex.resourcePrefix+"sprites/pokemonicons-pokeball-sheet.png) no-repeat scroll -0px 4px";
 }else if(pokemon==='pokeball-statused'){
@@ -725,7 +730,7 @@ if((_pokemon=pokemon)!=null&&_pokemon.speciesForme)id=toID(pokemon.speciesForme)
 
 if((_pokemon2=pokemon)!=null&&_pokemon2.species)id=toID(pokemon.species);
 
-if((_pokemon3=pokemon)!=null&&(_pokemon3$volatiles=_pokemon3.volatiles)!=null&&_pokemon3$volatiles.formechange&&!pokemon.volatiles.transform){
+if((_pokemon3=pokemon)!=null&&(_pokemon3=_pokemon3.volatiles)!=null&&_pokemon3.formechange&&!pokemon.volatiles.transform){
 
 id=toID(pokemon.volatiles.formechange[1]);
 }
@@ -734,7 +739,7 @@ var num=this.getPokemonIconNum(id,((_pokemon4=pokemon)==null?void 0:_pokemon4.ge
 var top=Math.floor(num/12)*30;
 var left=num%12*40;
 var fainted=(_pokemon5=pokemon)!=null&&_pokemon5.fainted?";opacity:.3;filter:grayscale(100%) brightness(.5)":"";
-return"background:transparent url("+Dex.resourcePrefix+"sprites/pokemonicons-sheet.png?v8) no-repeat scroll -"+left+"px -"+top+"px"+fainted;
+return"background:transparent url("+Dex.resourcePrefix+"sprites/pokemonicons-sheet.png?v13) no-repeat scroll -"+left+"px -"+top+"px"+fainted;
 };_proto2.
 
 getTeambuilderSpriteData=function getTeambuilderSpriteData(pokemon){var gen=arguments.length>1&&arguments[1]!==undefined?arguments[1]:0;
@@ -749,8 +754,8 @@ var spriteData={
 spriteid:spriteid,
 spriteDir:'sprites/dex',
 x:-2,
-y:-3};
-
+y:-3
+};
 if(pokemon.shiny)spriteData.shiny=true;
 if(Dex.prefs('nopastgens'))gen=6;
 if(Dex.prefs('bwgfx')&&gen>5)gen=5;
@@ -798,7 +803,7 @@ if((_item=item)!=null&&_item.spritenum)num=item.spritenum;
 
 var top=Math.floor(num/16)*24;
 var left=num%16*24;
-return'background:transparent url('+Dex.resourcePrefix+'sprites/itemicons-sheet.png?g8) no-repeat scroll -'+left+'px -'+top+'px';
+return'background:transparent url('+Dex.resourcePrefix+'sprites/itemicons-sheet.png?g9) no-repeat scroll -'+left+'px -'+top+'px';
 };_proto2.
 
 getTypeIcon=function getTypeIcon(type,b){
@@ -819,22 +824,22 @@ sanitizedCategory=categoryID.charAt(0).toUpperCase()+categoryID.slice(1);
 break;
 default:
 sanitizedCategory='undefined';
-break;}
-
+break;
+}
 return"<img src=\""+Dex.resourcePrefix+"sprites/categories/"+sanitizedCategory+".png\" alt=\""+sanitizedCategory+"\" height=\"14\" width=\"32\" class=\"pixelated\" />";
 };_proto2.
 
 getPokeballs=function getPokeballs(){
 if(this.pokeballs)return this.pokeballs;
 this.pokeballs=[];
-if(!window.BattleItems)window.BattleItems={};for(var _i3=0,_ref2=
-Object.values(window.BattleItems);_i3<_ref2.length;_i3++){var data=_ref2[_i3];
+if(!window.BattleItems)window.BattleItems={};for(var _i6=0,_ref3=
+Object.values(window.BattleItems);_i6<_ref3.length;_i6++){var data=_ref3[_i6];
 if(!data.isPokeball)continue;
 this.pokeballs.push(data.name);
 }
 return this.pokeballs;
-};return _class3;}())();var
-
+};return _class3;}())(
+);var
 
 ModdedDex=function(){
 
@@ -883,8 +888,8 @@ data.category=Dex.getGen3Category(data.type);
 var move=new Move(id,name,data);
 _this2.cache.Moves[id]=move;
 return move;
-}};this.
-
+}
+};this.
 
 items={
 get:function(name){
@@ -897,7 +902,7 @@ if(_this2.cache.Items.hasOwnProperty(id))return _this2.cache.Items[id];
 
 var data=Object.assign({},Dex.items.get(name));
 
-for(var i=_this2.gen;i<8;i++){
+for(var i=_this2.gen;i<9;i++){
 var table=window.BattleTeambuilderTable['gen'+i];
 if(id in table.overrideItemDesc){
 data.shortDesc=table.overrideItemDesc[id];
@@ -908,8 +913,8 @@ break;
 var item=new Item(id,name,data);
 _this2.cache.Items[id]=item;
 return item;
-}};this.
-
+}
+};this.
 
 abilities={
 get:function(name){
@@ -938,8 +943,8 @@ Object.assign(data,_table2.overrideAbilityData[id]);
 var ability=new Ability(id,name,data);
 _this2.cache.Abilities[id]=ability;
 return ability;
-}};this.
-
+}
+};this.
 
 species={
 get:function(name){
@@ -981,8 +986,8 @@ if(data.gen>_this2.gen)data.tier='Illegal';
 var species=new Species(id,name,data);
 _this2.cache.Species[id]=species;
 return species;
-}};this.
-
+}
+};this.
 
 types={
 get:function(name){
@@ -1007,14 +1012,14 @@ data=Object.assign({},data,table.overrideTypeChart[id]);
 
 _this2.cache.Types[id]=data;
 return data;
-}};this.modid=modid;var gen=parseInt(modid.substr(3,1),10);if(!modid.startsWith('gen')||!gen)throw new Error("Unsupported modid");this.gen=gen;}var _proto3=ModdedDex.prototype;_proto3.
-
+}
+};this.modid=modid;var gen=parseInt(modid.substr(3,1),10);if(!modid.startsWith('gen')||!gen)throw new Error("Unsupported modid");this.gen=gen;}var _proto3=ModdedDex.prototype;_proto3.
 
 getPokeballs=function getPokeballs(){
 if(this.pokeballs)return this.pokeballs;
 this.pokeballs=[];
-if(!window.BattleItems)window.BattleItems={};for(var _i4=0,_ref3=
-Object.values(window.BattleItems);_i4<_ref3.length;_i4++){var data=_ref3[_i4];
+if(!window.BattleItems)window.BattleItems={};for(var _i8=0,_ref5=
+Object.values(window.BattleItems);_i8<_ref5.length;_i8++){var data=_ref5[_i8];
 if(data.gen&&data.gen>this.gen)continue;
 if(!data.isPokeball)continue;
 this.pokeballs.push(data.name);
@@ -1052,90 +1057,90 @@ global.toID=toID;
 var BattleNatures={
 Adamant:{
 plus:'atk',
-minus:'spa'},
-
+minus:'spa'
+},
 Bashful:{},
 Bold:{
 plus:'def',
-minus:'atk'},
-
+minus:'atk'
+},
 Brave:{
 plus:'atk',
-minus:'spe'},
-
+minus:'spe'
+},
 Calm:{
 plus:'spd',
-minus:'atk'},
-
+minus:'atk'
+},
 Careful:{
 plus:'spd',
-minus:'spa'},
-
+minus:'spa'
+},
 Docile:{},
 Gentle:{
 plus:'spd',
-minus:'def'},
-
+minus:'def'
+},
 Hardy:{},
 Hasty:{
 plus:'spe',
-minus:'def'},
-
+minus:'def'
+},
 Impish:{
 plus:'def',
-minus:'spa'},
-
+minus:'spa'
+},
 Jolly:{
 plus:'spe',
-minus:'spa'},
-
+minus:'spa'
+},
 Lax:{
 plus:'def',
-minus:'spd'},
-
+minus:'spd'
+},
 Lonely:{
 plus:'atk',
-minus:'def'},
-
+minus:'def'
+},
 Mild:{
 plus:'spa',
-minus:'def'},
-
+minus:'def'
+},
 Modest:{
 plus:'spa',
-minus:'atk'},
-
+minus:'atk'
+},
 Naive:{
 plus:'spe',
-minus:'spd'},
-
+minus:'spd'
+},
 Naughty:{
 plus:'atk',
-minus:'spd'},
-
+minus:'spd'
+},
 Quiet:{
 plus:'spa',
-minus:'spe'},
-
+minus:'spe'
+},
 Quirky:{},
 Rash:{
 plus:'spa',
-minus:'spd'},
-
+minus:'spd'
+},
 Relaxed:{
 plus:'def',
-minus:'spe'},
-
+minus:'spe'
+},
 Sassy:{
 plus:'spd',
-minus:'spe'},
-
+minus:'spe'
+},
 Serious:{},
 Timid:{
 plus:'spe',
-minus:'atk'}};
-
-
+minus:'atk'
+}
+};
 var BattleStatIDs={
 HP:'hp',
 hp:'hp',
@@ -1155,8 +1160,8 @@ SpDef:'spd',
 spd:'spd',
 Spe:'spe',
 Spd:'spe',
-spe:'spe'};
-
+spe:'spe'
+};
 
 var BattleStatNames={
 hp:'HP',
@@ -1164,11 +1169,11 @@ atk:'Atk',
 def:'Def',
 spa:'SpA',
 spd:'SpD',
-spe:'Spe'};
-
+spe:'Spe'
+};
 
 var BattleBaseSpeciesChart=[
-"unown","burmy","shellos","gastrodon","deerling","sawsbuck","vivillon","flabebe","floette","florges","furfrou","minior","alcremie","tatsugiri","pokestarufo","pokestarbrycenman","pokestarmt","pokestarmt2","pokestartransport","pokestargiant","pokestarhumanoid","pokestarmonster","pokestarf00","pokestarf002","pokestarspirit","pokestarblackdoor","pokestarwhitedoor","pokestarblackbelt","snorlaxdelta","mew"];
+"unown","burmy","shellos","gastrodon","deerling","sawsbuck","vivillon","flabebe","floette","florges","furfrou","minior","alcremie","tatsugiri","pokestarufo","pokestarbrycenman","pokestarmt","pokestarmt2","pokestartransport","pokestargiant","pokestarhumanoid","pokestarmonster","pokestarf00","pokestarf002","pokestarspirit","pokestarblackdoor","pokestarwhitedoor","pokestarblackbelt","snorlaxdelta","mukdelta","mew"];
 
 
 var BattlePokemonIconIndexes={
@@ -1379,7 +1384,6 @@ moltresgalar:1020+202,
 slowkinggalar:1020+203,
 calyrexice:1020+204,
 calyrexshadow:1020+205,
-
 growlithehisui:1020+206,
 arcaninehisui:1020+207,
 voltorbhisui:1020+208,
@@ -1401,6 +1405,9 @@ enamorustherian:1020+223,
 taurospaldea:1020+224,
 taurospaldeafire:1020+225,
 taurospaldeawater:1020+226,
+taurospaldeacombat:1020+224,
+taurospaldeablaze:1020+225,
+taurospaldeaaqua:1020+226,
 wooperpaldea:1020+227,
 oinkolognef:1020+228,
 palafinhero:1020+229,
@@ -1415,9 +1422,10 @@ dialgaorigin:1020+237,
 palkiaorigin:1020+238,
 basculinwhitestriped:1020+239,
 
+greninjabond:658,
 gumshoostotem:735,
-raticatealolatotem:900+120,
-marowakalolatotem:900+136,
+raticatealolatotem:1020+120,
+marowakalolatotem:1020+136,
 araquanidtotem:752,
 lurantistotem:754,
 salazzletotem:758,
@@ -1514,76 +1522,77 @@ inteleongmax:1260+81,
 urshifugmax:1260+82,
 urshifurapidstrikegmax:1260+83,
 
-syclant:1308+0,
-revenankh:1308+1,
-pyroak:1308+2,
-fidgit:1308+3,
-stratagem:1308+4,
-arghonaut:1308+5,
-kitsunoh:1308+6,
-cyclohm:1308+7,
-colossoil:1308+8,
-krilowatt:1308+9,
-voodoom:1308+10,
-tomohawk:1308+11,
-necturna:1308+12,
-mollux:1308+13,
-aurumoth:1308+14,
-malaconda:1308+15,
-cawmodore:1308+16,
-volkraken:1308+17,
-plasmanta:1308+18,
-naviathan:1308+19,
-crucibelle:1308+20,
-crucibellemega:1308+21,
-kerfluffle:1308+22,
-pajantom:1308+23,
-jumbao:1308+24,
-caribolt:1308+25,
-smokomodo:1308+26,
-snaelstrom:1308+27,
-equilibra:1308+28,
-astrolotl:1308+29,
-miasmaw:1308+30,
-chromera:1308+31,
-venomicon:1308+32,
-venomiconepilogue:1308+33,
-saharaja:1308+34,
+syclant:1452+0,
+revenankh:1452+1,
+pyroak:1452+2,
+fidgit:1452+3,
+stratagem:1452+4,
+arghonaut:1452+5,
+kitsunoh:1452+6,
+cyclohm:1452+7,
+colossoil:1452+8,
+krilowatt:1452+9,
+voodoom:1452+10,
+tomohawk:1452+11,
+necturna:1452+12,
+mollux:1452+13,
+aurumoth:1452+14,
+malaconda:1452+15,
+cawmodore:1452+16,
+volkraken:1452+17,
+plasmanta:1452+18,
+naviathan:1452+19,
+crucibelle:1452+20,
+crucibellemega:1452+21,
+kerfluffle:1452+22,
+pajantom:1452+23,
+jumbao:1452+24,
+caribolt:1452+25,
+smokomodo:1452+26,
+snaelstrom:1452+27,
+equilibra:1452+28,
+astrolotl:1452+29,
+miasmaw:1452+30,
+chromera:1452+31,
+venomicon:1452+32,
+venomiconepilogue:1452+33,
+saharaja:1452+34,
+hemogoblin:1452+35,
 
-syclar:1344+0,
-embirch:1344+1,
-flarelm:1344+2,
-breezi:1344+3,
-scratchet:1344+4,
-necturine:1344+5,
-cupra:1344+6,
-argalis:1344+7,
-brattler:1344+8,
-cawdet:1344+9,
-volkritter:1344+10,
-snugglow:1344+11,
-floatoy:1344+12,
-caimanoe:1344+13,
-pluffle:1344+14,
-rebble:1344+15,
-tactite:1344+16,
-privatyke:1344+17,
-nohface:1344+18,
-monohm:1344+19,
-duohm:1344+20,
-protowatt:1344+21,
-voodoll:1344+22,
-mumbao:1344+23,
-fawnifer:1344+24,
-electrelk:1344+25,
-smogecko:1344+26,
-smoguana:1344+27,
-swirlpool:1344+28,
-coribalis:1344+29,
-justyke:1344+30,
-solotl:1344+31,
-miasmite:1344+32,
-dorsoil:1344+33,
+syclar:1488+0,
+embirch:1488+1,
+flarelm:1488+2,
+breezi:1488+3,
+scratchet:1488+4,
+necturine:1488+5,
+cupra:1488+6,
+argalis:1488+7,
+brattler:1488+8,
+cawdet:1488+9,
+volkritter:1488+10,
+snugglow:1488+11,
+floatoy:1488+12,
+caimanoe:1488+13,
+pluffle:1488+14,
+rebble:1488+15,
+tactite:1488+16,
+privatyke:1488+17,
+nohface:1488+18,
+monohm:1488+19,
+duohm:1488+20,
+protowatt:1488+21,
+voodoll:1488+22,
+mumbao:1488+23,
+fawnifer:1488+24,
+electrelk:1488+25,
+smogecko:1488+26,
+smoguana:1488+27,
+swirlpool:1488+28,
+coribalis:1488+29,
+justyke:1488+30,
+solotl:1488+31,
+miasmite:1488+32,
+dorsoil:1488+33,
 
 bulbasaurdelta:1524+0,
 ivysaurdelta:1524+1,
@@ -1656,7 +1665,7 @@ mismagiusdelta:1524+61,
 cyndaquildelta:1524+62,
 quilavadelta:1524+63,
 typhlosiondelta:1524+64,
-typhlosiondeltamega:1801,
+typhlosiondeltamega:1788+13,
 typhlosiondeltamegaactive:1524+65,
 treeckodelta:1524+66,
 grovyledelta:1524+67,
@@ -1816,7 +1825,7 @@ registeeldelta:1524+220,
 meloettadeltamime:1524+221,
 meloettadeltamagician:1524+222,
 hoopadelta:1524+223,
-hoopadeltaunbound:1524+224,
+hoopadeltaunleashed:1524+224,
 ufi:1524+225,
 
 
@@ -1838,7 +1847,7 @@ typhlosionmega:1752+4,
 feraligatrmega:1752+5,
 sudowoodomega:1752+6,
 politoedmega:1752+7,
-sunflorammega:1752+8,
+sunfloramegam:1752+8,
 girafarigmega:1752+9,
 steelixmegafire:1752+10,
 magcargomega:1752+11,
@@ -1867,7 +1876,7 @@ hydreigonmegasix:1752+31,
 hydreigonmegaseven:1752+31,
 hydreigonmegaeight:1752+31,
 hydreigonmeganine:1752+31,
-sunflorafmega:1752+32,
+sunfloramegaf:1752+32,
 venusaurdeltamegaf:1752+33,
 
 mewtwoarmor:1788+0,
@@ -1892,10 +1901,8 @@ ivysaurdeltaf:1788+19,
 venusaurdeltaf:1788+20,
 deinodeltaf:1788+21,
 zweilousdeltaf:1788+22,
-hydreigondeltaf:1788+23,
-
-druddigondelta:1812+0};
-
+hydreigondeltaf:1788+23
+};
 
 var BattlePokemonIconIndexesLeft={
 pikachubelle:1344+0,
@@ -1972,6 +1979,7 @@ kyurem:1344+70,
 keldeoresolute:1344+71,
 meloetta:1344+72,
 greninja:1344+73,
+greninjabond:1344+73,
 greninjaash:1344+74,
 furfroudebutante:1344+75,
 barbaracle:1344+76,
@@ -2003,8 +2011,8 @@ necrozmaduskmane:1344+101,
 necrozmadawnwings:1344+102,
 necrozmaultra:1344+103,
 stakataka:1344+104,
-blacephalon:1344+105};
-
+blacephalon:1344+105
+};
 
 var BattleAvatarNumbers={
 1:'lucas',
@@ -2318,8 +2326,8 @@ breederf:'pokemonbreederf',
 1002:'#1002',
 1003:'#1003',
 1005:'#1005',
-1010:'#1010'};var
-
+1010:'#1010'
+};var
 
 
 
@@ -2766,6 +2774,7 @@ var baseId=toID(this.baseSpecies);
 this.formeid=baseId===this.id?'':'-'+toID(this.forme);
 this.spriteid=baseId+this.formeid;
 if(this.spriteid.slice(-5)==='totem')this.spriteid=this.spriteid.slice(0,-5);
+if(this.spriteid==='greninja-bond')this.spriteid='greninja';
 if(this.spriteid.slice(-1)==='-')this.spriteid=this.spriteid.slice(0,-1);
 this.baseForme=data.baseForme||'';
 
@@ -2806,7 +2815,9 @@ this.isNonstandard=data.isNonstandard||null;
 this.unreleasedHidden=data.unreleasedHidden||false;
 this.changesFrom=data.changesFrom||undefined;
 if(!this.gen){
-if(this.num>=810||this.formeid.startsWith('-galar')){
+if(this.num>=906||this.formeid.startsWith('-paldea')){
+this.gen=9;
+}else if(this.num>=810||this.formeid.startsWith('-galar')||this.formeid.startsWith('-hisui')){
 this.gen=8;
 }else if(this.num>=722||this.formeid==='-alola'||this.formeid==='-starter'){
 this.gen=7;
@@ -2898,7 +2909,8 @@ BattleLog=function(){
 
 
 
-function BattleLog(elem,scene,innerElem){var _this=this;this.elem=void 0;this.innerElem=void 0;this.scene=null;this.preemptElem=null;this.atBottom=true;this.className=void 0;this.battleParser=null;this.joinLeave=null;this.lastRename=null;this.perspective=-1;this.
+
+function BattleLog(elem,scene,innerElem){var _this=this;this.elem=void 0;this.innerElem=void 0;this.scene=null;this.preemptElem=null;this.atBottom=true;this.skippedLines=false;this.className=void 0;this.battleParser=null;this.joinLeave=null;this.lastRename=null;this.perspective=-1;this.
 
 
 
@@ -2929,12 +2941,42 @@ _this.atBottom=distanceFromBottom<30;
 reset=function reset(){
 this.innerElem.innerHTML='';
 this.atBottom=true;
+this.skippedLines=false;
 };_proto.
 destroy=function destroy(){
 this.elem.onscroll=null;
 };_proto.
-add=function add(args,kwArgs,preempt){var _this$scene,_window$app,_window$app$ignore,_window$app2,_window$app2$rooms,_this$scene2;
+addSeekEarlierButton=function addSeekEarlierButton(){var _this2=this;
+if(this.skippedLines)return;
+this.skippedLines=true;
+var el=document.createElement('div');
+el.className='chat';
+el.innerHTML='<button class="button earlier-button"><i class="fa fa-caret-up"></i><br />Earlier messages</button>';
+var button=el.getElementsByTagName('button')[0];
+button==null||button.addEventListener==null?void 0:button.addEventListener('click',function(e){var _this2$scene;
+e.preventDefault();
+(_this2$scene=_this2.scene)==null?void 0:_this2$scene.battle.seekTurn(_this2.scene.battle.turn-100);
+});
+this.addNode(el);
+};_proto.
+add=function add(args,kwArgs,preempt){var _this$scene,_this$scene2,_window$app,_window$app2,_this$scene3;
 if(kwArgs!=null&&kwArgs.silent)return;
+if((_this$scene=this.scene)!=null&&_this$scene.battle.seeking){
+var battle=this.scene.battle;
+if(battle.stepQueue.length>2000){
+
+
+
+if(
+battle.seeking===Infinity?
+battle.currentStep<battle.stepQueue.length-2000:
+battle.turn<battle.seeking-100)
+{
+this.addSeekEarlierButton();
+return;
+}
+}
+}
 var divClass='chat';
 var divHTML='';
 var noNotify;
@@ -2942,7 +2984,7 @@ if(!['join','j','leave','l'].includes(args[0]))this.joinLeave=null;
 if(!['name','n'].includes(args[0]))this.lastRename=null;
 switch(args[0]){
 case'chat':case'c':case'c:':
-var battle=(_this$scene=this.scene)==null?void 0:_this$scene.battle;
+var _battle=(_this$scene2=this.scene)==null?void 0:_this$scene2.battle;
 var name;
 var message;
 if(args[0]==='c:'){
@@ -2953,30 +2995,30 @@ name=args[1];
 message=args[2];
 }
 var rank=name.charAt(0);
-if(battle!=null&&battle.ignoreSpects&&' +'.includes(rank))return;
-if(battle!=null&&battle.ignoreOpponent){
+if(_battle!=null&&_battle.ignoreSpects&&' +'.includes(rank))return;
+if(_battle!=null&&_battle.ignoreOpponent){
 if("\u2605\u2606".includes(rank)&&toUserid(name)!==app.user.get('userid'))return;
 }
-if((_window$app=window.app)!=null&&(_window$app$ignore=_window$app.ignore)!=null&&_window$app$ignore[toUserid(name)]&&" +\u2605\u2606".includes(rank))return;
-var isHighlighted=(_window$app2=window.app)==null?void 0:(_window$app2$rooms=_window$app2.rooms)==null?void 0:_window$app2$rooms[battle.roomid].getHighlight(message);var _this$parseChatMessag=
+if((_window$app=window.app)!=null&&(_window$app=_window$app.ignore)!=null&&_window$app[toUserid(name)]&&" +\u2605\u2606".includes(rank))return;
+var isHighlighted=(_window$app2=window.app)==null||(_window$app2=_window$app2.rooms)==null?void 0:_window$app2[_battle.roomid].getHighlight(message);var _this$parseChatMessag=
 this.parseChatMessage(message,name,'',isHighlighted);divClass=_this$parseChatMessag[0];divHTML=_this$parseChatMessag[1];noNotify=_this$parseChatMessag[2];
 if(!noNotify&&isHighlighted){
-var notifyTitle="Mentioned by "+name+" in "+battle.roomid;
-app.rooms[battle.roomid].notifyOnce(notifyTitle,"\""+message+"\"",'highlight');
+var notifyTitle="Mentioned by "+name+" in "+_battle.roomid;
+app.rooms[_battle.roomid].notifyOnce(notifyTitle,"\""+message+"\"",'highlight');
 }
 break;
 
 case'join':case'j':case'leave':case'l':{
 var user=BattleTextParser.parseNameParts(args[1]);
-if(battle!=null&&battle.ignoreSpects&&' +'.includes(user.group))return;
+if(_battle!=null&&_battle.ignoreSpects&&' +'.includes(user.group))return;
 var formattedUser=user.group+user.name;
 var isJoin=args[0].charAt(0)==='j';
 if(!this.joinLeave){
 this.joinLeave={
 joins:[],
 leaves:[],
-element:document.createElement('div')};
-
+element:document.createElement('div')
+};
 this.joinLeave.element.className='chat';
 }
 
@@ -3006,8 +3048,8 @@ if(!this.lastRename||toID(this.lastRename.to)!==toID(_user.name)){
 this.lastRename={
 from:args[2],
 to:'',
-element:document.createElement('div')};
-
+element:document.createElement('div')
+};
 this.lastRename.element.className='chat';
 }
 this.lastRename.to=_user.group+_user.name;
@@ -3074,7 +3116,7 @@ break;
 case'notify':
 var title=args[1];
 var body=args[2];
-var roomid=(_this$scene2=this.scene)==null?void 0:_this$scene2.battle.roomid;
+var roomid=(_this$scene3=this.scene)==null?void 0:_this$scene3.battle.roomid;
 if(!roomid)break;
 app.rooms[roomid].notifyOnce(title,body,'highlight');
 break;
@@ -3086,8 +3128,8 @@ return;
 
 default:
 this.addBattleMessage(args,kwArgs);
-return;}
-
+return;
+}
 if(divHTML)this.addDiv(divClass,divHTML,preempt);
 };_proto.
 addBattleMessage=function addBattleMessage(args,kwArgs){
@@ -3145,13 +3187,13 @@ return;
 }
 if(!line)return;
 this.message.apply(this,this.parseLogMessage(line));
-break;}
-
+break;
+}
 };_proto.
 textList=function textList(list){
 var message='';
-var listNoDuplicates=[];for(var _i=0,_list=
-list;_i<_list.length;_i++){var user=_list[_i];
+var listNoDuplicates=[];for(var _i2=0,_list2=
+list;_i2<_list2.length;_i2++){var user=_list2[_i2];
 if(!listNoDuplicates.includes(user))listNoDuplicates.push(user);
 }
 list=listNoDuplicates;
@@ -3222,27 +3264,27 @@ this.addDiv('spacer battle-history','<br />');
 changeUhtml=function changeUhtml(id,htmlSrc,forceAdd){
 id=toID(id);
 var classContains=' uhtml-'+id+' ';
-var elements=[];for(var _i2=0,_ref=
-this.innerElem.childNodes;_i2<_ref.length;_i2++){var node=_ref[_i2];
+var elements=[];for(var _i4=0,_ref2=
+this.innerElem.childNodes;_i4<_ref2.length;_i4++){var node=_ref2[_i4];
 if(node.className&&(' '+node.className+' ').includes(classContains)){
 elements.push(node);
 }
 }
-if(this.preemptElem){for(var _i3=0,_ref2=
-this.preemptElem.childNodes;_i3<_ref2.length;_i3++){var _node=_ref2[_i3];
+if(this.preemptElem){for(var _i6=0,_ref4=
+this.preemptElem.childNodes;_i6<_ref4.length;_i6++){var _node=_ref4[_i6];
 if(_node.className&&(' '+_node.className+' ').includes(classContains)){
 elements.push(_node);
 }
 }
 }
-if(htmlSrc&&elements.length&&!forceAdd){for(var _i4=0;_i4<
-elements.length;_i4++){var element=elements[_i4];
+if(htmlSrc&&elements.length&&!forceAdd){for(var _i8=0;_i8<
+elements.length;_i8++){var element=elements[_i8];
 element.innerHTML=BattleLog.sanitizeHTML(htmlSrc);
 }
 this.updateScroll();
 return;
-}for(var _i5=0;_i5<
-elements.length;_i5++){var _element=elements[_i5];
+}for(var _i10=0;_i10<
+elements.length;_i10++){var _element=elements[_i10];
 _element.parentElement.removeChild(_element);
 }
 if(!htmlSrc)return;
@@ -3254,22 +3296,22 @@ this.prependDiv('notice uhtml-'+id,BattleLog.sanitizeHTML(htmlSrc));
 };_proto.
 hideChatFrom=function hideChatFrom(userid){var showRevealButton=arguments.length>1&&arguments[1]!==undefined?arguments[1]:true;var lineCount=arguments.length>2&&arguments[2]!==undefined?arguments[2]:0;
 var classStart='chat chatmessage-'+userid+' ';
-var nodes=[];for(var _i6=0,_ref3=
-this.innerElem.childNodes;_i6<_ref3.length;_i6++){var node=_ref3[_i6];
+var nodes=[];for(var _i12=0,_ref6=
+this.innerElem.childNodes;_i12<_ref6.length;_i12++){var node=_ref6[_i12];
 if(node.className&&(node.className+' ').startsWith(classStart)){
 nodes.push(node);
 }
 }
-if(this.preemptElem){for(var _i7=0,_ref4=
-this.preemptElem.childNodes;_i7<_ref4.length;_i7++){var _node2=_ref4[_i7];
+if(this.preemptElem){for(var _i14=0,_ref8=
+this.preemptElem.childNodes;_i14<_ref8.length;_i14++){var _node2=_ref8[_i14];
 if(_node2.className&&(_node2.className+' ').startsWith(classStart)){
 nodes.push(_node2);
 }
 }
 }
-if(lineCount)nodes=nodes.slice(-lineCount);for(var _i8=0,_nodes=
+if(lineCount)nodes=nodes.slice(-lineCount);for(var _i16=0,_nodes2=
 
-nodes;_i8<_nodes.length;_i8++){var _node3=_nodes[_i8];
+nodes;_i16<_nodes2.length;_i16++){var _node3=_nodes2[_i16];
 _node3.style.display='none';
 _node3.className='revealed '+_node3.className;
 }
@@ -3284,16 +3326,16 @@ lastNode.appendChild(document.createTextNode(' '));
 lastNode.appendChild(button);
 };BattleLog.
 
-unlinkNodeList=function unlinkNodeList(nodeList,classStart){for(var _i9=0,_ref5=
-nodeList;_i9<_ref5.length;_i9++){var node=_ref5[_i9];
+unlinkNodeList=function unlinkNodeList(nodeList,classStart){for(var _i18=0,_ref10=
+nodeList;_i18<_ref10.length;_i18++){var node=_ref10[_i18];
 if(node.className&&(node.className+' ').startsWith(classStart)){
 var linkList=node.getElementsByTagName('a');
 
 for(var i=linkList.length-1;i>=0;i--){
 var linkNode=linkList[i];
 var parent=linkNode.parentElement;
-if(!parent)continue;for(var _i10=0,_ref6=
-linkNode.childNodes;_i10<_ref6.length;_i10++){var childNode=_ref6[_i10];
+if(!parent)continue;for(var _i20=0,_ref12=
+linkNode.childNodes;_i20<_ref12.length;_i20++){var childNode=_ref12[_i20];
 parent.insertBefore(childNode,linkNode);
 }
 parent.removeChild(linkNode);
@@ -3402,8 +3444,8 @@ case 2:R1=0;G1=C;B1=X;break;
 case 3:R1=0;G1=X;B1=C;break;
 case 4:R1=X;G1=0;B1=C;break;
 case 5:R1=C;G1=0;B1=X;break;
-case 0:default:R1=C;G1=X;B1=0;break;}
-
+case 0:default:R1=C;G1=X;B1=0;break;
+}
 var R=R1+m;
 var G=G1+m;
 var B=B1+m;
@@ -3420,7 +3462,7 @@ return undefined;
 
 parseChatMessage=function parseChatMessage(
 message,name,timestamp,isHighlighted)
-{var _BattleLog$prefs,_window$app3,_window$app3$user,_window$PS;
+{var _BattleLog$prefs,_window$app3,_window$PS;
 var showMe=!((_BattleLog$prefs=BattleLog.prefs('chatformatting'))!=null&&_BattleLog$prefs.hideme);
 var group=' ';
 if(!/[A-Za-z0-9]/.test(name.charAt(0))){
@@ -3431,7 +3473,7 @@ name=name.substr(1);
 var colorStyle=" style=\"color:"+BattleLog.usernameColor(toID(name))+"\"";
 var clickableName="<small>"+BattleLog.escapeHTML(group)+"</small><span class=\"username\" data-name=\""+BattleLog.escapeHTML(name)+"\">"+BattleLog.escapeHTML(name)+"</span>";
 var hlClass=isHighlighted?' highlighted':'';
-var isMine=((_window$app3=window.app)==null?void 0:(_window$app3$user=_window$app3.user)==null?void 0:_window$app3$user.get('name'))===name||((_window$PS=window.PS)==null?void 0:_window$PS.user.name)===name;
+var isMine=((_window$app3=window.app)==null||(_window$app3=_window$app3.user)==null?void 0:_window$app3.get('name'))===name||((_window$PS=window.PS)==null?void 0:_window$PS.user.name)===name;
 var mineClass=isMine?' mine':'';
 
 var cmd='';
@@ -3512,9 +3554,9 @@ timestamp+"<em>"+BattleLog.parseMessage(message)+"</em>"];
 }
 return[
 'chat chatmessage-'+toID(name)+hlClass+mineClass,
-timestamp+"<strong"+colorStyle+">"+clickableName+":</strong> <em>"+BattleLog.parseMessage(message)+"</em>"];}
+timestamp+"<strong"+colorStyle+">"+clickableName+":</strong> <em>"+BattleLog.parseMessage(message)+"</em>"];
 
-
+}
 };BattleLog.
 
 parseMessage=function parseMessage(str){var isTrusted=arguments.length>1&&arguments[1]!==undefined?arguments[1]:false;
@@ -3562,7 +3604,9 @@ return str;
 
 
 
-initSanitizeHTML=function initSanitizeHTML(){var _this2=this;
+
+
+initSanitizeHTML=function initSanitizeHTML(){var _this3=this;
 if(this.tagPolicy)return;
 if(!('html4'in window)){
 throw new Error('sanitizeHTML requires caja');
@@ -3577,8 +3621,8 @@ psicon:html4.eflags['OPTIONAL_ENDTAG']|html4.eflags['EMPTY'],
 username:0,
 spotify:0,
 youtube:0,
-twitch:0});
-
+twitch:0
+});
 
 
 
@@ -3601,12 +3645,13 @@ Object.assign(html4.ATTRIBS,{
 'psicon::category':0,
 'username::name':0,
 'form::data-submitsend':0,
+'div::data-server':0,
 'button::data-send':0,
 'form::data-delimiter':0,
 'button::data-delimiter':0,
 '*::aria-label':0,
-'*::aria-hidden':0});
-
+'*::aria-hidden':0
+});
 
 
 
@@ -3675,35 +3720,35 @@ if(location.protocol!=='http:'&&location.protocol!=='https:'){
 setAttrib('src','https:'+src);
 }
 }
-}else if(tagName==='twitch'){var _$exec;
+}else if(tagName==='twitch'){var _exec;
 
 var _src=getAttrib('src')||"";
-var channelId=(_$exec=/(https?:\/\/)?twitch.tv\/([A-Za-z0-9]+)/i.exec(_src))==null?void 0:_$exec[2];
+var channelId=(_exec=/(https?:\/\/)?twitch.tv\/([A-Za-z0-9]+)/i.exec(_src))==null?void 0:_exec[2];
 var height=parseInt(getAttrib('height')||"",10)||400;
 var width=parseInt(getAttrib('width')||"",10)||340;
 return{
 tagName:'iframe',
 attribs:[
 'src',"https://player.twitch.tv/?channel="+channelId+"&parent="+location.hostname+"&autoplay=false",
-'allowfullscreen','true','height',""+height,'width',""+width]};
+'allowfullscreen','true','height',""+height,'width',""+width]
 
-
+};
 }else if(tagName==='username'){
 
 tagName='strong';
-var color=_this2.usernameColor(toID(getAttrib('name')));
+var color=_this3.usernameColor(toID(getAttrib('name')));
 var style=getAttrib('style');
 setAttrib('style',style+";color:"+color);
-}else if(tagName==='spotify'){var _$exec2;
+}else if(tagName==='spotify'){var _exec2;
 
 var _src2=getAttrib('src')||'';
-var songId=(_$exec2=/(?:\?v=|\/track\/)([A-Za-z0-9]+)/.exec(_src2))==null?void 0:_$exec2[1];
+var songId=(_exec2=/(?:\?v=|\/track\/)([A-Za-z0-9]+)/.exec(_src2))==null?void 0:_exec2[1];
 
 return{
 tagName:'iframe',
-attribs:['src',"https://open.spotify.com/embed/track/"+songId,'width','300','height','380','frameborder','0','allowtransparency','true','allow','encrypted-media']};
-
-}else if(tagName==='youtube'){var _$exec3,_$exec4;
+attribs:['src',"https://open.spotify.com/embed/track/"+songId,'width','300','height','380','frameborder','0','allowtransparency','true','allow','encrypted-media']
+};
+}else if(tagName==='youtube'){var _exec3,_exec4;
 
 
 var _src3=getAttrib('src')||'';
@@ -3714,19 +3759,22 @@ if(window.innerWidth>=400){
 _width='400';
 _height='225';
 }
-var videoId=(_$exec3=/(?:\?v=|\/embed\/)([A-Za-z0-9_\-]+)/.exec(_src3))==null?void 0:_$exec3[1];
+var videoId=(_exec3=/(?:\?v=|\/embed\/)([A-Za-z0-9_\-]+)/.exec(_src3))==null?void 0:_exec3[1];
 if(!videoId)return{tagName:'img',attribs:['alt',"invalid src for <youtube>"]};
 
-var time=(_$exec4=/(?:\?|&)(?:t|start)=([0-9]+)/.exec(_src3))==null?void 0:_$exec4[1];
-
+var time=(_exec4=/(?:\?|&)(?:t|start)=([0-9]+)/.exec(_src3))==null?void 0:_exec4[1];
+_this3.players.push(null);
+var idx=_this3.players.length;
+_this3.initYoutubePlayer(idx);
 return{
 tagName:'iframe',
 attribs:[
+'id',"youtube-iframe-"+idx,
 'width',_width,'height',_height,
-'src',"https://www.youtube.com/embed/"+videoId+(time?"?start="+time:''),
-'frameborder','0','allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture','allowfullscreen','allowfullscreen']};
+'src',"https://www.youtube.com/embed/"+videoId+"?enablejsapi=1&playsinline=1"+(time?"&start="+time:''),
+'frameborder','0','allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture','allowfullscreen','allowfullscreen']
 
-
+};
 }else if(tagName==='psicon'){
 
 
@@ -3791,8 +3839,8 @@ var formattedTime;
 
 if((_Intl=window.Intl)!=null&&_Intl.DateTimeFormat){
 formattedTime=new Intl.DateTimeFormat(undefined,{
-month:'long',day:'numeric',hour:'numeric',minute:'numeric'}).
-format(parsedTime);
+month:'long',day:'numeric',hour:'numeric',minute:'numeric'
+}).format(parsedTime);
 }else{
 
 
@@ -3833,6 +3881,55 @@ var sanitized=html.sanitizeWithPolicy(input,this.tagPolicy);
 return sanitized.replace(
 /<time>\s*([+-]?\d{4,}-\d{2}-\d{2})[T ](\d{2}:\d{2}(?::\d{2}(?:\.\d{3})?)?)(Z|[+-]\d{2}:\d{2})?\s*<\/time>/ig,
 this.localizeTime);
+};BattleLog.
+
+initYoutubePlayer=function initYoutubePlayer(idx){var _this4=this;
+var id="youtube-iframe-"+idx;
+var loadPlayer=function(){
+if(!$("#"+id).length)return;
+var player=new window.YT.Player(id,{
+events:{
+onStateChange:function(event){
+if(event.data===window.YT.PlayerState.PLAYING){for(var _i22=0,_BattleLog$players2=
+BattleLog.players;_i22<_BattleLog$players2.length;_i22++){var curPlayer=_BattleLog$players2[_i22];
+if(player===curPlayer)continue;
+curPlayer==null||curPlayer.pauseVideo==null?void 0:curPlayer.pauseVideo();
+}
+}
+}
+}
+});
+_this4.players[idx-1]=player;
+};
+
+this.ensureYoutube().then(function(){
+setTimeout(function(){return loadPlayer();},300);
+});
+};BattleLog.
+
+ensureYoutube=function ensureYoutube(){
+if(this.ytLoading)return this.ytLoading;
+
+this.ytLoading=new Promise(function(resolve){
+var el=document.createElement('script');
+el.type='text/javascript';
+el.async=true;
+el.src='https://youtube.com/iframe_api';
+el.onload=function(){
+
+
+var loopCheck=function(){var _window$YT;
+if(!((_window$YT=window.YT)!=null&&_window$YT.Player)){
+setTimeout(function(){return loopCheck();},300);
+}else{
+resolve();
+}
+};
+loopCheck();
+};
+document.body.appendChild(el);
+});
+return this.ytLoading;
 };BattleLog.
 
 
@@ -3903,7 +4000,7 @@ createReplayFileHref=function createReplayFileHref(room){
 
 
 return'data:text/plain;base64,'+encodeURIComponent(btoa(unescape(encodeURIComponent(BattleLog.createReplayFile(room)))));
-};return BattleLog;}();BattleLog.colorCache={};BattleLog.interstice=function(){var whitelist=Config.whitelist;var patterns=whitelist.map(function(entry){return new RegExp("^(https?:)?//([A-Za-z0-9-]*\\.)?"+entry.replace(/\./g,'\\.')+"(/.*)?",'i');});return{isWhitelisted:function(uri){if(uri[0]==='/'&&uri[1]!=='/'){return true;}for(var _i11=0;_i11<patterns.length;_i11++){var pattern=patterns[_i11];if(pattern.test(uri))return true;}return false;},getURI:function(uri){return"http://"+Config.routes.root+"/interstice?uri="+encodeURIComponent(uri);}};}();BattleLog.tagPolicy=null;
+};return BattleLog;}();BattleLog.colorCache={};BattleLog.interstice=function(){var whitelist=Config.whitelist;var patterns=whitelist.map(function(entry){return new RegExp("^(https?:)?//([A-Za-z0-9-]*\\.)?"+entry.replace(/\./g,'\\.')+"(/.*)?",'i');});return{isWhitelisted:function(uri){if(uri[0]==='/'&&uri[1]!=='/'){return true;}for(var _i24=0;_i24<patterns.length;_i24++){var pattern=patterns[_i24];if(pattern.test(uri))return true;}return false;},getURI:function(uri){return"http://"+Config.routes.root+"/interstice?uri="+encodeURIComponent(uri);}};}();BattleLog.players=[];BattleLog.ytLoading=null;BattleLog.tagPolicy=null;
 /**
  * Pokemon Showdown Log Misc
  *
@@ -3926,12 +4023,12 @@ return'data:text/plain;base64,'+encodeURIComponent(btoa(unescape(encodeURICompon
 
 
 function MD5(f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b&1073741824;e=c&1073741824;h=(b&1073741823)+(c&1073741823);return d&e?h^2147483648^f^g:d|e?h&1073741824?h^3221225472^f^g:h^1073741824^f^g:h^f^g;}function j(b,c,d,e,f,g,h){b=i(b,i(i(c&d|~c&e,f),h));return i(b<<g|b>>>32-g,c);}function k(b,c,d,e,f,g,h){b=i(b,i(i(c&e|d&~e,f),h));return i(b<<g|b>>>32-g,c);}function l(b,c,e,d,f,g,h){b=i(b,i(i(c^e^d,f),h));return i(b<<g|b>>>32-g,c);}function m(b,c,e,d,f,g,h){b=i(b,i(i(e^(c|~d),
-f),h));return i(b<<g|b>>>32-g,c);}function n(b){var c="",e="",d;for(d=0;d<=3;d++){e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);}return c;}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128));}return c;}(f),g=function(b){var c,d=b.length;c=
-d+8;for(var e=((c-c%64)/64+1)*16,f=Array(e-1),g=0,h=0;h<d;){c=(h-h%4)/4,g=h%4*8,f[c]|=b.charCodeAt(h)<<g,h++;}f[(h-h%4)/4]|=128<<h%4*8;f[e-2]=d<<3;f[e-1]=d>>>29;return f;}(f);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(f=0;f<g.length;f+=16){o=b,p=c,q=d,r=e,b=j(b,c,d,e,g[f+0],7,3614090360),e=j(e,b,c,d,g[f+1],12,3905402710),d=j(d,e,b,c,g[f+2],17,606105819),c=j(c,d,e,b,g[f+3],22,3250441966),b=j(b,c,d,e,g[f+4],7,4118548399),e=j(e,b,c,d,g[f+5],12,1200080426),d=j(d,e,b,c,g[f+6],17,2821735955),c=
+f),h));return i(b<<g|b>>>32-g,c);}function n(b){var c="",e="",d;for(d=0;d<=3;d++)e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);return c;}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128));}return c;}(f),g=function(b){var c,d=b.length;c=
+d+8;for(var e=((c-c%64)/64+1)*16,f=Array(e-1),g=0,h=0;h<d;)c=(h-h%4)/4,g=h%4*8,f[c]|=b.charCodeAt(h)<<g,h++;f[(h-h%4)/4]|=128<<h%4*8;f[e-2]=d<<3;f[e-1]=d>>>29;return f;}(f);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(f=0;f<g.length;f+=16)o=b,p=c,q=d,r=e,b=j(b,c,d,e,g[f+0],7,3614090360),e=j(e,b,c,d,g[f+1],12,3905402710),d=j(d,e,b,c,g[f+2],17,606105819),c=j(c,d,e,b,g[f+3],22,3250441966),b=j(b,c,d,e,g[f+4],7,4118548399),e=j(e,b,c,d,g[f+5],12,1200080426),d=j(d,e,b,c,g[f+6],17,2821735955),c=
 j(c,d,e,b,g[f+7],22,4249261313),b=j(b,c,d,e,g[f+8],7,1770035416),e=j(e,b,c,d,g[f+9],12,2336552879),d=j(d,e,b,c,g[f+10],17,4294925233),c=j(c,d,e,b,g[f+11],22,2304563134),b=j(b,c,d,e,g[f+12],7,1804603682),e=j(e,b,c,d,g[f+13],12,4254626195),d=j(d,e,b,c,g[f+14],17,2792965006),c=j(c,d,e,b,g[f+15],22,1236535329),b=k(b,c,d,e,g[f+1],5,4129170786),e=k(e,b,c,d,g[f+6],9,3225465664),d=k(d,e,b,c,g[f+11],14,643717713),c=k(c,d,e,b,g[f+0],20,3921069994),b=k(b,c,d,e,g[f+5],5,3593408605),e=k(e,b,c,d,g[f+10],9,38016083),
 d=k(d,e,b,c,g[f+15],14,3634488961),c=k(c,d,e,b,g[f+4],20,3889429448),b=k(b,c,d,e,g[f+9],5,568446438),e=k(e,b,c,d,g[f+14],9,3275163606),d=k(d,e,b,c,g[f+3],14,4107603335),c=k(c,d,e,b,g[f+8],20,1163531501),b=k(b,c,d,e,g[f+13],5,2850285829),e=k(e,b,c,d,g[f+2],9,4243563512),d=k(d,e,b,c,g[f+7],14,1735328473),c=k(c,d,e,b,g[f+12],20,2368359562),b=l(b,c,d,e,g[f+5],4,4294588738),e=l(e,b,c,d,g[f+8],11,2272392833),d=l(d,e,b,c,g[f+11],16,1839030562),c=l(c,d,e,b,g[f+14],23,4259657740),b=l(b,c,d,e,g[f+1],4,2763975236),
 e=l(e,b,c,d,g[f+4],11,1272893353),d=l(d,e,b,c,g[f+7],16,4139469664),c=l(c,d,e,b,g[f+10],23,3200236656),b=l(b,c,d,e,g[f+13],4,681279174),e=l(e,b,c,d,g[f+0],11,3936430074),d=l(d,e,b,c,g[f+3],16,3572445317),c=l(c,d,e,b,g[f+6],23,76029189),b=l(b,c,d,e,g[f+9],4,3654602809),e=l(e,b,c,d,g[f+12],11,3873151461),d=l(d,e,b,c,g[f+15],16,530742520),c=l(c,d,e,b,g[f+2],23,3299628645),b=m(b,c,d,e,g[f+0],6,4096336452),e=m(e,b,c,d,g[f+7],10,1126891415),d=m(d,e,b,c,g[f+14],15,2878612391),c=m(c,d,e,b,g[f+5],21,4237533241),
-b=m(b,c,d,e,g[f+12],6,1700485571),e=m(e,b,c,d,g[f+3],10,2399980690),d=m(d,e,b,c,g[f+10],15,4293915773),c=m(c,d,e,b,g[f+1],21,2240044497),b=m(b,c,d,e,g[f+8],6,1873313359),e=m(e,b,c,d,g[f+15],10,4264355552),d=m(d,e,b,c,g[f+6],15,2734768916),c=m(c,d,e,b,g[f+13],21,1309151649),b=m(b,c,d,e,g[f+4],6,4149444226),e=m(e,b,c,d,g[f+11],10,3174756917),d=m(d,e,b,c,g[f+2],15,718787259),c=m(c,d,e,b,g[f+9],21,3951481745),b=i(b,o),c=i(c,p),d=i(d,q),e=i(e,r);}return(n(b)+n(c)+n(d)+n(e)).toLowerCase();};
+b=m(b,c,d,e,g[f+12],6,1700485571),e=m(e,b,c,d,g[f+3],10,2399980690),d=m(d,e,b,c,g[f+10],15,4293915773),c=m(c,d,e,b,g[f+1],21,2240044497),b=m(b,c,d,e,g[f+8],6,1873313359),e=m(e,b,c,d,g[f+15],10,4264355552),d=m(d,e,b,c,g[f+6],15,2734768916),c=m(c,d,e,b,g[f+13],21,1309151649),b=m(b,c,d,e,g[f+4],6,4149444226),e=m(e,b,c,d,g[f+11],10,3174756917),d=m(d,e,b,c,g[f+2],15,718787259),c=m(c,d,e,b,g[f+9],21,3951481745),b=i(b,o),c=i(c,p),d=i(d,q),e=i(e,r);return(n(b)+n(c)+n(d)+n(e)).toLowerCase();};
 /**
  * Chat parser
  * Pokemon Showdown - http://pokemonshowdown.com/
@@ -4083,7 +4180,7 @@ if(span[0]!=='spoiler')break;
 if(stackPosition===-1)return false;
 
 this.pushSlice(start);
-while(this.stack.length>stackPosition){this.popSpan(start);}
+while(this.stack.length>stackPosition)this.popSpan(start);
 this.offset=start;
 return true;
 };_proto.
@@ -4104,7 +4201,7 @@ break;
 if(stackPosition===-1)return false;
 
 this.pushSlice(start);
-while(this.stack.length>stackPosition+1){this.popSpan(start);}
+while(this.stack.length>stackPosition+1)this.popSpan(start);
 var span=this.stack.pop();
 var startIndex=span[1];
 var tagName='';
@@ -4115,8 +4212,8 @@ case'*':tagName='b';break;
 case'~':tagName='s';break;
 case'^':tagName='sup';break;
 case'\\':tagName='sub';break;
-case'|':tagName='span';attrs=' class="spoiler"';break;}
-
+case'|':tagName='span';attrs=' class="spoiler"';break;
+}
 if(tagName){
 this.buffers[startIndex]="<"+tagName+attrs+">";
 this.buffers.push("</"+tagName+">");
@@ -4145,13 +4242,13 @@ this.buffers[span[1]]="<span class=\"greentext\">";
 break;
 default:
 
-break;}
-
+break;
+}
 return true;
 };_proto.
 
 popAllSpans=function popAllSpans(end){
-while(this.stack.length){this.popSpan(end);}
+while(this.stack.length)this.popSpan(end);
 this.pushSlice(end);
 };_proto.
 
@@ -4262,8 +4359,8 @@ if(key==='item')dir+='s';
 if(key==='category')dir='categories';
 
 uri="//dex.pokemonshowdown.com/"+dir+"/"+toID(term);
-term=display;}
-
+term=display;
+}
 }
 if(!uri){
 uri="//www.google.com/search?ie=UTF-8&btnI&q="+this.toUriComponent(term);
@@ -4277,7 +4374,7 @@ case'<':
 {
 if(this.slice(start,start+8)!=='&lt;&lt;')return false;
 var _i2=start+8;
-while(/[a-z0-9-]/.test(this.at(_i2))){_i2++;}
+while(/[a-z0-9-]/.test(this.at(_i2)))_i2++;
 if(this.slice(_i2,_i2+8)!=='&gt;&gt;')return false;
 this.pushSlice(start);
 var roomid=this.slice(start+8,_i2);
@@ -4288,12 +4385,12 @@ return true;
 case'a':
 {
 var _i3=start+1;
-while(this.at(_i3)!=='/'||this.at(_i3+1)!=='a'||this.at(_i3+2)!=='>'){_i3++;}
+while(this.at(_i3)!=='/'||this.at(_i3+1)!=='a'||this.at(_i3+2)!=='>')_i3++;
 _i3+=3;
 this.pushSlice(_i3);
 }
-return true;}
-
+return true;
+}
 return false;
 };_proto.
 
@@ -4318,7 +4415,7 @@ i=this.offset-1;
 break;
 }
 }
-while(this.at(i+1)===char){i++;}
+while(this.at(i+1)===char)i++;
 break;
 case'(':
 this.stack.push(['(',-1]);
@@ -4336,7 +4433,7 @@ if(i<this.offset){
 i=this.offset-1;
 break;
 }
-while(this.at(i+1)==='`'){i++;}
+while(this.at(i+1)==='`')i++;
 break;
 case'[':
 this.runLookahead('[',i);
@@ -4344,7 +4441,7 @@ if(i<this.offset){
 i=this.offset-1;
 break;
 }
-while(this.at(i+1)==='['){i++;}
+while(this.at(i+1)==='[')i++;
 break;
 case':':
 if(i<7)break;
@@ -4366,7 +4463,7 @@ if(i<this.offset){
 i=this.offset-1;
 break;
 }
-while(this.slice(i+1,i+5)==='lt;&'){i+=4;}
+while(this.slice(i+1,i+5)==='lt;&')i+=4;
 break;
 case'<':
 this.runLookahead('a',i);
@@ -4384,8 +4481,8 @@ this.buffers.push("<br />");
 this.offset++;
 }
 beginningOfLine=i+1;
-break;}
-
+break;
+}
 }
 
 this.popAllSpans(this.str.length);
@@ -4438,7 +4535,7 @@ BattleTextParser=function(){
 
 
 
-function BattleTextParser(){var perspective=arguments.length>0&&arguments[0]!==undefined?arguments[0]:'p1';this.p1="Player 1";this.p2="Player 2";this.p3="Player 3";this.p4="Player 4";this.perspective=void 0;this.gen=7;this.turn=0;this.curLineSection='break';this.lowercaseRegExp=undefined;this.
+function BattleTextParser(){var perspective=arguments.length>0&&arguments[0]!==undefined?arguments[0]:'p1';this.p1="Player 1";this.p2="Player 2";this.p3="Player 3";this.p4="Player 4";this.perspective=void 0;this.gen=9;this.turn=0;this.curLineSection='break';this.lowercaseRegExp=undefined;this.
 
 
 
@@ -4647,7 +4744,7 @@ if(!pokemon.startsWith('p'))return"???pokemon:"+pokemon+"???";
 if(pokemon.charAt(3)===':')return pokemon.slice(4).trim();else
 if(pokemon.charAt(2)===':')return pokemon.slice(3).trim();
 return"???pokemon:"+pokemon+"???";
-};this.perspective=perspective;}BattleTextParser.parseLine=function parseLine(line,noDefault){if(!line.startsWith('|')){return['',line];}if(line==='|'){return['done'];}var index=line.indexOf('|',1);var cmd=line.slice(1,index);switch(cmd){case'chatmsg':case'chatmsg-raw':case'raw':case'error':case'html':case'inactive':case'inactiveoff':case'warning':case'fieldhtml':case'controlshtml':case'bigerror':case'debug':case'tier':case'challstr':case'popup':case'':return[cmd,line.slice(index+1)];case'c':case'chat':case'uhtml':case'uhtmlchange':case'queryresponse':var index2a=line.indexOf('|',index+1);return[cmd,line.slice(index+1,index2a),line.slice(index2a+1)];case'c:':case'pm':var index2b=line.indexOf('|',index+1);var index3b=line.indexOf('|',index2b+1);return[cmd,line.slice(index+1,index2b),line.slice(index2b+1,index3b),line.slice(index3b+1)];}if(noDefault)return null;return line.slice(1).split('|');};BattleTextParser.parseBattleLine=function parseBattleLine(line){var args=this.parseLine(line,true);if(args)return{args:args,kwArgs:{}};args=line.slice(1).split('|');var kwArgs={};while(args.length>1){var lastArg=args[args.length-1];if(lastArg.charAt(0)!=='[')break;var bracketPos=lastArg.indexOf(']');if(bracketPos<=0)break;kwArgs[lastArg.slice(1,bracketPos)]=lastArg.slice(bracketPos+1).trim()||'.';args.pop();}return BattleTextParser.upgradeArgs({args:args,kwArgs:kwArgs});};BattleTextParser.parseNameParts=function parseNameParts(text){var group='';if(!/[A-Za-z0-9]/.test(text.charAt(0))){group=text.charAt(0);text=text.slice(1);}var name=text;var atIndex=text.indexOf('@');var status='';var away=false;if(atIndex>0){name=text.slice(0,atIndex);status=text.slice(atIndex+1);if(status.startsWith('!')){away=true;status=status.slice(1);}}return{group:group,name:name,away:away,status:status};};BattleTextParser.upgradeArgs=function upgradeArgs(_ref){var args=_ref.args,kwArgs=_ref.kwArgs;switch(args[0]){case'-activate':{if(kwArgs.item||kwArgs.move||kwArgs.number||kwArgs.ability)return{args:args,kwArgs:kwArgs};var _args=args,pokemon=_args[1],effect=_args[2],arg3=_args[3],arg4=_args[4];var target=kwArgs.of;var _id=BattleTextParser.effectId(effect);if(kwArgs.block)return{args:['-fail',pokemon],kwArgs:kwArgs};if(_id==='wonderguard')return{args:['-immune',pokemon],kwArgs:{from:'ability:Wonder Guard'}};if(_id==='beatup'&&kwArgs.of)return{args:args,kwArgs:{name:kwArgs.of}};if(['ingrain','quickguard','wideguard','craftyshield','matblock','protect','mist','safeguard','electricterrain','mistyterrain','psychicterrain','telepathy','stickyhold','suctioncups','aromaveil','flowerveil','sweetveil','disguise','safetygoggles','protectivepads'].includes(_id)){if(target){kwArgs.of=pokemon;return{args:['-block',target,effect,arg3],kwArgs:kwArgs};}return{args:['-block',pokemon,effect,arg3],kwArgs:kwArgs};}if(_id==='charge'){return{args:['-singlemove',pokemon,effect],kwArgs:{of:target}};}if(['bind','wrap','clamp','whirlpool','firespin','magmastorm','sandtomb','infestation','snaptrap','thundercage','trapped'].includes(_id)){return{args:['-start',pokemon,effect],kwArgs:{of:target}};}if(_id==='fairylock'){return{args:['-fieldactivate',effect],kwArgs:{}};}if(_id==='symbiosis'||_id==='poltergeist'){kwArgs.item=arg3;}else if(_id==='magnitude'){kwArgs.number=arg3;}else if(_id==='skillswap'||_id==='mummy'||_id==='wanderingspirit'){kwArgs.ability=arg3;kwArgs.ability2=arg4;}else if(['eeriespell','gmaxdepletion','spite','grudge','forewarn','sketch','leppaberry','mysteryberry'].includes(_id)){kwArgs.move=arg3;kwArgs.number=arg4;}args=['-activate',pokemon,effect,target||''];break;}case'-fail':{if(kwArgs.from==='ability: Flower Veil'){return{args:['-block',kwArgs.of,'ability: Flower Veil'],kwArgs:{of:args[1]}};}break;}case'-start':{if(kwArgs.from==='Protean'||kwArgs.from==='Color Change')kwArgs.from='ability:'+kwArgs.from;break;}case'move':{if(kwArgs.from==='Magic Bounce')kwArgs.from='ability:Magic Bounce';break;}case'cant':{var _args2=args,_pokemon2=_args2[1],_effect2=_args2[2],move=_args2[3];if(['ability: Queenly Majesty','ability: Damp','ability: Dazzling'].includes(_effect2)){args[0]='-block';return{args:['-block',_pokemon2,_effect2,move,kwArgs.of],kwArgs:{}};}break;}case'-nothing':return{args:['-activate','','move:Splash'],kwArgs:kwArgs};}return{args:args,kwArgs:kwArgs};};var _proto=BattleTextParser.prototype;_proto.extractMessage=function extractMessage(buf){var out='';for(var _i=0,_buf$split=buf.split('\n');_i<_buf$split.length;_i++){var _line=_buf$split[_i];var _BattleTextParser$par=BattleTextParser.parseBattleLine(_line),args=_BattleTextParser$par.args,kwArgs=_BattleTextParser$par.kwArgs;out+=this.parseArgs(args,kwArgs)||'';}return out;};_proto.fixLowercase=function fixLowercase(input){if(this.lowercaseRegExp===undefined){var prefixes=['pokemon','opposingPokemon','team','opposingTeam','party','opposingParty'].map(function(templateId){var template=BattleText["default"][templateId];if(template.charAt(0)===template.charAt(0).toUpperCase())return'';var bracketIndex=template.indexOf('[');if(bracketIndex>=0)return template.slice(0,bracketIndex);return template;}).filter(function(prefix){return prefix;});if(prefixes.length){var buf="((?:^|\n)(?:  |  \\(|\\[)?)("+prefixes.map(BattleTextParser.escapeRegExp).join('|')+")";this.lowercaseRegExp=new RegExp(buf,'g');}else{this.lowercaseRegExp=null;}}if(!this.lowercaseRegExp)return input;return input.replace(this.lowercaseRegExp,function(match,p1,p2){return p1+p2.charAt(0).toUpperCase()+p2.slice(1);});};BattleTextParser.escapeRegExp=function escapeRegExp(input){return input.replace(/[\\^$.*+?()[\]{}|]/g,'\\$&');};_proto.
+};this.perspective=perspective;}BattleTextParser.parseLine=function parseLine(line,noDefault){if(!line.startsWith('|')){return['',line];}if(line==='|'){return['done'];}var index=line.indexOf('|',1);var cmd=line.slice(1,index);switch(cmd){case'chatmsg':case'chatmsg-raw':case'raw':case'error':case'html':case'inactive':case'inactiveoff':case'warning':case'fieldhtml':case'controlshtml':case'bigerror':case'debug':case'tier':case'challstr':case'popup':case'':return[cmd,line.slice(index+1)];case'c':case'chat':case'uhtml':case'uhtmlchange':case'queryresponse':var index2a=line.indexOf('|',index+1);return[cmd,line.slice(index+1,index2a),line.slice(index2a+1)];case'c:':case'pm':var index2b=line.indexOf('|',index+1);var index3b=line.indexOf('|',index2b+1);return[cmd,line.slice(index+1,index2b),line.slice(index2b+1,index3b),line.slice(index3b+1)];}if(noDefault)return null;return line.slice(1).split('|');};BattleTextParser.parseBattleLine=function parseBattleLine(line){var args=this.parseLine(line,true);if(args)return{args:args,kwArgs:{}};args=line.slice(1).split('|');var kwArgs={};while(args.length>1){var lastArg=args[args.length-1];if(lastArg.charAt(0)!=='[')break;var bracketPos=lastArg.indexOf(']');if(bracketPos<=0)break;kwArgs[lastArg.slice(1,bracketPos)]=lastArg.slice(bracketPos+1).trim()||'.';args.pop();}return BattleTextParser.upgradeArgs({args:args,kwArgs:kwArgs});};BattleTextParser.parseNameParts=function parseNameParts(text){var group='';if(!/[A-Za-z0-9]/.test(text.charAt(0))){group=text.charAt(0);text=text.slice(1);}var name=text;var atIndex=text.indexOf('@');var status='';var away=false;if(atIndex>0){name=text.slice(0,atIndex);status=text.slice(atIndex+1);if(status.startsWith('!')){away=true;status=status.slice(1);}}return{group:group,name:name,away:away,status:status};};BattleTextParser.upgradeArgs=function upgradeArgs(_ref){var args=_ref.args,kwArgs=_ref.kwArgs;switch(args[0]){case'-activate':{if(kwArgs.item||kwArgs.move||kwArgs.number||kwArgs.ability)return{args:args,kwArgs:kwArgs};var _args=args,pokemon=_args[1],effect=_args[2],arg3=_args[3],arg4=_args[4];var target=kwArgs.of;var _id=BattleTextParser.effectId(effect);if(kwArgs.block)return{args:['-fail',pokemon],kwArgs:kwArgs};if(_id==='wonderguard')return{args:['-immune',pokemon],kwArgs:{from:'ability:Wonder Guard'}};if(_id==='beatup'&&kwArgs.of)return{args:args,kwArgs:{name:kwArgs.of}};if(['ingrain','quickguard','wideguard','craftyshield','matblock','protect','mist','safeguard','electricterrain','mistyterrain','psychicterrain','telepathy','stickyhold','suctioncups','aromaveil','flowerveil','sweetveil','disguise','safetygoggles','protectivepads'].includes(_id)){if(target){kwArgs.of=pokemon;return{args:['-block',target,effect,arg3],kwArgs:kwArgs};}return{args:['-block',pokemon,effect,arg3],kwArgs:kwArgs};}if(_id==='charge'){return{args:['-singlemove',pokemon,effect],kwArgs:{of:target}};}if(['bind','wrap','clamp','whirlpool','firespin','magmastorm','sandtomb','infestation','snaptrap','thundercage','trapped'].includes(_id)){return{args:['-start',pokemon,effect],kwArgs:{of:target}};}if(_id==='fairylock'){return{args:['-fieldactivate',effect],kwArgs:{}};}if(_id==='symbiosis'||_id==='poltergeist'){kwArgs.item=arg3;}else if(_id==='magnitude'){kwArgs.number=arg3;}else if(_id==='skillswap'||_id==='mummy'||_id==='lingeringaroma'||_id==='wanderingspirit'){kwArgs.ability=arg3;kwArgs.ability2=arg4;}else if(['eeriespell','gmaxdepletion','spite','grudge','forewarn','sketch','leppaberry','mysteryberry'].includes(_id)){kwArgs.move=arg3;kwArgs.number=arg4;}args=['-activate',pokemon,effect,target||''];break;}case'-fail':{if(kwArgs.from==='ability: Flower Veil'){return{args:['-block',kwArgs.of,'ability: Flower Veil'],kwArgs:{of:args[1]}};}break;}case'-start':{if(kwArgs.from==='Protean'||kwArgs.from==='Color Change')kwArgs.from='ability:'+kwArgs.from;break;}case'move':{if(kwArgs.from==='Magic Bounce')kwArgs.from='ability:Magic Bounce';break;}case'cant':{var _args2=args,_pokemon2=_args2[1],_effect2=_args2[2],move=_args2[3];if(['ability: Damp','ability: Dazzling','ability: Queenly Majesty','ability: Armor Tail'].includes(_effect2)){args[0]='-block';return{args:['-block',_pokemon2,_effect2,move,kwArgs.of],kwArgs:{}};}break;}case'-nothing':return{args:['-activate','','move:Splash'],kwArgs:kwArgs};}return{args:args,kwArgs:kwArgs};};var _proto=BattleTextParser.prototype;_proto.extractMessage=function extractMessage(buf){var out='';for(var _i2=0,_buf$split2=buf.split('\n');_i2<_buf$split2.length;_i2++){var _line=_buf$split2[_i2];var _BattleTextParser$par=BattleTextParser.parseBattleLine(_line),args=_BattleTextParser$par.args,kwArgs=_BattleTextParser$par.kwArgs;out+=this.parseArgs(args,kwArgs)||'';}return out;};_proto.fixLowercase=function fixLowercase(input){if(this.lowercaseRegExp===undefined){var prefixes=['pokemon','opposingPokemon','team','opposingTeam','party','opposingParty'].map(function(templateId){var template=BattleText["default"][templateId];if(template.charAt(0)===template.charAt(0).toUpperCase())return'';var bracketIndex=template.indexOf('[');if(bracketIndex>=0)return template.slice(0,bracketIndex);return template;}).filter(function(prefix){return prefix;});if(prefixes.length){var buf="((?:^|\n)(?:  |  \\(|\\[)?)("+prefixes.map(BattleTextParser.escapeRegExp).join('|')+")";this.lowercaseRegExp=new RegExp(buf,'g');}else{this.lowercaseRegExp=null;}}if(!this.lowercaseRegExp)return input;return input.replace(this.lowercaseRegExp,function(match,p1,p2){return p1+p2.charAt(0).toUpperCase()+p2.slice(1);});};BattleTextParser.escapeRegExp=function escapeRegExp(input){return input.replace(/[\\^$.*+?()[\]{}|]/g,'\\$&');};_proto.
 
 pokemon=function pokemon(_pokemon){
 if(!_pokemon)return'';
@@ -4728,8 +4825,8 @@ _effect=_effect.slice(8);
 return _effect.trim();
 };_proto.
 
-template=function template(type){for(var _len=arguments.length,namespaces=new Array(_len>1?_len-1:0),_key=1;_key<_len;_key++){namespaces[_key-1]=arguments[_key];}for(var _i2=0;_i2<
-namespaces.length;_i2++){var namespace=namespaces[_i2];
+template=function template(type){for(var _len=arguments.length,namespaces=new Array(_len>1?_len-1:0),_key=1;_key<_len;_key++){namespaces[_key-1]=arguments[_key];}for(var _i4=0;_i4<
+namespaces.length;_i4++){var namespace=namespaces[_i4];
 if(!namespace)continue;
 if(namespace==='OWN'){
 return BattleText["default"][type+'Own']+'\n';
@@ -4771,7 +4868,8 @@ var cmd=args[0];
 switch(cmd){
 case'done':case'turn':
 return'break';
-case'move':case'cant':case'switch':case'drag':case'upkeep':case'start':case'-mega':case'-candynamax':
+case'move':case'cant':case'switch':case'drag':case'upkeep':case'start':
+case'-mega':case'-candynamax':case'-terastallize':
 return'major';
 case'switchout':case'faint':
 return'preMajor';
@@ -4796,8 +4894,8 @@ case'-activate':{
 var _id6=BattleTextParser.effectId(args[2]);
 if(_id6==='confusion'||_id6==='attract')return'preMajor';
 return'postMajor';
-}}
-
+}
+}
 return cmd.charAt(0)==='-'?'postMajor':'';
 };_proto.
 
@@ -4815,8 +4913,8 @@ case'major':
 if(prevSection==='postMajor'||prevSection==='major')return true;
 return false;
 case'postMajor':
-return false;}
-
+return false;
+}
 };_proto.
 
 parseArgs=function parseArgs(args,kwArgs,noSectionBreak){
@@ -4885,8 +4983,8 @@ var newSpecies='';
 switch(cmd){
 case'detailschange':newSpecies=arg2.split(',')[0].trim();break;
 case'-transform':newSpecies=arg3;break;
-case'-formechange':newSpecies=arg2;break;}
-
+case'-formechange':newSpecies=arg2;break;
+}
 var newSpeciesId=toID(newSpecies);
 var _id7='';
 var _templateName='transform';
@@ -4907,8 +5005,8 @@ case'wishiwashi':_id7='schooling';_templateName='transformEnd';break;
 case'miniormeteor':_id7='shieldsdown';break;
 case'minior':_id7='shieldsdown';_templateName='transformEnd';break;
 case'eiscuenoice':_id7='iceface';break;
-case'eiscue':_id7='iceface';_templateName='transformEnd';break;}
-
+case'eiscue':_id7='iceface';_templateName='transformEnd';break;
+}
 }else if(newSpecies){
 _id7='transform';
 }
@@ -4933,11 +5031,11 @@ return _template4.replace('[POKEMON]',this.pokemon(_pokemon6));
 case'swap':{
 var _pokemon7=args[1],target=args[2];
 if(!target||!isNaN(Number(target))){
-var _template6=this.template('swapCenter');
-return _template6.replace('[POKEMON]',this.pokemon(_pokemon7));
+var _template5=this.template('swapCenter');
+return _template5.replace('[POKEMON]',this.pokemon(_pokemon7));
 }
-var _template5=this.template('swap');
-return _template5.replace('[POKEMON]',this.pokemon(_pokemon7)).replace('[TARGET]',this.pokemon(target));
+var _template6=this.template('swap');
+return _template6.replace('[POKEMON]',this.pokemon(_pokemon7)).replace('[TARGET]',this.pokemon(target));
 }
 
 case'move':{
@@ -4980,22 +5078,27 @@ var _pokemon10=args[1],_effect3=args[2],_arg=args[3];
 var _line4=this.maybeAbility(_effect3,_pokemon10)||this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon10);
 var _id8=BattleTextParser.effectId(_effect3);
 if(_id8==='typechange'){
-var _template11=this.template('typeChange',kwArgs.from);
-return _line4+_template11.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[TYPE]',_arg).replace('[SOURCE]',this.pokemon(kwArgs.of));
+var _template10=this.template('typeChange',kwArgs.from);
+return _line4+_template10.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[TYPE]',_arg).replace('[SOURCE]',this.pokemon(kwArgs.of));
 }
 if(_id8==='typeadd'){
-var _template12=this.template('typeAdd',kwArgs.from);
-return _line4+_template12.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[TYPE]',_arg);
+var _template11=this.template('typeAdd',kwArgs.from);
+return _line4+_template11.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[TYPE]',_arg);
 }
 if(_id8.startsWith('stockpile')){
 var _num2=_id8.slice(9);
-var _template13=this.template('start','stockpile');
-return _line4+_template13.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[NUMBER]',_num2);
+var _template12=this.template('start','stockpile');
+return _line4+_template12.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[NUMBER]',_num2);
 }
 if(_id8.startsWith('perish')){
 var _num3=_id8.slice(6);
-var _template14=this.template('activate','perishsong');
-return _line4+_template14.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[NUMBER]',_num3);
+var _template13=this.template('activate','perishsong');
+return _line4+_template13.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[NUMBER]',_num3);
+}
+if(_id8.startsWith('protosynthesis')||_id8.startsWith('quarkdrive')){
+var stat=_id8.slice(-3);
+var _template14=this.template('start',_id8.slice(0,_id8.length-3));
+return _line4+_template14.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[STAT]',BattleTextParser.stat(stat));
 }
 var templateId='start';
 if(kwArgs.already)templateId='alreadyStarted';
@@ -5009,8 +5112,8 @@ if(_id8==='reflect'||_id8==='lightscreen')templateId='startGen1';
 if(templateId==='start'&&(_kwArgs$from=kwArgs.from)!=null&&_kwArgs$from.startsWith('item:')){
 templateId+='FromItem';
 }
-var _template10=this.template(templateId,_effect3);
-return _line4+_template10.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[EFFECT]',this.effect(_effect3)).replace('[MOVE]',_arg).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[ITEM]',this.effect(kwArgs.from));
+var _template15=this.template(templateId,kwArgs.from,_effect3);
+return _line4+_template15.replace('[POKEMON]',this.pokemon(_pokemon10)).replace('[EFFECT]',this.effect(_effect3)).replace('[MOVE]',_arg).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[ITEM]',this.effect(kwArgs.from));
 }
 
 case'-end':{var _kwArgs$from2;
@@ -5022,12 +5125,12 @@ var _template16=this.template('activate',_effect4);
 return _line5+_template16.replace('[TARGET]',this.pokemon(_pokemon11));
 }
 var _templateId='end';
-var _template15='';
+var _template17='';
 if((_kwArgs$from2=kwArgs.from)!=null&&_kwArgs$from2.startsWith('item:')){
-_template15=this.template('endFromItem',_effect4);
+_template17=this.template('endFromItem',_effect4);
 }
-if(!_template15)_template15=this.template(_templateId,_effect4);
-return _line5+_template15.replace('[POKEMON]',this.pokemon(_pokemon11)).replace('[EFFECT]',this.effect(_effect4)).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[ITEM]',this.effect(kwArgs.from));
+if(!_template17)_template17=this.template(_templateId,_effect4);
+return _line5+_template17.replace('[POKEMON]',this.pokemon(_pokemon11)).replace('[EFFECT]',this.effect(_effect4)).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[ITEM]',this.effect(kwArgs.from));
 }
 
 case'-ability':{
@@ -5055,16 +5158,16 @@ return _line6+_template20.replace('[TEAM]',this.team(_pokemon12.slice(0,2),true)
 }
 var _templateId2='start';
 if(_id10==='anticipation'||_id10==='sturdy')_templateId2='activate';
-var _template17=this.template(_templateId2,ability,'NODEFAULT');
-return _line6+_template17.replace('[POKEMON]',this.pokemon(_pokemon12));
+var _template21=this.template(_templateId2,ability,'NODEFAULT');
+return _line6+_template21.replace('[POKEMON]',this.pokemon(_pokemon12));
 }
 
 case'-endability':{
 var _pokemon13=args[1],_ability=args[2];
 if(_ability)return this.ability(_ability,_pokemon13);
 var _line7=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon13);
-var _template21=this.template('start','Gastro Acid');
-return _line7+_template21.replace('[POKEMON]',this.pokemon(_pokemon13));
+var _template22=this.template('start','Gastro Acid');
+return _line7+_template22.replace('[POKEMON]',this.pokemon(_pokemon13));
 }
 
 case'-item':{
@@ -5088,8 +5191,8 @@ if(kwArgs.from){
 var _template25=this.template('addItem',kwArgs.from);
 return _line8+_template25.replace('[POKEMON]',this.pokemon(_pokemon14)).replace('[ITEM]',this.effect(item));
 }
-var _template22=this.template('start',item,'NODEFAULT');
-return _line8+_template22.replace('[POKEMON]',this.pokemon(_pokemon14));
+var _template26=this.template('start',item,'NODEFAULT');
+return _line8+_template26.replace('[POKEMON]',this.pokemon(_pokemon14));
 }
 
 case'-enditem':{
@@ -5116,9 +5219,9 @@ if(kwArgs.weaken){
 var _template31=this.template('activateWeaken');
 return _line9+_template31.replace('[POKEMON]',this.pokemon(_pokemon15)).replace('[ITEM]',this.effect(_item));
 }
-var _template26=this.template('end',_item,'NODEFAULT');
-if(!_template26)_template26=this.template('activateItem').replace('[ITEM]',this.effect(_item));
-return _line9+_template26.replace('[POKEMON]',this.pokemon(_pokemon15)).replace('[TARGET]',this.pokemon(kwArgs.of));
+var _template32=this.template('end',_item,'NODEFAULT');
+if(!_template32)_template32=this.template('activateItem').replace('[ITEM]',this.effect(_item));
+return _line9+_template32.replace('[POKEMON]',this.pokemon(_pokemon15)).replace('[TARGET]',this.pokemon(kwArgs.of));
 }
 
 case'-status':{
@@ -5128,8 +5231,8 @@ if(BattleTextParser.effectId(kwArgs.from)==='rest'){
 var _template33=this.template('startFromRest',status);
 return _line10+_template33.replace('[POKEMON]',this.pokemon(_pokemon16));
 }
-var _template32=this.template('start',status);
-return _line10+_template32.replace('[POKEMON]',this.pokemon(_pokemon16));
+var _template34=this.template('start',status);
+return _line10+_template34.replace('[POKEMON]',this.pokemon(_pokemon16));
 }
 
 case'-curestatus':{var _kwArgs$from3;
@@ -5147,9 +5250,9 @@ if(kwArgs.thaw){
 var _template37=this.template('endFromMove',_status);
 return _line11+_template37.replace('[POKEMON]',this.pokemon(_pokemon17)).replace('[MOVE]',this.effect(kwArgs.from));
 }
-var _template34=this.template('end',_status,'NODEFAULT');
-if(!_template34)_template34=this.template('end').replace('[EFFECT]',_status);
-return _line11+_template34.replace('[POKEMON]',this.pokemon(_pokemon17));
+var _template38=this.template('end',_status,'NODEFAULT');
+if(!_template38)_template38=this.template('end').replace('[EFFECT]',_status);
+return _line11+_template38.replace('[POKEMON]',this.pokemon(_pokemon17));
 }
 
 case'-cureteam':{
@@ -5165,23 +5268,23 @@ if(_id13==='instruct'){
 var _template39=this.template('activate',_effect5);
 return _line12+_template39.replace('[POKEMON]',this.pokemon(kwArgs.of)).replace('[TARGET]',this.pokemon(_pokemon18));
 }
-var _template38=this.template('start',_effect5,'NODEFAULT');
-if(!_template38)_template38=this.template('start').replace('[EFFECT]',this.effect(_effect5));
-return _line12+_template38.replace('[POKEMON]',this.pokemon(_pokemon18)).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[TEAM]',this.team(_pokemon18.slice(0,2)));
+var _template40=this.template('start',_effect5,'NODEFAULT');
+if(!_template40)_template40=this.template('start').replace('[EFFECT]',this.effect(_effect5));
+return _line12+_template40.replace('[POKEMON]',this.pokemon(_pokemon18)).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[TEAM]',this.team(_pokemon18.slice(0,2)));
 }
 
 case'-sidestart':{
 var _side5=args[1],_effect6=args[2];
-var _template40=this.template('start',_effect6,'NODEFAULT');
-if(!_template40)_template40=this.template('startTeamEffect').replace('[EFFECT]',this.effect(_effect6));
-return _template40.replace('[TEAM]',this.team(_side5)).replace('[PARTY]',this.party(_side5));
+var _template41=this.template('start',_effect6,'NODEFAULT');
+if(!_template41)_template41=this.template('startTeamEffect').replace('[EFFECT]',this.effect(_effect6));
+return _template41.replace('[TEAM]',this.team(_side5)).replace('[PARTY]',this.party(_side5));
 }
 
 case'-sideend':{
 var _side6=args[1],_effect7=args[2];
-var _template41=this.template('end',_effect7,'NODEFAULT');
-if(!_template41)_template41=this.template('endTeamEffect').replace('[EFFECT]',this.effect(_effect7));
-return _template41.replace('[TEAM]',this.team(_side6)).replace('[PARTY]',this.party(_side6));
+var _template42=this.template('end',_effect7,'NODEFAULT');
+if(!_template42)_template42=this.template('endTeamEffect').replace('[EFFECT]',this.effect(_effect7));
+return _template42.replace('[TEAM]',this.team(_side6)).replace('[PARTY]',this.party(_side6));
 }
 
 case'-weather':{
@@ -5195,26 +5298,29 @@ if(kwArgs.upkeep){
 return this.template('upkeep',weather,'NODEFAULT');
 }
 var _line13=this.maybeAbility(kwArgs.from,kwArgs.of);
-var _template42=this.template('start',weather,'NODEFAULT');
-if(!_template42)_template42=this.template('startFieldEffect').replace('[EFFECT]',this.effect(weather));
-return _line13+_template42;
+var _template44=this.template('start',weather,'NODEFAULT');
+if(!_template44)_template44=this.template('startFieldEffect').replace('[EFFECT]',this.effect(weather));
+return _line13+_template44;
 }
 
 case'-fieldstart':case'-fieldactivate':{
 var _effect8=args[1];
 var _line14=this.maybeAbility(kwArgs.from,kwArgs.of);
+if(BattleTextParser.effectId(kwArgs.from)==='hadronengine'){
+return _line14+this.template('start','hadronengine').replace('[POKEMON]',this.pokemon(kwArgs.of));
+}
 var _templateId3=cmd.slice(6);
 if(BattleTextParser.effectId(_effect8)==='perishsong')_templateId3='start';
-var _template44=this.template(_templateId3,_effect8,'NODEFAULT');
-if(!_template44)_template44=this.template('startFieldEffect').replace('[EFFECT]',this.effect(_effect8));
-return _line14+_template44.replace('[POKEMON]',this.pokemon(kwArgs.of));
+var _template45=this.template(_templateId3,_effect8,'NODEFAULT');
+if(!_template45)_template45=this.template('startFieldEffect').replace('[EFFECT]',this.effect(_effect8));
+return _line14+_template45.replace('[POKEMON]',this.pokemon(kwArgs.of));
 }
 
 case'-fieldend':{
 var _effect9=args[1];
-var _template45=this.template('end',_effect9,'NODEFAULT');
-if(!_template45)_template45=this.template('endFieldEffect').replace('[EFFECT]',this.effect(_effect9));
-return _template45;
+var _template46=this.template('end',_effect9,'NODEFAULT');
+if(!_template46)_template46=this.template('endFieldEffect').replace('[EFFECT]',this.effect(_effect9));
+return _template46;
 }
 
 case'-sethp':{
@@ -5238,7 +5344,8 @@ var _id14=BattleTextParser.effectId(_effect11);
 if(_id14==='celebrate'){
 return this.template('activate','celebrate').replace('[TRAINER]',this.trainer(_pokemon19.slice(0,2)));
 }
-if(!_target2&&['hyperspacefury','hyperspacehole','phantomforce','shadowforce','feint'].includes(_id14)){var _ref3=
+if(!_target2&&
+['hyperdrill','hyperspacefury','hyperspacehole','phantomforce','shadowforce','feint'].includes(_id14)){var _ref3=
 [kwArgs.of,_pokemon19];_pokemon19=_ref3[0];_target2=_ref3[1];
 if(!_pokemon19)_pokemon19=_target2;
 }
@@ -5251,26 +5358,40 @@ var _template47=this.template('start',_effect11);
 return _line15+_template47.replace('[POKEMON]',this.pokemon(kwArgs.of)).replace('[SOURCE]',this.pokemon(_pokemon19));
 }
 
-if(_id14==='mummy'&&kwArgs.ability){
+if((_id14==='mummy'||_id14==='lingeringaroma')&&kwArgs.ability){
 _line15+=this.ability(kwArgs.ability,_target2);
-_line15+=this.ability('Mummy',_target2);
-var _template48=this.template('changeAbility','mummy');
+_line15+=this.ability(_id14==='mummy'?'Mummy':'Lingering Aroma',_target2);
+var _template48=this.template('changeAbility',_id14);
 return _line15+_template48.replace('[TARGET]',this.pokemon(_target2));
+}
+
+if(_id14==='commander'){
+
+
+if(_target2===_pokemon19)return _line15;
+var _template49=this.template('activate',_id14);
+return _line15+_template49.replace('[POKEMON]',this.pokemon(_pokemon19)).replace(/\[TARGET\]/g,this.pokemon(_target2));
 }
 
 var _templateId4='activate';
 if(_id14==='forewarn'&&_pokemon19===_target2){
 _templateId4='activateNoTarget';
 }
-var _template46=this.template(_templateId4,_effect11,'NODEFAULT');
-if(!_template46){
+if((_id14==='protosynthesis'||_id14==='quarkdrive')&&kwArgs.fromitem){
+_templateId4='activateFromItem';
+}
+if(_id14==='orichalcumpulse'&&kwArgs.source){
+_templateId4='start';
+}
+var _template50=this.template(_templateId4,_effect11,'NODEFAULT');
+if(!_template50){
 if(_line15)return _line15;
-_template46=this.template('activate');
-return _line15+_template46.replace('[EFFECT]',this.effect(_effect11));
+_template50=this.template('activate');
+return _line15+_template50.replace('[EFFECT]',this.effect(_effect11));
 }
 
 if(_id14==='brickbreak'){
-_template46=_template46.replace('[TEAM]',this.team(_target2.slice(0,2)));
+_template50=_template50.replace('[TEAM]',this.team(_target2.slice(0,2)));
 }
 if(kwArgs.ability){
 _line15+=this.ability(kwArgs.ability,_pokemon19);
@@ -5279,63 +5400,63 @@ if(kwArgs.ability2){
 _line15+=this.ability(kwArgs.ability2,_target2);
 }
 if(kwArgs.move||kwArgs.number||kwArgs.item||kwArgs.name){
-_template46=_template46.replace('[MOVE]',kwArgs.move).replace('[NUMBER]',kwArgs.number).replace('[ITEM]',kwArgs.item).replace('[NAME]',kwArgs.name);
+_template50=_template50.replace('[MOVE]',kwArgs.move).replace('[NUMBER]',kwArgs.number).replace('[ITEM]',kwArgs.item).replace('[NAME]',kwArgs.name);
 }
-return _line15+_template46.replace('[POKEMON]',this.pokemon(_pokemon19)).replace('[TARGET]',this.pokemon(_target2)).replace('[SOURCE]',this.pokemon(kwArgs.of));
+return _line15+_template50.replace('[POKEMON]',this.pokemon(_pokemon19)).replace('[TARGET]',this.pokemon(_target2)).replace('[SOURCE]',this.pokemon(kwArgs.of));
 }
 
 case'-prepare':{
 var _pokemon20=args[1],_effect12=args[2],_target3=args[3];
-var _template49=this.template('prepare',_effect12);
-return _template49.replace('[POKEMON]',this.pokemon(_pokemon20)).replace('[TARGET]',this.pokemon(_target3));
+var _template51=this.template('prepare',_effect12);
+return _template51.replace('[POKEMON]',this.pokemon(_pokemon20)).replace('[TARGET]',this.pokemon(_target3));
 }
 
 case'-damage':{
 var _pokemon21=args[1],percentage=args[3];
-var _template50=this.template('damage',kwArgs.from,'NODEFAULT');
+var _template52=this.template('damage',kwArgs.from,'NODEFAULT');
 var _line16=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon21);
 var _id15=BattleTextParser.effectId(kwArgs.from);
-if(_template50){
-return _line16+_template50.replace('[POKEMON]',this.pokemon(_pokemon21));
+if(_template52){
+return _line16+_template52.replace('[POKEMON]',this.pokemon(_pokemon21));
 }
 
 if(!kwArgs.from){
-_template50=this.template(percentage?'damagePercentage':'damage');
-return _line16+_template50.replace('[POKEMON]',this.pokemon(_pokemon21)).replace('[PERCENTAGE]',percentage);
+_template52=this.template(percentage?'damagePercentage':'damage');
+return _line16+_template52.replace('[POKEMON]',this.pokemon(_pokemon21)).replace('[PERCENTAGE]',percentage);
 }
 if(kwArgs.from.startsWith('item:')){
-_template50=this.template(kwArgs.of?'damageFromPokemon':'damageFromItem');
-return _line16+_template50.replace('[POKEMON]',this.pokemon(_pokemon21)).replace('[ITEM]',this.effect(kwArgs.from)).replace('[SOURCE]',this.pokemon(kwArgs.of));
+_template52=this.template(kwArgs.of?'damageFromPokemon':'damageFromItem');
+return _line16+_template52.replace('[POKEMON]',this.pokemon(_pokemon21)).replace('[ITEM]',this.effect(kwArgs.from)).replace('[SOURCE]',this.pokemon(kwArgs.of));
 }
 if(kwArgs.partiallytrapped||_id15==='bind'||_id15==='wrap'){
-_template50=this.template('damageFromPartialTrapping');
-return _line16+_template50.replace('[POKEMON]',this.pokemon(_pokemon21)).replace('[MOVE]',this.effect(kwArgs.from));
+_template52=this.template('damageFromPartialTrapping');
+return _line16+_template52.replace('[POKEMON]',this.pokemon(_pokemon21)).replace('[MOVE]',this.effect(kwArgs.from));
 }
 
-_template50=this.template('damage');
-return _line16+_template50.replace('[POKEMON]',this.pokemon(_pokemon21));
+_template52=this.template('damage');
+return _line16+_template52.replace('[POKEMON]',this.pokemon(_pokemon21));
 }
 
 case'-heal':{
 var _pokemon22=args[1];
-var _template51=this.template('heal',kwArgs.from,'NODEFAULT');
+var _template53=this.template('heal',kwArgs.from,'NODEFAULT');
 var _line17=this.maybeAbility(kwArgs.from,_pokemon22);
-if(_template51){
-return _line17+_template51.replace('[POKEMON]',this.pokemon(_pokemon22)).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[NICKNAME]',kwArgs.wisher);
+if(_template53){
+return _line17+_template53.replace('[POKEMON]',this.pokemon(_pokemon22)).replace('[SOURCE]',this.pokemon(kwArgs.of)).replace('[NICKNAME]',kwArgs.wisher);
 }
 
 if(kwArgs.from&&!kwArgs.from.startsWith('ability:')){
-_template51=this.template('healFromEffect');
-return _line17+_template51.replace('[POKEMON]',this.pokemon(_pokemon22)).replace('[EFFECT]',this.effect(kwArgs.from));
+_template53=this.template('healFromEffect');
+return _line17+_template53.replace('[POKEMON]',this.pokemon(_pokemon22)).replace('[EFFECT]',this.effect(kwArgs.from));
 }
 
-_template51=this.template('heal');
-return _line17+_template51.replace('[POKEMON]',this.pokemon(_pokemon22));
+_template53=this.template('heal');
+return _line17+_template53.replace('[POKEMON]',this.pokemon(_pokemon22));
 }
 
 case'-boost':case'-unboost':{var _kwArgs$from4;
-var _pokemon23=args[1],stat=args[2],_num4=args[3];
-if(stat==='spa'&&this.gen===1)stat='spc';
+var _pokemon23=args[1],_stat2=args[2],_num4=args[3];
+if(_stat2==='spa'&&this.gen===1)_stat2='spc';
 var amount=parseInt(_num4,10);
 var _line18=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon23);
 var _templateId5=cmd.slice(1);
@@ -5345,19 +5466,19 @@ if(amount===0)_templateId5+='0';
 if(amount&&kwArgs.zeffect){
 _templateId5+=kwArgs.multiple?'MultipleFromZEffect':'FromZEffect';
 }else if(amount&&(_kwArgs$from4=kwArgs.from)!=null&&_kwArgs$from4.startsWith('item:')){
-var _template53=this.template(_templateId5+'FromItem',kwArgs.from);
-return _line18+_template53.replace('[POKEMON]',this.pokemon(_pokemon23)).replace('[STAT]',BattleTextParser.stat(stat)).replace('[ITEM]',this.effect(kwArgs.from));
+var _template54=this.template(_templateId5+'FromItem',kwArgs.from);
+return _line18+_template54.replace('[POKEMON]',this.pokemon(_pokemon23)).replace('[STAT]',BattleTextParser.stat(_stat2)).replace('[ITEM]',this.effect(kwArgs.from));
 }
-var _template52=this.template(_templateId5,kwArgs.from);
-return _line18+_template52.replace('[POKEMON]',this.pokemon(_pokemon23)).replace('[STAT]',BattleTextParser.stat(stat));
+var _template55=this.template(_templateId5,kwArgs.from);
+return _line18+_template55.replace('[POKEMON]',this.pokemon(_pokemon23)).replace('[STAT]',BattleTextParser.stat(_stat2));
 }
 
 case'-setboost':{
 var _pokemon24=args[1];
 var _effect13=kwArgs.from;
 var _line19=this.maybeAbility(_effect13,kwArgs.of||_pokemon24);
-var _template54=this.template('boost',_effect13);
-return _line19+_template54.replace('[POKEMON]',this.pokemon(_pokemon24));
+var _template56=this.template('boost',_effect13);
+return _line19+_template56.replace('[POKEMON]',this.pokemon(_pokemon24));
 }
 
 case'-swapboost':{
@@ -5367,15 +5488,15 @@ var _id16=BattleTextParser.effectId(kwArgs.from);
 var _templateId6='swapBoost';
 if(_id16==='guardswap')_templateId6='swapDefensiveBoost';
 if(_id16==='powerswap')_templateId6='swapOffensiveBoost';
-var _template55=this.template(_templateId6,kwArgs.from);
-return _line20+_template55.replace('[POKEMON]',this.pokemon(_pokemon25)).replace('[TARGET]',this.pokemon(_target4));
+var _template57=this.template(_templateId6,kwArgs.from);
+return _line20+_template57.replace('[POKEMON]',this.pokemon(_pokemon25)).replace('[TARGET]',this.pokemon(_target4));
 }
 
 case'-copyboost':{
 var _pokemon26=args[1],_target5=args[2];
 var _line21=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon26);
-var _template56=this.template('copyBoost',kwArgs.from);
-return _line21+_template56.replace('[POKEMON]',this.pokemon(_pokemon26)).replace('[TARGET]',this.pokemon(_target5));
+var _template58=this.template('copyBoost',kwArgs.from);
+return _line21+_template58.replace('[POKEMON]',this.pokemon(_pokemon26)).replace('[TARGET]',this.pokemon(_target5));
 }
 
 case'-clearboost':case'-clearpositiveboost':case'-clearnegativeboost':{
@@ -5383,15 +5504,15 @@ var _pokemon27=args[1],source=args[2];
 var _line22=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon27);
 var _templateId7='clearBoost';
 if(kwArgs.zeffect)_templateId7='clearBoostFromZEffect';
-var _template57=this.template(_templateId7,kwArgs.from);
-return _line22+_template57.replace('[POKEMON]',this.pokemon(_pokemon27)).replace('[SOURCE]',this.pokemon(source));
+var _template59=this.template(_templateId7,kwArgs.from);
+return _line22+_template59.replace('[POKEMON]',this.pokemon(_pokemon27)).replace('[SOURCE]',this.pokemon(source));
 }
 
 case'-invertboost':{
 var _pokemon28=args[1];
 var _line23=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon28);
-var _template58=this.template('invertBoost',kwArgs.from);
-return _line23+_template58.replace('[POKEMON]',this.pokemon(_pokemon28));
+var _template60=this.template('invertBoost',kwArgs.from);
+return _line23+_template60.replace('[POKEMON]',this.pokemon(_pokemon28));
 }
 
 case'-clearallboost':{
@@ -5403,8 +5524,8 @@ var _pokemon29=args[1];
 var _templateId8=cmd.slice(1);
 if(_templateId8==='supereffective')_templateId8='superEffective';
 if(kwArgs.spread)_templateId8+='Spread';
-var _template59=this.template(_templateId8);
-return _template59.replace('[POKEMON]',this.pokemon(_pokemon29));
+var _template61=this.template(_templateId8);
+return _template61.replace('[POKEMON]',this.pokemon(_pokemon29));
 }
 
 case'-block':{
@@ -5413,63 +5534,63 @@ var _line24=this.maybeAbility(_effect14,kwArgs.of||_pokemon30);
 var _id17=BattleTextParser.effectId(_effect14);
 var _templateId9='block';
 if(_id17==='mist'&&this.gen<=2)_templateId9='blockGen'+this.gen;
-var _template60=this.template(_templateId9,_effect14);
-return _line24+_template60.replace('[POKEMON]',this.pokemon(_pokemon30)).replace('[SOURCE]',this.pokemon(attacker||kwArgs.of)).replace('[MOVE]',_move2);
+var _template62=this.template(_templateId9,_effect14);
+return _line24+_template62.replace('[POKEMON]',this.pokemon(_pokemon30)).replace('[SOURCE]',this.pokemon(attacker||kwArgs.of)).replace('[MOVE]',_move2);
 }
 
 case'-fail':{
-var _pokemon31=args[1],_effect15=args[2],_stat2=args[3];
+var _pokemon31=args[1],_effect15=args[2],_stat3=args[3];
 var _id18=BattleTextParser.effectId(_effect15);
 var blocker=BattleTextParser.effectId(kwArgs.from);
 var _line25=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon31);
 var _templateId10='block';
 if(['desolateland','primordialsea'].includes(blocker)&&
-!['sunnyday','raindance','sandstorm','hail','newmoon'].includes(_id18)){
+!['sunnyday','raindance','sandstorm','hail','snowscape','chillyreception','newmoon'].includes(_id18)){
 _templateId10='blockMove';
 }else if(blocker==='uproar'&&kwArgs.msg){
 _templateId10='blockSelf';
 }
-var _template61=this.template(_templateId10,kwArgs.from);
-if(_template61){
-return _line25+_template61.replace('[POKEMON]',this.pokemon(_pokemon31));
+var _template63=this.template(_templateId10,kwArgs.from);
+if(_template63){
+return _line25+_template63.replace('[POKEMON]',this.pokemon(_pokemon31));
 }
 
 if(_id18==='unboost'){
-_template61=this.template(_stat2?'failSingular':'fail','unboost');
-return _line25+_template61.replace('[POKEMON]',this.pokemon(_pokemon31)).replace('[STAT]',_stat2);
+_template63=this.template(_stat3?'failSingular':'fail','unboost');
+return _line25+_template63.replace('[POKEMON]',this.pokemon(_pokemon31)).replace('[STAT]',_stat3);
 }
 
 _templateId10='fail';
-if(['brn','frz','par','psn','slp','substitute'].includes(_id18)){
+if(['brn','frz','par','psn','slp','substitute','shedtail'].includes(_id18)){
 _templateId10='alreadyStarted';
 }
 if(kwArgs.heavy)_templateId10='failTooHeavy';
 if(kwArgs.weak)_templateId10='fail';
 if(kwArgs.forme)_templateId10='failWrongForme';
-_template61=this.template(_templateId10,_id18);
-return _line25+_template61.replace('[POKEMON]',this.pokemon(_pokemon31));
+_template63=this.template(_templateId10,_id18);
+return _line25+_template63.replace('[POKEMON]',this.pokemon(_pokemon31));
 }
 
 case'-immune':{
 var _pokemon32=args[1];
 var _line26=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon32);
-var _template62=this.template('block',kwArgs.from);
-if(!_template62){
+var _template64=this.template('block',kwArgs.from);
+if(!_template64){
 var _templateId11=kwArgs.ohko?'immuneOHKO':'immune';
-_template62=this.template(_pokemon32?_templateId11:'immuneNoPokemon',kwArgs.from);
+_template64=this.template(_pokemon32?_templateId11:'immuneNoPokemon',kwArgs.from);
 }
-return _line26+_template62.replace('[POKEMON]',this.pokemon(_pokemon32));
+return _line26+_template64.replace('[POKEMON]',this.pokemon(_pokemon32));
 }
 
 case'-miss':{
 var _source=args[1],_pokemon33=args[2];
 var _line27=this.maybeAbility(kwArgs.from,kwArgs.of||_pokemon33);
 if(!_pokemon33){
-var _template64=this.template('missNoPokemon');
-return _line27+_template64.replace('[SOURCE]',this.pokemon(_source));
+var _template65=this.template('missNoPokemon');
+return _line27+_template65.replace('[SOURCE]',this.pokemon(_source));
 }
-var _template63=this.template('miss');
-return _line27+_template63.replace('[POKEMON]',this.pokemon(_pokemon33));
+var _template66=this.template('miss');
+return _line27+_template66.replace('[POKEMON]',this.pokemon(_pokemon33));
 }
 
 case'-center':case'-ohko':case'-combine':{
@@ -5490,32 +5611,41 @@ _templateId12='megaNoItem';
 }
 if(!_id19&&cmd==='-mega'&&this.gen<7)_templateId12='megaGen6';
 if(!_item2&&cmd==='-mega')_templateId12='megaNoItem';
-var _template65=this.template(_templateId12,_id19);
+var _template67=this.template(_templateId12,_id19);
 var _side7=_pokemon34.slice(0,2);
 var pokemonName=this.pokemon(_pokemon34);
 if(cmd==='-mega'){
 var template2=this.template('transformMega');
-_template65+=template2.replace('[POKEMON]',pokemonName).replace('[SPECIES]',species);
+_template67+=template2.replace('[POKEMON]',pokemonName).replace('[SPECIES]',species);
 }
-return _template65.replace('[POKEMON]',pokemonName).replace('[ITEM]',_item2).replace('[TRAINER]',this.trainer(_side7));
+return _template67.replace('[POKEMON]',pokemonName).replace('[ITEM]',_item2).replace('[TRAINER]',this.trainer(_side7));
+}
+
+case'-terastallize':{
+var _pokemon35=args[1],type=args[2];
+var _id20='';
+var _templateId13=cmd.slice(1);
+var _template68=this.template(_templateId13,_id20);
+var _pokemonName=this.pokemon(_pokemon35);
+return _template68.replace('[POKEMON]',_pokemonName).replace('[TYPE]',type);
 }
 
 case'-zpower':{
-var _pokemon35=args[1];
-var _template66=this.template('zPower');
-return _template66.replace('[POKEMON]',this.pokemon(_pokemon35));
+var _pokemon36=args[1];
+var _template69=this.template('zPower');
+return _template69.replace('[POKEMON]',this.pokemon(_pokemon36));
 }
 
 case'-burst':{
-var _pokemon36=args[1];
-var _template67=this.template('activate',"Ultranecrozium Z");
-return _template67.replace('[POKEMON]',this.pokemon(_pokemon36));
+var _pokemon37=args[1];
+var _template70=this.template('activate',"Ultranecrozium Z");
+return _template70.replace('[POKEMON]',this.pokemon(_pokemon37));
 }
 
 case'-zbroken':{
-var _pokemon37=args[1];
-var _template68=this.template('zBroken');
-return _template68.replace('[POKEMON]',this.pokemon(_pokemon37));
+var _pokemon38=args[1];
+var _template71=this.template('zBroken');
+return _template71.replace('[POKEMON]',this.pokemon(_pokemon38));
 }
 
 case'-hitcount':{
@@ -5527,9 +5657,9 @@ return this.template('hitCount').replace('[NUMBER]',_num5);
 }
 
 case'-waiting':{
-var _pokemon38=args[1],_target6=args[2];
-var _template69=this.template('activate',"Water Pledge");
-return _template69.replace('[POKEMON]',this.pokemon(_pokemon38)).replace('[TARGET]',this.pokemon(_target6));
+var _pokemon39=args[1],_target6=args[2];
+var _template72=this.template('activate',"Water Pledge");
+return _template72.replace('[POKEMON]',this.pokemon(_pokemon39)).replace('[TARGET]',this.pokemon(_target6));
 }
 
 case'-anim':{
@@ -5538,8 +5668,8 @@ return'';
 
 default:{
 return null;
-}}
-
+}
+}
 };return BattleTextParser;}();
 
 

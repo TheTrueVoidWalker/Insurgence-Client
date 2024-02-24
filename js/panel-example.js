@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Example Panel
  *
  * Just an example panel for creating new panels/popups
@@ -20,15 +20,15 @@ ExamplePanel=function(_PSRoomPanel){_inheritsLoose(ExamplePanel,_PSRoomPanel);fu
 render=function render(){
 var room=this.props.room;
 return preact.h(PSPanelWrapper,{room:room},
-preact.h("div",{"class":"mainmessage"},preact.h("p",null,"Loading...")));
-
+preact.h("div",{"class":"mainmessage"},preact.h("p",null,"Loading..."))
+);
 };return ExamplePanel;}(PSRoomPanel);
 
 
 PS.roomTypes['example']={
 Model:ExampleRoom,
-Component:ExamplePanel};var
-
+Component:ExamplePanel
+};var
 
 
 
@@ -36,11 +36,12 @@ ExampleViewPanel=function(_PSRoomPanel2){_inheritsLoose(ExampleViewPanel,_PSRoom
 render=function render(){
 var room=this.props.room;
 return preact.h(PSPanelWrapper,{room:room},
-preact.h("div",{"class":"mainmessage"},preact.h("p",null,"Loading...")));
-
+preact.h("div",{"class":"mainmessage"},preact.h("p",null,"Loading..."))
+);
 };return ExampleViewPanel;}(PSRoomPanel);
 
 
 PS.roomTypes['exampleview']={
-Component:ExampleViewPanel};
+Component:ExampleViewPanel
+};
 //# sourceMappingURL=panel-example.js.map

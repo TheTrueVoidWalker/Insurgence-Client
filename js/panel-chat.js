@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Chat panel
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
@@ -117,8 +117,8 @@ _PSRoom.prototype.send.call(this,line,true);
 };_proto.
 setUsers=function setUsers(count,usernames){
 this.userCount=count;
-this.users={};for(var _i=0;_i<
-usernames.length;_i++){var username=usernames[_i];
+this.users={};for(var _i2=0;_i2<
+usernames.length;_i2++){var username=usernames[_i2];
 var _userid=toID(username);
 this.users[_userid]=username;
 }
@@ -307,10 +307,10 @@ rows:1,
 onInput:this.update,
 onKeyDown:this.keyDown,
 style:{resize:'none',width:'100%',height:'16px',padding:'2px 3px 1px 3px'},
-placeholder:PS.focusPreview(this.props.room)})));
-
-
-
+placeholder:PS.focusPreview(this.props.room)}
+)
+)
+);
 };return ChatTextEntry;}(preact.Component);var
 
 
@@ -363,38 +363,38 @@ var tinyLayout=room.width<450;
 
 var challengeTo=room.challengingFormat?preact.h("div",{"class":"challenge"},
 preact.h(TeamForm,{format:room.challengingFormat,onSubmit:null},
-preact.h("button",{name:"cmd",value:"/cancelchallenge","class":"button"},"Cancel"))):
-
-room.challengeMenuOpen?preact.h("div",{"class":"challenge"},
+preact.h("button",{name:"cmd",value:"/cancelchallenge","class":"button"},"Cancel")
+)
+):room.challengeMenuOpen?preact.h("div",{"class":"challenge"},
 preact.h(TeamForm,{onSubmit:this.makeChallenge},
 preact.h("button",{type:"submit","class":"button"},preact.h("strong",null,"Challenge"))," ",
-preact.h("button",{name:"cmd",value:"/cancelchallenge","class":"button"},"Cancel"))):
-
-null;
+preact.h("button",{name:"cmd",value:"/cancelchallenge","class":"button"},"Cancel")
+)
+):null;
 
 var challengeFrom=room.challengedFormat?preact.h("div",{"class":"challenge"},
 preact.h(TeamForm,{format:room.challengedFormat,onSubmit:this.acceptChallenge},
 preact.h("button",{type:"submit","class":"button"},preact.h("strong",null,"Accept"))," ",
-preact.h("button",{name:"cmd",value:"/reject","class":"button"},"Reject"))):
-
-null;
+preact.h("button",{name:"cmd",value:"/reject","class":"button"},"Reject")
+)
+):null;
 
 return preact.h(PSPanelWrapper,{room:room},
 preact.h("div",{"class":"tournament-wrapper hasuserlist"}),
 preact.h(ChatLog,{"class":"chat-log",room:this.props.room,onClick:this.focusIfNoSelection,left:tinyLayout?0:146},
-challengeTo||challengeFrom&&[challengeTo,challengeFrom]),
-
+challengeTo||challengeFrom&&[challengeTo,challengeFrom]
+),
 preact.h(ChatTextEntry,{room:this.props.room,onMessage:this.send,onKey:this.onKey,left:tinyLayout?0:146}),
-preact.h(ChatUserList,{room:this.props.room,minimized:tinyLayout}));
-
+preact.h(ChatUserList,{room:this.props.room,minimized:tinyLayout})
+);
 };return ChatPanel;}(PSRoomPanel);var
 
 
 ChatUserList=function(_preact$Component2){_inheritsLoose(ChatUserList,_preact$Component2);function ChatUserList(){var _this5;for(var _len3=arguments.length,args=new Array(_len3),_key3=0;_key3<_len3;_key3++){args[_key3]=arguments[_key3];}_this5=_preact$Component2.call.apply(_preact$Component2,[this].concat(args))||this;_this5.
 subscription=null;_this5.
 state={
-expanded:false};_this5.
-
+expanded:false
+};_this5.
 toggleExpanded=function(){
 _this5.setState({expanded:!_this5.state.expanded});
 };return _this5;}var _proto4=ChatUserList.prototype;_proto4.
@@ -410,8 +410,8 @@ render=function render(){
 var room=this.props.room;
 var userList=Object.entries(room.users);
 PSUtils.sortBy(userList,function(_ref){var id=_ref[0],name=_ref[1];return(
-[PS.server.getGroup(name.charAt(0)).order,!name.endsWith('@!'),id]);});
-
+[PS.server.getGroup(name.charAt(0)).order,!name.endsWith('@!'),id]);}
+);
 return preact.h("ul",{"class":'userlist'+(this.props.minimized?this.state.expanded?' userlist-maximized':' userlist-minimized':''),style:{left:this.props.left||0}},
 preact.h("li",{"class":"userlist-count",onClick:this.toggleExpanded},preact.h("small",null,room.userCount," users")),
 userList.map(function(_ref2){var userid=_ref2[0],name=_ref2[1];
@@ -426,18 +426,18 @@ color=BattleLog.usernameColor(userid);
 }
 return preact.h("li",{key:userid},preact.h("button",{"class":"userbutton username","data-name":name},
 preact.h("em",{"class":"group"+(['leadership','staff'].includes(group.type)?' staffgroup':'')},
-groupSymbol),
-
+groupSymbol
+),
 group.type==='leadership'?
 preact.h("strong",null,preact.h("em",{style:{color:color}},name.substr(1))):
 group.type==='staff'?
 preact.h("strong",{style:{color:color}},name.substr(1)):
 
-preact.h("span",{style:{color:color}},name.substr(1))));
+preact.h("span",{style:{color:color}},name.substr(1))
 
-
-}));
-
+));
+})
+);
 };return ChatUserList;}(preact.Component);var
 
 
@@ -467,8 +467,8 @@ _this8.props.room.removeUser(tokens[1]);
 break;
 case'name':case'n':case'N':
 _this8.props.room.renameUser(tokens[1],tokens[2]);
-break;}
-
+break;
+}
 if(!_this8.props.noSubscription)_this8.log.add(tokens);
 });
 this.setControlsJSX(this.props.children);
@@ -514,14 +514,14 @@ this.log.updateScroll();
 };_proto5.
 render=function render(){
 return preact.h("div",{"class":this.props["class"],role:"log",onClick:this.props.onClick,style:{
-left:this.props.left||0,top:this.props.top||0}});
-
+left:this.props.left||0,top:this.props.top||0
+}});
 };return ChatLog;}(preact.Component);
 
 
 PS.roomTypes['chat']={
 Model:ChatRoom,
-Component:ChatPanel};
-
+Component:ChatPanel
+};
 PS.updateRoomTypes();
 //# sourceMappingURL=panel-chat.js.map

@@ -1,4 +1,4 @@
-function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf||function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
+function _inheritsLoose(subClass,superClass){subClass.prototype=Object.create(superClass.prototype);subClass.prototype.constructor=subClass;_setPrototypeOf(subClass,superClass);}function _setPrototypeOf(o,p){_setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function _setPrototypeOf(o,p){o.__proto__=p;return o;};return _setPrototypeOf(o,p);}/**
  * Room-list panel (default right-panel)
  *
  * @author Guangcong Luo <guangcongluo@gmail.com>
@@ -57,14 +57,14 @@ var searchid=toID(this.search);
 var exactMatch=false;
 
 var rooms=PS.mainmenu.roomsCache;
-var roomList=[].concat(rooms.chat||[]);for(var _i=0,_roomList=
-roomList;_i<_roomList.length;_i++){var room=_roomList[_i];
-if(!room.subRooms)continue;for(var _i2=0,_room$subRooms=
-room.subRooms;_i2<_room$subRooms.length;_i2++){var title=_room$subRooms[_i2];
+var roomList=[].concat(rooms.chat||[]);for(var _i2=0,_roomList2=
+roomList;_i2<_roomList2.length;_i2++){var room=_roomList2[_i2];
+if(!room.subRooms)continue;for(var _i4=0,_room$subRooms2=
+room.subRooms;_i4<_room$subRooms2.length;_i4++){var title=_room$subRooms2[_i4];
 roomList.push({
 title:title,
-desc:"Subroom of "+room.title});
-
+desc:"Subroom of "+room.title
+});
 }
 }
 
@@ -78,8 +78,8 @@ roomList=roomList.filter(function(room){return!start.includes(room);});
 
 var abbr=roomList.filter(function(room){return(
 toID(room.title.toLowerCase().replace(/\b([a-z0-9])[a-z0-9]*\b/g,'$1')).startsWith(searchid)||
-room.title.replace(/[^A-Z0-9]+/g,'').toLowerCase().startsWith(searchid));});
-
+room.title.replace(/[^A-Z0-9]+/g,'').toLowerCase().startsWith(searchid));}
+);
 
 var hidden=!exactMatch?[{title:this.search,desc:"(Private room?)"}]:[];
 
@@ -131,34 +131,34 @@ this.renderRoomList("Chat rooms",rooms.chat)];
 
 return preact.h(PSPanelWrapper,{room:this.props.room,scrollable:true},preact.h("div",{"class":"pad"},
 preact.h("button",{"class":"button",style:"float:right;font-size:10pt;margin-top:3px",onClick:this.hide},
-preact.h("i",{"class":"fa fa-caret-right"})," Hide"),
-
+preact.h("i",{"class":"fa fa-caret-right"})," Hide"
+),
 preact.h("div",{"class":"roomcounters"},
 preact.h("button",{"class":"button","data-href":"/users",title:"Find an online user"},
 preact.h("span",{
 "class":"pixelated usercount",
-title:"Meloetta is PS's mascot! The Aria forme is about using its voice, and represents our chatrooms."}),
-
-preact.h("strong",null,rooms.userCount||'-')," users online")," ",
-
+title:"Meloetta is PS's mascot! The Aria forme is about using its voice, and represents our chatrooms."}
+),
+preact.h("strong",null,rooms.userCount||'-')," users online"
+)," ",
 preact.h("button",{"class":"button","data-href":"/battles",title:"Watch an active battle"},
 preact.h("span",{
 "class":"pixelated battlecount",
-title:"Meloetta is PS's mascot! The Pirouette forme is Fighting-type, and represents our battles."}),
-
-preact.h("strong",null,rooms.battleCount||'-')," active battles")),
-
-
+title:"Meloetta is PS's mascot! The Pirouette forme is Fighting-type, and represents our battles."}
+),
+preact.h("strong",null,rooms.battleCount||'-')," active battles"
+)
+),
 preact.h("div",null,
 preact.h("input",{
 type:"search",name:"roomsearch","class":"textbox",style:"width: 100%; max-width: 480px",
 placeholder:"Join or search for rooms",
-onInput:this.changeSearch,onKeyDown:this.keyDownSearch})),
-
-
+onInput:this.changeSearch,onKeyDown:this.keyDownSearch}
+)
+),
 PS.isOffline?preact.h("h2",null,"(offline)"):rooms.userCount===undefined&&preact.h("h2",null,"Connecting..."),
-roomList));
-
+roomList
+));
 };_proto.
 renderRoomList=function renderRoomList(title,rooms){
 if(!rooms||!rooms.length)return null;
@@ -174,19 +174,19 @@ preact.h("small",null,roomInfo.desc||''),
 roomInfo.subRooms&&preact.h("small",null,preact.h("br",null),
 preact.h("i",{"class":"fa fa-level-up fa-rotate-90"})," Subrooms: ",preact.h("strong",null,
 roomInfo.subRooms.map(function(roomName,i){return[
-preact.h("i",{"class":"fa fa-comment-o"})," "+roomName+(i===roomInfo.subRooms.length-1?"":", ")];})))));}));
-
-
-
-
-
-
+preact.h("i",{"class":"fa fa-comment-o"})," "+roomName+(i===roomInfo.subRooms.length-1?"":", ")];}
+)
+)
+)
+)
+);})
+);
 };return RoomsPanel;}(PSRoomPanel);
 
 
 PS.roomTypes['rooms']={
 Model:RoomsRoom,
-Component:RoomsPanel};
-
+Component:RoomsPanel
+};
 PS.updateRoomTypes();
 //# sourceMappingURL=panel-rooms.js.map

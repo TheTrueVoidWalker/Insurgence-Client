@@ -35,7 +35,7 @@ class Replays {
 		$alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';
 		$password = '';
 		for ($i = 0; $i < 31; $i++) {
-			$password .= $alphabet{mt_rand(0, 35)};
+			$password .= $alphabet[mt_rand(0, 35)];
 		}
 		return $password;
 	}
@@ -46,7 +46,7 @@ class Replays {
 			$this->init();
 		}
 
-		$res = $this->db->prepare("SELECT * FROM ps_replays WHERE id = ? LIMIT 1");
+		$res = $this->db->prepare("SELECT * FROM ntbb_replays WHERE id = ? LIMIT 1");
 		$res->execute([$id]);
 		if (!$res) return [];
 		$replay = $res->fetch();
@@ -56,10 +56,10 @@ class Replays {
 
 		// if ($replay['private'] && !($replay['password'] ?? null)) {
 		// 	$replay['password'] = $this->genPassword();
-		// 	$res = $this->db->prepare("UPDATE ps_replays SET views = views + 1, `password` = ? WHERE id = ? LIMIT 1");
+		// 	$res = $this->db->prepare("UPDATE ntbb_replays SET views = views + 1, `password` = ? WHERE id = ? LIMIT 1");
 		// 	$res->execute([$replay['password'], $id]);
 		// } else {
-			$res = $this->db->prepare("UPDATE ps_replays SET views = views + 1 WHERE id = ? LIMIT 1");
+			$res = $this->db->prepare("UPDATE ntbb_replays SET views = views + 1 WHERE id = ? LIMIT 1");
 			$res->execute([$id]);
 		// }
 
@@ -68,19 +68,19 @@ class Replays {
 	function edit(&$replay) {
 		if ($replay['private'] === 3) {
 			$replay['private'] = 3;
-			$res = $this->db->prepare("UPDATE ps_replays SET private = 3, password = NULL WHERE id = ? LIMIT 1");
+			$res = $this->db->prepare("UPDATE ntbb_replays SET private = 3, password = NULL WHERE id = ? LIMIT 1");
 			$res->execute([$replay['id']]);
 		} else if ($replay['private'] === 2) {
 			$replay['private'] = 1;
 			$replay['password'] = NULL;
-			$res = $this->db->prepare("UPDATE ps_replays SET private = 1, password = NULL WHERE id = ? LIMIT 1");
+			$res = $this->db->prepare("UPDATE ntbb_replays SET private = 1, password = NULL WHERE id = ? LIMIT 1");
 			$res->execute([$replay['id']]);
 		} else if ($replay['private']) {
 			if (!$replay['password']) $replay['password'] = $this->genPassword();
-			$res = $this->db->prepare("UPDATE ps_replays SET private = 1, password = ? WHERE id = ? LIMIT 1");
+			$res = $this->db->prepare("UPDATE ntbb_replays SET private = 1, password = ? WHERE id = ? LIMIT 1");
 			$res->execute([$replay['password'], $replay['id']]);
 		} else {
-			$res = $this->db->prepare("UPDATE ps_replays SET private = 0, password = NULL WHERE id = ? LIMIT 1");
+			$res = $this->db->prepare("UPDATE ntbb_replays SET private = 0, password = NULL WHERE id = ? LIMIT 1");
 			$res->execute([$replay['id']]);
 		}
 		return;
@@ -112,18 +112,18 @@ class Replays {
 			if ($args["username2"] ?? null) {
 				$userid2 = $this->toId($args["username2"]);
 				if ($format) {
-					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? AND format = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? AND format = ? ORDER BY $order DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
+					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? AND format = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? AND format = ? ORDER BY $order DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
 					$res->execute([$isPrivate, $userid, $userid2, $format, $isPrivate, $userid2, $userid, $format]);
 				} else {
-					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? ORDER BY $order DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
+					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND p2id = ? ORDER BY $order DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
 					$res->execute([$isPrivate, $userid, $userid2, $isPrivate, $userid2, $userid]);
 				}
 			} else {
 				if ($format) {
-					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND format = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p2) WHERE private = ? AND p2id = ? AND format = ? ORDER BY uploadtime DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
+					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? AND format = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p2) WHERE private = ? AND p2id = ? AND format = ? ORDER BY uploadtime DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
 					$res->execute([$isPrivate, $userid, $format, $isPrivate, $userid, $format]);
 				} else {
-					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (p2) WHERE private = ? AND p2id = ? ORDER BY uploadtime DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
+					$res = $this->db->prepare("(SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p1) WHERE private = ? AND p1id = ? ORDER BY $order DESC) UNION (SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (p2) WHERE private = ? AND p2id = ? ORDER BY uploadtime DESC) ORDER BY $order DESC LIMIT $limit1, 51;");
 					$res->execute([$isPrivate, $userid, $isPrivate, $userid]);
 				}
 			}
@@ -132,9 +132,9 @@ class Replays {
 
 		$res = null;
 		if ($byRating) {
-			$res = $this->db->prepare("SELECT uploadtime, id, format, p1, p2, rating, password FROM ps_replays FORCE INDEX (top) WHERE private = ? AND formatid = ? ORDER BY rating DESC LIMIT $limit1, 51");
+			$res = $this->db->prepare("SELECT uploadtime, id, format, p1, p2, rating, password FROM ntbb_replays FORCE INDEX (top) WHERE private = ? AND formatid = ? ORDER BY rating DESC LIMIT $limit1, 51");
 		} else {
-			$res = $this->db->prepare("SELECT uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (format) WHERE private = ? AND formatid = ? ORDER BY uploadtime DESC LIMIT $limit1, 51");
+			$res = $this->db->prepare("SELECT uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (format) WHERE private = ? AND formatid = ? ORDER BY uploadtime DESC LIMIT $limit1, 51");
 		}
 		$res->execute([$isPrivate, $format]);
 
@@ -152,16 +152,16 @@ class Replays {
 		}
 
 		// $pattern = '%' . str_replace('_', '\\_', str_replace('%', '\\%', $term)) . '%';
-		// $res = $this->db->prepare("SELECT uploadtime, id, format, p1, p2 FROM ps_replays WHERE private = 0 AND (p1id = ? OR p2id = ?) ORDER BY uploadtime DESC LIMIT ?, 51");
+		// $res = $this->db->prepare("SELECT uploadtime, id, format, p1, p2 FROM ntbb_replays WHERE private = 0 AND (p1id = ? OR p2id = ?) ORDER BY uploadtime DESC LIMIT ?, 51");
 		// $this->db->query("SET SESSION max_execution_time=5000");
 		$res = null;
 		switch (count($patterns)) {
 		case 1:
-			$res = $this->db->prepare("SELECT /*+ MAX_EXECUTION_TIME(10000) */ uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (recent) WHERE private = 0 AND log LIKE ? ORDER BY uploadtime DESC LIMIT 10;");
+			$res = $this->db->prepare("SELECT /*+ MAX_EXECUTION_TIME(10000) */ uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (recent) WHERE private = 0 AND log LIKE ? ORDER BY uploadtime DESC LIMIT 10;");
 			$res->execute($patterns);
 			break;
 		case 2:
-			$res = $this->db->prepare("SELECT /*+ MAX_EXECUTION_TIME(10000) */ uploadtime, id, format, p1, p2, password FROM ps_replays FORCE INDEX (recent) WHERE private = 0 AND log LIKE ? AND log LIKE ? ORDER BY uploadtime DESC LIMIT 10;");
+			$res = $this->db->prepare("SELECT /*+ MAX_EXECUTION_TIME(10000) */ uploadtime, id, format, p1, p2, password FROM ntbb_replays FORCE INDEX (recent) WHERE private = 0 AND log LIKE ? AND log LIKE ? ORDER BY uploadtime DESC LIMIT 10;");
 			$res->execute($patterns);
 			break;
 		default;
@@ -173,7 +173,7 @@ class Replays {
 
 	function recent() {
 		if (!$this->db) return [];
-		$res = $this->db->query("SELECT uploadtime, id, format, p1, p2 FROM ps_replays FORCE INDEX (recent) WHERE private = 0 ORDER BY uploadtime DESC LIMIT 50");
+		$res = $this->db->query("SELECT uploadtime, id, format, p1, p2 FROM ntbb_replays FORCE INDEX (recent) WHERE private = 0 ORDER BY uploadtime DESC LIMIT 50");
 
 		return $res->fetchAll();
 	}
@@ -198,10 +198,10 @@ class Replays {
 		$inputlog = null;
 		if (@$reqData['inputlog']) $inputlog = $reqData['inputlog'];
 
-		$res = $this->db->prepare("REPLACE INTO ps_prepreplays (id,loghash,p1,p2,format,private,uploadtime,rating,inputlog) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$res = $this->db->prepare("REPLACE INTO ntbb_prepreplays (id,loghash,p1,p2,format,private,uploadtime,rating,inputlog) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		$out = !!$res->execute([$id, $loghash, $p1, $p2, $format, $private, time(), $rating, $inputlog]);
 
-		// $res = $this->db->prepare("REPLACE INTO ps_prepreplays (id,loghash,p1,p2,format,private,uploadtime,rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+		// $res = $this->db->prepare("REPLACE INTO ntbb_prepreplays (id,loghash,p1,p2,format,private,uploadtime,rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		// $out = !!$res->execute([$id, $loghash, $p1, $p2, $format, $private, time(), $rating]);
 
 		// throw new Exception(var_export($res->errorInfo(), true));
@@ -218,7 +218,7 @@ class Replays {
 		$id = @$reqData['id'];
 
 		if (!$id) return 'ID needed';
-		$res = $this->db->prepare("SELECT * FROM ps_prepreplays WHERE id = ?");
+		$res = $this->db->prepare("SELECT * FROM ntbb_prepreplays WHERE id = ?");
 		if (!$res->execute([$id])) {
 			// throw new Exception($this->db->error);
 			return 'database error for ' . $id . ': ' . $res->errorInfo();
@@ -226,7 +226,7 @@ class Replays {
 
 		$pReplay = $res->fetch();
 
-		$res = $this->db->prepare("SELECT id, `password`, `private` FROM ps_replays WHERE id = ?");
+		$res = $this->db->prepare("SELECT id, `password`, `private` FROM ntbb_replays WHERE id = ?");
 		$res->execute([$id]);
 		$replay = $res->fetch();
 
@@ -276,10 +276,10 @@ class Replays {
 		$p2id = $this->toID($pReplay['p2']);
 		$formatid = $this->toID($pReplay['format']);
 
-		$res = $this->db->prepare("INSERT INTO ps_replays (id, p1, p2, format, p1id, p2id, formatid, uploadtime, private, rating, log, inputlog, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE log = ?, inputlog = ?, rating = ?, private = ?, `password` = ?");
+		$res = $this->db->prepare("INSERT INTO ntbb_replays (id, p1, p2, format, p1id, p2id, formatid, uploadtime, private, rating, log, inputlog, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE log = ?, inputlog = ?, rating = ?, private = ?, `password` = ?");
 		$res->execute([$id, $pReplay['p1'], $pReplay['p2'], $pReplay['format'], $p1id, $p2id, $formatid, $pReplay['uploadtime'], $pReplay['private'] ? 1 : 0, $pReplay['rating'], $reqData['log'], $pReplay['inputlog'], $password, $reqData['log'], $pReplay['inputlog'], $pReplay['rating'], $pReplay['private'] ? 1 : 0, $password]);
 
-		$res = $this->db->prepare("DELETE FROM ps_prepreplays WHERE id = ? AND loghash = ?");
+		$res = $this->db->prepare("DELETE FROM ntbb_prepreplays WHERE id = ? AND loghash = ?");
 		$res->execute([$id, $pReplay['loghash']]);
 
 		return 'success:' . $fullid;

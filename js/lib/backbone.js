@@ -1650,6 +1650,7 @@
           fragment = this.getHash();
         }
       }
+      fragment = fragment.replace('replays/', '');
       return fragment.replace(routeStripper, '');
     },
 

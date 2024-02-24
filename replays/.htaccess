@@ -21,7 +21,7 @@ AddType application/x-web-app-manifest+json .webapp
 RewriteEngine on
 
 RewriteCond %{HTTP:X-Forwarded-Proto} ^http$
-RewriteRule ^(.*)$ https://replay.pokemonshowdown.com/$1 [R=302,NE,L]
+RewriteRule ^(.*)$ https://battling.p-insurgence.com/replays/$1 [R=302,NE,L]
 
 RewriteRule ^replay\/(.*)$ /$1 [R=302,L]
 
