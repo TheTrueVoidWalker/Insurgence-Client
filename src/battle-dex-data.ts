@@ -864,7 +864,26 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	zweilousdeltaf: 1788 + 22,
 	hydreigondeltaf: 1788 + 23,
 
-	druddigondelta: 1812 + 0,
+	walkingwake: 1812 + 0,
+	ironleaves: 1812 + 1,
+	dipplin: 1812 + 2,
+	poltchageist: 1812 + 3,
+	sinistcha: 1812 + 4,
+	okidogi: 1812 + 5,
+	munkidori: 1812 + 6,
+	fezandipiti: 1812 + 7,
+	ogerpon: 1812 + 8,
+	archaludon: 1812 + 9,
+	hydrapple: 1812 + 10,
+	gougingfire: 1812 + 11,
+	ragingbolt: 1812 + 12,
+	ironboulder: 1812 + 13,
+	ironcrown: 1812 + 14,
+	terapagos: 1812 + 15,
+	pecharunt: 1812 + 16,
+
+	// Add new Pokemon here
+	druddigondelta: 1836 + 0,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
