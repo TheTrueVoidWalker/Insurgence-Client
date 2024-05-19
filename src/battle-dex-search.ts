@@ -1394,6 +1394,8 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 			return ['megalauncher', 'technician'].includes(abilityid) && !moves.includes('originpulse');
 		case 'trickroom':
 			return species.baseStats.spe <= 100;
+		case 'peerlessslash':
+			return true;
 		}
 
 		if (this.formatType === 'doubles' && BattleMoveSearch.GOOD_DOUBLES_MOVES.includes(id)) {

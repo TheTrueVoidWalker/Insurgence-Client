@@ -170,8 +170,8 @@ return name;
 
 
 var Dex=new(function(){function _class3(){var _this=this;this.
-gen=9;this.
-modid='gen9';this.
+gen=8;this.
+modid='gen8';this.
 cache=null;this.
 
 statNames=['hp','atk','def','spa','spd','spe'];this.
@@ -182,12 +182,12 @@ pokeballs=null;this.
 resourcePrefix=function(_window$document){
 var prefix='';
 if(((_window$document=window.document)==null||(_window$document=_window$document.location)==null?void 0:_window$document.protocol)!=='http:')prefix='https:';
-return prefix+"//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/";
+return prefix+"//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/";
 }();this.
 
 fxPrefix=function(_window$document2){
 var protocol=((_window$document2=window.document)==null||(_window$document2=_window$document2.location)==null?void 0:_window$document2.protocol)!=='http:'?'https:':'';
-return protocol+"//raw.githubusercontent.com/Poilerwags/Sprites/master/play.pokemonshowdown.com/fx/";
+return protocol+"//raw.githubusercontent.com/TheTrueVoidWalker/Sprites/master/play.pokemonshowdown.com/fx/";
 }();this.
 
 loadedSpriteData={xy:1,bw:0};this.
@@ -451,7 +451,7 @@ var id=toID(name);
 if(name!==id.substr(0,1).toUpperCase()+id.substr(1))return false;
 return(window.BattleTypeChart||{}).hasOwnProperty(id);
 }
-};}var _proto2=_class3.prototype;_proto2.mod=function mod(modid){if(modid==='gen9')return this;if(!window.BattleTeambuilderTable)return this;if(modid in this.moddedDexes){return this.moddedDexes[modid];}this.moddedDexes[modid]=new ModdedDex(modid);return this.moddedDexes[modid];};_proto2.forGen=function forGen(gen){if(!gen)return this;return this.mod("gen"+gen);};_proto2.resolveAvatar=function resolveAvatar(avatar){var _window$Config;if(window.BattleAvatarNumbers&&avatar in BattleAvatarNumbers){avatar=BattleAvatarNumbers[avatar];}if(avatar.charAt(0)==='#'){return Dex.resourcePrefix+'sprites/trainers-custom/'+toID(avatar.substr(1))+'.png';}if(avatar.includes('.')&&(_window$Config=window.Config)!=null&&(_window$Config=_window$Config.server)!=null&&_window$Config.registered){var protocol=Config.server.port===443?'https':'http';return protocol+'://'+Config.server.host+':'+Config.server.port+'/avatars/'+encodeURIComponent(avatar).replace(/\%3F/g,'?');}return Dex.resourcePrefix+'sprites/trainers/'+Dex.sanitizeName(avatar||'unknown')+'.png';};_proto2.sanitizeName=function sanitizeName(name){if(!name)return'';return(''+name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').slice(0,50);};_proto2.prefs=function prefs(prop){var _window$Storage;return(_window$Storage=window.Storage)==null||_window$Storage.prefs==null?void 0:_window$Storage.prefs(prop);};_proto2.getShortName=function getShortName(name){var shortName=name.replace(/[^A-Za-z0-9]+$/,'');if(shortName.indexOf('(')>=0){shortName+=name.slice(shortName.length).replace(/[^\(\)]+/g,'').replace(/\(\)/g,'');}return shortName;};_proto2.getEffect=function getEffect(name){name=(name||'').trim();if(name.substr(0,5)==='item:'){return Dex.items.get(name.substr(5).trim());}else if(name.substr(0,8)==='ability:'){return Dex.abilities.get(name.substr(8).trim());}else if(name.substr(0,5)==='move:'){return Dex.moves.get(name.substr(5).trim());}var id=toID(name);return new PureEffect(id,name);};_proto2.getGen3Category=function getGen3Category(type){return['Fire','Water','Grass','Electric','Ice','Psychic','Dark','Dragon'].includes(type)?'Special':'Physical';};_proto2.
+};}var _proto2=_class3.prototype;_proto2.mod=function mod(modid){if(modid==='gen8')return this;if(!window.BattleTeambuilderTable)return this;if(modid in this.moddedDexes){return this.moddedDexes[modid];}this.moddedDexes[modid]=new ModdedDex(modid);return this.moddedDexes[modid];};_proto2.forGen=function forGen(gen){if(!gen)return this;return this.mod("gen"+gen);};_proto2.resolveAvatar=function resolveAvatar(avatar){var _window$Config;if(window.BattleAvatarNumbers&&avatar in BattleAvatarNumbers){avatar=BattleAvatarNumbers[avatar];}if(avatar.charAt(0)==='#'){return Dex.resourcePrefix+'sprites/trainers-custom/'+toID(avatar.substr(1))+'.png';}if(avatar.includes('.')&&(_window$Config=window.Config)!=null&&(_window$Config=_window$Config.server)!=null&&_window$Config.registered){var protocol=Config.server.port===443?'https':'http';return protocol+'://'+Config.server.host+':'+Config.server.port+'/avatars/'+encodeURIComponent(avatar).replace(/\%3F/g,'?');}return Dex.resourcePrefix+'sprites/trainers/'+Dex.sanitizeName(avatar||'unknown')+'.png';};_proto2.sanitizeName=function sanitizeName(name){if(!name)return'';return(''+name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').slice(0,50);};_proto2.prefs=function prefs(prop){var _window$Storage;return(_window$Storage=window.Storage)==null||_window$Storage.prefs==null?void 0:_window$Storage.prefs(prop);};_proto2.getShortName=function getShortName(name){var shortName=name.replace(/[^A-Za-z0-9]+$/,'');if(shortName.indexOf('(')>=0){shortName+=name.slice(shortName.length).replace(/[^\(\)]+/g,'').replace(/\(\)/g,'');}return shortName;};_proto2.getEffect=function getEffect(name){name=(name||'').trim();if(name.substr(0,5)==='item:'){return Dex.items.get(name.substr(5).trim());}else if(name.substr(0,8)==='ability:'){return Dex.abilities.get(name.substr(8).trim());}else if(name.substr(0,5)==='move:'){return Dex.moves.get(name.substr(5).trim());}var id=toID(name);return new PureEffect(id,name);};_proto2.getGen3Category=function getGen3Category(type){return['Fire','Water','Grass','Electric','Ice','Psychic','Dark','Dragon'].includes(type)?'Special':'Physical';};_proto2.
 
 hasAbility=function hasAbility(species,ability){
 for(var i in species.abilities){
@@ -543,7 +543,7 @@ var graphicsGen=mechanicsGen;
 if(Dex.prefs('nopastgens'))graphicsGen=6;
 if(Dex.prefs('bwgfx')&&graphicsGen>=6)graphicsGen=5;
 spriteData.gen=Math.max(graphicsGen,Math.min(species.gen,5));
-var baseDir=['','gen1','gen2','gen3','gen4','gen5','','','',''][spriteData.gen];
+var baseDir=['','gen1','gen2','gen3','gen4','gen5','','',''][spriteData.gen];
 
 var animationData=null;
 var miscData=null;
@@ -568,14 +568,11 @@ if(species.isMega||formeid&&(
 formeid==='-crowned'||
 formeid==='-eternal'||
 formeid==='-eternamax'||
-formeid==='-four'||
 formeid==='-hangry'||
-formeid==='-hero'||
 formeid==='-lowkey'||
 formeid==='-noice'||
 formeid==='-primal'||
 formeid==='-rapidstrike'||
-formeid==='-roaming'||
 formeid==='-school'||
 formeid==='-sky'||
 formeid==='-starter'||
@@ -588,10 +585,8 @@ baseSpeciesid==='cramorant'||
 baseSpeciesid==='indeedee'||
 baseSpeciesid==='lycanroc'||
 baseSpeciesid==='necrozma'||
-baseSpeciesid==='oinkologne'||
 baseSpeciesid==='oricorio'||
 baseSpeciesid==='slowpoke'||
-baseSpeciesid==='tatsugiri'||
 baseSpeciesid==='zygarde'))
 {
 spriteData.cryurl+=formeid;
@@ -739,7 +734,7 @@ var num=this.getPokemonIconNum(id,((_pokemon4=pokemon)==null?void 0:_pokemon4.ge
 var top=Math.floor(num/12)*30;
 var left=num%12*40;
 var fainted=(_pokemon5=pokemon)!=null&&_pokemon5.fainted?";opacity:.3;filter:grayscale(100%) brightness(.5)":"";
-return"background:transparent url("+Dex.resourcePrefix+"sprites/pokemonicons-sheet.png?v13) no-repeat scroll -"+left+"px -"+top+"px"+fainted;
+return"background:transparent url("+Dex.resourcePrefix+"sprites/pokemonicons-sheet.png?v8) no-repeat scroll -"+left+"px -"+top+"px"+fainted;
 };_proto2.
 
 getTeambuilderSpriteData=function getTeambuilderSpriteData(pokemon){var gen=arguments.length>1&&arguments[1]!==undefined?arguments[1]:0;
@@ -803,7 +798,7 @@ if((_item=item)!=null&&_item.spritenum)num=item.spritenum;
 
 var top=Math.floor(num/16)*24;
 var left=num%16*24;
-return'background:transparent url('+Dex.resourcePrefix+'sprites/itemicons-sheet.png?g9) no-repeat scroll -'+left+'px -'+top+'px';
+return'background:transparent url('+Dex.resourcePrefix+'sprites/itemicons-sheet.png?g8) no-repeat scroll -'+left+'px -'+top+'px';
 };_proto2.
 
 getTypeIcon=function getTypeIcon(type,b){
@@ -902,7 +897,7 @@ if(_this2.cache.Items.hasOwnProperty(id))return _this2.cache.Items[id];
 
 var data=Object.assign({},Dex.items.get(name));
 
-for(var i=_this2.gen;i<9;i++){
+for(var i=_this2.gen;i<8;i++){
 var table=window.BattleTeambuilderTable['gen'+i];
 if(id in table.overrideItemDesc){
 data.shortDesc=table.overrideItemDesc[id];
