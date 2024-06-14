@@ -1450,6 +1450,10 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 			return true;
 		case 'steelburstbarrage':
 			return true;
+		case 'heavymetallica':
+			return true;
+		case 'mindmeld':
+			return true;
 		}
 
 		if (this.formatType === 'doubles' && BattleMoveSearch.GOOD_DOUBLES_MOVES.includes(id)) {
