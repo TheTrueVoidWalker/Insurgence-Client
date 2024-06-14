@@ -1438,6 +1438,18 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 			return true;
 		case 'hydrosteam':
 			return true;
+		case 'steelsurgestrike':
+			return true;
+		case 'magneticburst':
+			return true;
+		case 'ultrasonicwave':
+			return true;
+		case 'hypersonicfang':
+			return true;
+		case 'avaricefang':
+			return true;
+		case 'steelburstbarrage':
+			return true;
 		}
 
 		if (this.formatType === 'doubles' && BattleMoveSearch.GOOD_DOUBLES_MOVES.includes(id)) {

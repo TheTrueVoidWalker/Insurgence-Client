@@ -1396,6 +1396,48 @@ case'trickroom':
 return species.baseStats.spe<=100;
 case'peerlessslash':
 return true;
+case'bloodmoon':
+return true;
+case'matchagotcha':
+return true;
+case'syrupbomb':
+return true;
+case'ivycudgel':
+return true;
+case'electroshot':
+return true;
+case'terastarstorm':
+return true;
+case'ficklebeam':
+return true;
+case'burningbulwark':
+return true;
+case'thunderclap':
+return true;
+case'mightycleave':
+return true;
+case'tachyoncutter':
+return true;
+case'hardpress':
+return true;
+case'dragoncheer':
+return true;
+case'alluringvoice':
+return true;
+case'temperflare':
+return true;
+case'supercellslam':
+return true;
+case'psychicnoise':
+return true;
+case'upperhand':
+return true;
+case'malignantchain':
+return true;
+case'psyblade':
+return true;
+case'hydrosteam':
+return true;
 }
 
 if(this.formatType==='doubles'&&BattleMoveSearch.GOOD_DOUBLES_MOVES.includes(id)){
