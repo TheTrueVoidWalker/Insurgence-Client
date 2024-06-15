@@ -923,10 +923,14 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	mudkipdelta: 1836 + 30,
 	marshtompdelta: 1836 + 31,
 	swampertdelta: 1836 + 32,
-	dundunsparcedelta: 1836 + 33,
+	dudunsparcedelta: 1836 + 33,
 	calyrexdelta: 1836 + 34,
 	snomdelta: 1836 + 35,
 	frosmothdelta: 1836 + 36,
+	ampharosdeltamega: 1836 + 37,
+	beedrilldeltamega: 1836 + 38,
+	aerodactyldeltamega: 1836 + 39,
+	allknown: 1836 + 40,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
