@@ -931,6 +931,7 @@ const BattlePokemonIconIndexes: {[id: string]: number} = {
 	beedrilldeltamega: 1836 + 38,
 	aerodactyldeltamega: 1836 + 39,
 	allknown: 1836 + 40,
+	magnezonemega: 1836 + 41,
 };
 
 const BattlePokemonIconIndexesLeft: {[id: string]: number} = {
